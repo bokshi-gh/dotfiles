@@ -24,11 +24,6 @@ fi
 
 echo ""
 
-# Create symlinks for Zsh
-symlink ~/.dotfiles/zsh/.zshrc ~/.zshrc
-symlink ~/.dotfiles/zsh/aliases.zsh ~/.aliases.zsh
-symlink ~/.dotfiles/zsh/functions.zsh ~/.functions.zsh
-
 # Create symlinks for Bash
 symlink ~/.dotfiles/bash/.bashrc ~/.bashrc
 symlink ~/.dotfiles/bash/.bash_profile ~/.bash_profile
@@ -44,6 +39,3 @@ symlink ~/.dotfiles/vim/plugins.vim ~/.vim/plugins.vim
 
 # Create symlinks for Neovim
 symlink ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
-
-# Source the bashrc file to apply changes
-source ~/.bashrc
