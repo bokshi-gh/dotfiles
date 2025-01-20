@@ -3,11 +3,6 @@ function remove_symlink() {
     echo "Symlink $1 is removed"
 }
 
-# Remove symlinks for Zsh
-remove_symlink ~/.zshrc
-remove_symlink ~/.aliases.zsh
-remove_symlink ~/.functions.zsh
-
 # Remove symlinks for Bash
 remove_symlink ~/.bashrc
 remove_symlink ~/.bash_profile
@@ -41,6 +36,3 @@ then
 	dir_name="~/.config/nvim"
 	echo "Directory $dir_name is removed"
 fi
-
-
-
