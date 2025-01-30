@@ -24,8 +24,8 @@ remove_symlink ~/.config/nvim/init.vim
 
 # Remove symlink for SSH
 remove_symlink ~/.ssh/config
-remove_symlink ~/.ssh/id_rsa_github
-remove_symlink ~/.ssh/id_rsa_github
+remove_symlink ~/.ssh/github/id_rsa
+remove_symlink ~/.ssh/github/id_rsa.pub
 
 echo ""
 
