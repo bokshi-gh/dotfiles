@@ -16,7 +16,7 @@ remove_symlink ~/.gitconfig
 remove_symlink ~/.gitignore_global
 
 # Remove symlinks for Vim
-remove_symlink ~/.config/vim/vimrc
+remove_symlink ~/.vimrc
 remove_symlink ~/.config/vim/plugin.vim
 
 # Remove symlinks for Neovim
