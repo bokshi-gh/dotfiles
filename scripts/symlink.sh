@@ -9,10 +9,23 @@ function symlink() {
 # Ensure all necessary directories in home exist
 mkdir -p ~/.vim
 mkdir -p ~/.config/nvim
+mkdir -p ~/.ssh
+
+if [ -d ~/.nvim ]
+then
+    dir_name="~/.vim"
+    echo "Directory $dir_name is created"
+fi
 
 if [ -d ~/.config/nvim ]
 then
     dir_name="~/.config/nvim"
+    echo "Directory $dir_name is created"
+fi
+
+if [ -d ~/.ssh ]
+then
+    dir_name="~/.ssh"
     echo "Directory $dir_name is created"
 fi
 
@@ -33,3 +46,6 @@ symlink ~/.dotfiles/vim/plugins.vim ~/.vim/plugin.vim
 
 # Create symlinks for Neovim
 symlink ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
+
+# Create symlink for SSH
+symlink ~/.dotfiles/ssh ~/.config/.ssh
