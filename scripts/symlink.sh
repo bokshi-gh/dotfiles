@@ -7,14 +7,8 @@ function symlink() {
 }
 
 # Ensure all necessary directories in home exist
-mkdir -p ~/.config/vim
+mkdir -p ~/.vim
 mkdir -p ~/.config/nvim
-
-if [ -d ~/.config/vim ]
-then
-    dir_name="~/.config/vim"
-    echo "Directory $dir_name is created"
-fi
 
 if [ -d ~/.config/nvim ]
 then
@@ -34,8 +28,8 @@ symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
 symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
 
 # Create symlinks for Vim
-symlink ~/.dotfiles/vim/vimrc ~/.config/vim/vimrc
-symlink ~/.dotfiles/vim/plugins.vim ~/.config/vim/plugin.vim
+symlink ~/.dotfiles/vim/vimrc ~/vimrc
+symlink ~/.dotfiles/vim/plugins.vim ~/.vim/plugin.vim
 
 # Create symlinks for Neovim
 symlink ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
