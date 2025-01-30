@@ -1,4 +1,22 @@
-Host github
-    HostName github.com
-    User git
-    IdentityFile ~/.ssh/id_rsa_github
+# SSH Config File
+
+# Default settings for all hosts
+Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityFile ~/.ssh/id_rsa
+
+# Specific settings for a particular host
+Host example
+    HostName example.com
+    User your_username
+    Port 22
+    IdentityFile ~/.ssh/id_rsa_example
+    RequestTTY no  # Equivalent to using the -T flag
+
+# Another specific host
+Host another_host
+    HostName another_host.com
+    User another_username
+    Port 2200
+    IdentityFile ~/.ssh/id_rsa_another_host
