@@ -31,11 +31,11 @@ scp /path/to/local/file username@remote_host:/path/to/remote/directory
 ```sh
 ssh username@remote_host 'command'
 ```
-Flags
-| -T  Disables the terminal allocation
+**Flags**
+- T  => Disables the terminal allocation
 
-known_hosts file
-Stores a list of known hosts for verifying the identity of the remote host.
-                   Once you have connected to a remote server and its fingerprint is stored in your known_hosts file,
-                  SSH will use this fingerprint to verify the server's identity during subsequent connections.
-                  No need to use the ID for subsequent connections.
+**known_hosts file**
+- Stores a list of known hosts for verifying the identity of the remote host.
+- Once you have connected to a remote server and its fingerprint is stored in your known_hosts file,
+- SSH will use this fingerprint to verify the server's identity during subsequent connections.
+- No need to use the ID for subsequent connections.
