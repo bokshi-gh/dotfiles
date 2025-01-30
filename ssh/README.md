@@ -41,6 +41,8 @@ ssh username@remote_host 'command'
 **Flags**
 - T  => Disables the terminal allocation
 
+**authorized_keys file**
+
 **known_hosts file**
 - Stores a list of known hosts for verifying the identity of the remote host.
 - Once you have connected to a remote server and its fingerprint is stored in your known_hosts file,
