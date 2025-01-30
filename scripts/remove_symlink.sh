@@ -27,6 +27,7 @@ echo ""
 # Ensure all necessary directories are removed after all the symlinks are removed
 rm -rf ~/.vim
 rm -rf ~/.config
+rm -rf ~/.ssh
 
 if [ ! -d ~/.vim ]
 then
@@ -37,5 +38,11 @@ fi
 if [ ! -d ~/.config ]
 then
     dir_name="~/.config"
+    echo "Directory $dir_name is removed"
+fi
+
+if [ ! -d ~/.ssh ]
+then
+    dir_name="~/.ssh"
     echo "Directory $dir_name is removed"
 fi
