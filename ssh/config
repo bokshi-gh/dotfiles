@@ -27,4 +27,4 @@ Host github
     User git
     Port 22
     RequestTTY no  # Equivalent to using the -T flag
-    IdentityFile ~/.ssh/id_rsa_github
+    IdentityFile ~/.ssh/github/id_rsa
