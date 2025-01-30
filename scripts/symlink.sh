@@ -9,7 +9,7 @@ function symlink() {
 # Ensure all necessary directories in home exist
 mkdir -p ~/.vim
 mkdir -p ~/.config/nvim
-mkdir -p ~/.ssh
+mkdir -p ~/.ssh/github
 
 if [ -d ~/.vim ]; then
     echo "Directory ~/.vim is created"
@@ -42,4 +42,4 @@ symlink ~/.dotfiles/vim/plugins.vim ~/.vim/plugin.vim
 symlink ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
 
 # Create symlink for SSH
-symlink ~/.dotfiles/ssh ~/.ssh
+symlink ~/.dotfiles/ssh/github/id_rsa_github ~/.ssh/github/id_rsa_github
