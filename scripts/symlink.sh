@@ -28,7 +28,7 @@ symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
 symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
 
 # Create symlinks for Vim
-symlink ~/.dotfiles/vim/vimrc ~/vimrc
+symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 symlink ~/.dotfiles/vim/plugins.vim ~/.vim/plugin.vim
 
 # Create symlinks for Neovim
