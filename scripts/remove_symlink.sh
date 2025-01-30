@@ -22,6 +22,11 @@ remove_symlink ~/.config/vim/plugin.vim
 # Remove symlinks for Neovim
 remove_symlink ~/.config/nvim/init.vim
 
+# Remove symlink for SSH
+remove_symlink ~/.ssh/config
+remove_symlink ~/.ssh/id_rsa_github
+remove_symlink ~/.ssh/id_rsa_github
+
 echo ""
 
 # Ensure all necessary directories are removed after all the symlinks are removed
