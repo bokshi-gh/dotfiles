@@ -25,17 +25,17 @@ remove_symlink ~/.config/nvim/init.vim
 echo ""
 
 # Ensure all necessary directories are removed after all the symlinks are removed
-rm -rf ~/.config/vim
-rm -rf ~/.config/nvim
+rm -rf ~/.vim
+rm -rf ~/.config
 
-if [ ! -d ~/.config/vim ]
+if [ ! -d ~/.vim ]
 then
-    dir_name="~/.config/vim"
+    dir_name="~/.vim"
     echo "Directory $dir_name is removed"
 fi
 
-if [ ! -d ~/.config/nvim ]
+if [ ! -d ~/.config ]
 then
-    dir_name="~/.config/nvim"
+    dir_name="~/.config"
     echo "Directory $dir_name is removed"
 fi
