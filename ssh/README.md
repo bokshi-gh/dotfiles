@@ -30,6 +30,10 @@ scp /path/to/local/file username@remote_host:/path/to/remote/directory
 ```sh
 ssh username@remote_host 'command'
 ```
+**Use different port**
+```sh
+```
+
 **Port forwarding**
 ```sh
 ```
