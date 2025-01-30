@@ -6,7 +6,6 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 - When you generate an SSH key pair, it often comes with a passphrase to protect the private key.   While this is a good security measure, it can become cumbersome if you need to enter the     passphrase each time you use the key.
 
 - By adding your private key to the SSH agent, you only need to enter the passphrase once, and the   agent will handle authentication for future connections. This way, you can connect to remote  servers or execute commands without constantly typing the passphrase.
-- 
 ```sh
 eval "$(ssh-agent -s)" 
 ssh-add /path/to/id_rsa
