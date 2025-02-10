@@ -44,4 +44,3 @@ symlink ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
 # Create symlink for SSH
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
 symlink ~/.dotfiles/ssh/github/id_rsa ~/.ssh/github/id_rsa
-symlink ~/.dotfiles/ssh/github/id_rsa ~/.ssh/github/id_rsa
