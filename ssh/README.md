@@ -9,7 +9,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 - The `-C` flag adds a label (usually your email) for identifying the key.
 - The key pair is stored in the `~/.ssh/` directory by default.
 - If a custom name is not provided, the key pair files will be named `id_rsa` (private key) and `id_rsa.pub` (public key).
-- After generating key pair paste the pubic key content to SSH server's authorized_keys file.
+- After generating key pair put the pubic key content to SSH server's authorized_keys file.
 - authorized_keys file looks like this:
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArYHJ6jU+OnEwLOIhJz8LBX1nPRA6Oik9m4hklpqlyDAidFz9dKHtddMb4zrkDkSuTY4z6JfXbcT8bH6OXfGsA3GdAmwb9n8z44K5hQXsZy3qjdzssTY55M0PjYCTFSV+gjf96ZJvllqNN5gsseQZl0SZXqAPYkXggwRsqZgaLkgV2FNb1Kl6H8gPmI1ed3eRvoBXnyTXtXlbrX2Ez/8yyfBd1XpoRm5HzUBVw3A2zKqWYoFjWpxkMDCJbi/qvWwskA/2Ez3vhkmyw62gBhK8PlTZtZcW4rQ1lGfThgVfG1Oe9A29OSkjUEP3Wfr9XqI0XkZ3r5V6TmPzsh3hijXQPOEl1uFS0o8vvvWymnPQ4GGKhzI0wGtHw2pRtbd7e08+Hc3Qw== user@hostname
