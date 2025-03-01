@@ -7,6 +7,8 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 - This command generates a new SSH key pair with the RSA algorithm (`-t rsa`) and a key length of 4096 bits (`-b 4096`).
 - The `-C` flag adds a label (usually your email) for identifying the key.
+- The key pair is stored in the `~/.ssh/` directory by default.
+- If a custom name is not provided, the key pair files will be named `id_rsa` (private key) and `id_rsa.pub` (public key).
 
 ## 2. **Adding to SSH Agent**
 - The SSH agent stores your keys and handles authentication for you, so you don’t need to re-enter the passphrase each time.
@@ -28,6 +30,7 @@ ssh username@remote_host
 ssh -i /path/to/id_rsa/file username@remote_host
 ```
 - This allows SSH authentication using the private key (`-i` option), without entering a password, if your key is authorized on the remote server.
+- If `-i` is not provided, the default key used is `~/.ssh/id_rsa`.
 
 ## 5. **Copying Files with SCP (Secure Copy)**
 - Copy a file from remote server to local machine:
@@ -50,6 +53,7 @@ ssh username@remote_host 'command'
 ssh -p 2222 username@remote_host
 ```
 - If the SSH service on the remote server is running on a different port (e.g., 2222), you can specify it with the `-p` flag.
+- If the port is not specified, SSH defaults to port `22`.
 
 ## 8. **Port Forwarding**
 - Port forwarding lets you tunnel a port from your local machine to a remote machine.
