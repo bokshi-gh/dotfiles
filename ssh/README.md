@@ -75,6 +75,7 @@ ssh -p 2222 username@remote_host
 - Located on your local machine in `~/.ssh/known_hosts`, this file stores the fingerprints of remote hosts you’ve connected to. It’s used to verify the identity of the server during future connections.
 
 ## 12. **SSH Config File**
+- Located on your local machine in `~/.ssh/config`.
 - Simplifies connecting to multiple hosts with specific configurations:
   ```txt
   Host *
