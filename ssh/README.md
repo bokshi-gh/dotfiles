@@ -92,3 +92,4 @@ ssh -p 2222 username@remote_host
   ```
 - The `Host *` section applies to all hosts, setting up common options.
 - Specific hosts can have unique settings, such as a different port or identity file.
+- Use `ssh example` to execute.
