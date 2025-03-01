@@ -51,3 +51,29 @@ ssh username@remote_host 'command'
 - Once you have connected to a remote server and its fingerprint is stored in your known_hosts file,
 - SSH will use this fingerprint to verify the server's identity during subsequent connections.
 - No need to use the ID for subsequent connections.
+
+**config file**
+```
+# SSH Config File
+
+# Default settings for all hosts
+Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityFile ~/.ssh/id_rsa
+
+# Specific settings for a particular host
+Host example
+    HostName example.com
+    User your_username
+    Port 22
+    RequestTTY no  # Equivalent to using the -T flag
+    IdentityFile ~/.ssh/id_rsa_example
+
+# Another specific host
+Host another_host
+    HostName another_host.com
+    User another_username
+    Port 2200
+    IdentityFile ~/.ssh/id_rsa_another_host
+```
