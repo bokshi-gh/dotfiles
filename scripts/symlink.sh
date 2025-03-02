@@ -9,7 +9,7 @@ function symlink() {
 # Ensure all necessary directories in home exist
 mkdir -p ~/.vim
 mkdir -p ~/.config/nvim
-mkdir -p ~/.ssh/github
+mkdir -p ~/.ssh
 
 if [ -d ~/.vim ]; then
     echo "Directory ~/.vim is created"
@@ -25,8 +25,15 @@ fi
 
 echo ""
 
-# Create symlinks for Bash
-symlink ~/.dotfiles/bash/.bashrc ~/.bashrc
+# Check if .bashrc exists
+if [ -f ~/.bashrc ]; then
+    echo ".bashrc exists, appending content..."
+    echo "source ~/.dotfiles/bash/.bashrc" >> ~/.bashrc
+else
+    echo ".bashrc does not exist, creating and adding content..."
+    touch ~/.bashrc
+    echo "source ~/.dotfiles/bash/.bashrc" > ~/.bashrc
+fi
 
 # Create symlinks for Git
 symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
