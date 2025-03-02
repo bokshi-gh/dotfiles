@@ -27,8 +27,6 @@ echo ""
 
 # Create symlinks for Bash
 symlink ~/.dotfiles/bash/.bashrc ~/.bashrc
-symlink ~/.dotfiles/bash/.bash_profile ~/.bash_profile
-symlink ~/.dotfiles/bash/aliases.bash ~/.aliases.bash
 
 # Create symlinks for Git
 symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
