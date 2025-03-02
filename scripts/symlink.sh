@@ -35,6 +35,8 @@ else
     echo "source ~/.dotfiles/bash/.bashrc" > ~/.bashrc
 fi
 
+echo ""
+
 # Create symlinks for Git
 symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
 symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
