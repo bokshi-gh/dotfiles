@@ -6,11 +6,6 @@ function remove_symlink() {
     echo "Symlink $1 is removed"
 }
 
-# Remove symlinks for Bash
-remove_symlink ~/.bashrc
-remove_symlink ~/.bash_profile
-remove_symlink ~/.aliases.bash
-
 # Remove symlinks for Git
 remove_symlink ~/.gitconfig
 remove_symlink ~/.gitignore_global
