@@ -46,7 +46,7 @@ symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 symlink ~/.dotfiles/vim/plugins.vim ~/.vim/plugin.vim
 
 # Create symlinks for Neovim
-symlink ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
+symlink ~/.dotfiles/config/nvim/init.lua ~/.config/nvim/init.lua
 
 # Create symlink for SSH
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
