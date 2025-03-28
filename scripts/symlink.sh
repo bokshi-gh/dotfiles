@@ -8,7 +8,7 @@ function symlink() {
 
 # Ensure all necessary directories in home exist
 mkdir -p ~/.vim
-mkdir -p ~/.config/nvim
+mkdir -p ~/.config
 mkdir -p ~/.ssh
 
 if [ -d ~/.vim ]; then
@@ -38,16 +38,14 @@ fi
 echo ""
 
 # Create symlinks for Git
-symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
-symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
+symlink ~/.dotfiles/git/ ~/
 
 # Create symlinks for Vim
 symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 symlink ~/.dotfiles/vim/plugins.vim ~/.vim/plugin.vim
 
 # Create symlinks for Neovim
-symlink ~/.dotfiles/config/nvim/init.lua ~/.config/nvim/init.lua
+symlink ~/.dotfiles/config/ ~/.config/
 
 # Create symlink for SSH
-symlink ~/.dotfiles/ssh/config ~/.ssh/config
-symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
+symlink ~/.dotfiles/ssh/ ~/.ssh/
