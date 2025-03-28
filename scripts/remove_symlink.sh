@@ -15,11 +15,10 @@ remove_symlink ~/.vimrc
 remove_symlink ~/.config/vim/plugin.vim
 
 # Remove symlinks for Neovim
-remove_symlink ~/.config/nvim/init.vim
+remove_symlink ~/.config/
 
 # Remove symlink for SSH
-remove_symlink ~/.ssh/config
-remove_symlink ~/.ssh/id_rsa_github
+remove_symlink ~/.ssh/
 
 echo ""
 
