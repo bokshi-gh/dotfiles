@@ -7,13 +7,8 @@ function symlink() {
 }
 
 # Ensure all necessary directories in home exist
-mkdir -p ~/.vim
 mkdir -p ~/.config
 mkdir -p ~/.ssh
-
-if [ -d ~/.vim ]; then
-    echo "Directory ~/.vim is created"
-fi
 
 if [ -d ~/.config/nvim ]; then
     echo "Directory ~/.config/nvim is created"
@@ -38,7 +33,7 @@ fi
 echo ""
 
 # Create symlinks for Git
-symlink ~/.dotfiles/git ~/
+symlink ~/.dotfiles/git/ ~/
 
 # Create symlinks for Vim
 symlink ~/.dotfiles/vim/.vimrc ~/
@@ -47,4 +42,4 @@ symlink ~/.dotfiles/vim/.vimrc ~/
 symlink ~/.dotfiles/config/ ~/.config/
 
 # Create symlink for SSH
-symlink ~/.dotfiles/ssh ~/.ssh/
+symlink ~/.dotfiles/ssh/ ~/.ssh/
