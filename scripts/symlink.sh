@@ -33,13 +33,13 @@ fi
 echo ""
 
 # Create symlinks for Git
-symlink ~/.dotfiles/git/ ~/
+symlink ~/.dotfiles/git/* ~/
 
 # Create symlinks for Vim
 symlink ~/.dotfiles/vim/.vimrc ~/
 
 # Create symlinks for Neovim
-symlink ~/.dotfiles/config/ ~/.config/
+symlink ~/.dotfiles/config/* ~/.config/
 
 # Create symlink for SSH
-symlink ~/.dotfiles/ssh/ ~/.ssh/
+symlink ~/.dotfiles/ssh/* ~/.ssh/
