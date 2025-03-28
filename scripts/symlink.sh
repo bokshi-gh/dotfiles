@@ -38,7 +38,7 @@ fi
 echo ""
 
 # Create symlinks for Git
-symlink ~/.dotfiles/git/ ~/
+symlink ~/.dotfiles/git ~/
 
 # Create symlinks for Vim
 symlink ~/.dotfiles/vim/.vimrc ~/
@@ -47,4 +47,4 @@ symlink ~/.dotfiles/vim/.vimrc ~/
 symlink ~/.dotfiles/config/ ~/.config/
 
 # Create symlink for SSH
-symlink ~/.dotfiles/ssh/ ~/.ssh/
+symlink ~/.dotfiles/ssh ~/.ssh/
