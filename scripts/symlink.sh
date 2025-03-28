@@ -41,8 +41,7 @@ echo ""
 symlink ~/.dotfiles/git/ ~/
 
 # Create symlinks for Vim
-symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
-symlink ~/.dotfiles/vim/plugins.vim ~/.vim/plugin.vim
+symlink ~/.dotfiles/vim/.vimrc ~/
 
 # Create symlinks for Neovim
 symlink ~/.dotfiles/config/ ~/.config/
