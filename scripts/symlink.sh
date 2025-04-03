@@ -26,10 +26,10 @@ symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
 symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 
 # Create symlinks for Neovim
-mkdir .config
+mkdir ~/.config
 symlink ~/.dotfiles/config/ ~/config/
 
 # Create symlink for SSH
-mkdir .ssh
+mkdir ~/.ssh
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
 symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
