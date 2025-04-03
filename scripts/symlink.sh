@@ -6,20 +6,6 @@ function symlink() {
     echo "Symlinked $1 to $2"
 }
 
-# Ensure all necessary directories in home exist
-mkdir -p ~/.config
-mkdir -p ~/.ssh
-
-if [ -d ~/.config/nvim ]; then
-    echo "Directory ~/.config/nvim is created"
-fi
-
-if [ -d ~/.ssh ]; then
-    echo "Directory ~/.ssh is created"
-fi
-
-echo ""
-
 # Check if .bashrc exists
 if [ -f ~/.bashrc ]; then
     echo ".bashrc exists, appending content..."
@@ -33,13 +19,14 @@ fi
 echo ""
 
 # Create symlinks for Git
-symlink ~/.dotfiles/git/ ~/
+symlink ~/.dotfiles/git/.gitconfig ~/
+symlink ~/.dotfiles/git/.gitignore_global ~/
 
 # Create symlinks for Vim
 symlink ~/.dotfiles/vim/.vimrc ~/
 
 # Create symlinks for Neovim
-symlink ~/.dotfiles/config ~/.config/
+symlink ~/.dotfiles/config ~/
 
 # Create symlink for SSH
-symlink ~/.dotfiles/ssh/ ~/.ssh/
+symlink ~/.dotfiles/ssh ~/
