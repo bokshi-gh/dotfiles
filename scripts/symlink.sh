@@ -30,5 +30,6 @@ mkdir .config
 symlink ~/.dotfiles/config/ ~/config/
 
 # Create symlink for SSH
+mkdir .ssh
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
 symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
