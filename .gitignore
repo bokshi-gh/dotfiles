@@ -1,2 +1,4 @@
 # Ignore backup files
 *.un~
+
+/config/nvim/lazy-lock.json
