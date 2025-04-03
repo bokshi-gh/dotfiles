@@ -29,6 +29,7 @@ symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 
 # Create symlinks for Neovim
 symlink ~/.dotfiles/config ~/config
+mv ~/config .config
 
 # Create symlink for SSH
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
