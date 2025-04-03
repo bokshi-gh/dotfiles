@@ -6,8 +6,6 @@ function symlink() {
     echo "Symlinked $1 to $2"
 }
 
-mkdir .ssh
-
 # Check if .bashrc exists
 if [ -f ~/.bashrc ]; then
     echo ".bashrc exists, appending content..."
@@ -28,8 +26,8 @@ symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
 symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 
 # Create symlinks for Neovim
-symlink ~/.dotfiles/config ~/config
-mv ~/config .config
+symlink ~/.dotfiles/config/ ~/config/
+mv config .config
 
 # Create symlink for SSH
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
