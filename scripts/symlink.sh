@@ -26,8 +26,8 @@ symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
 symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 
 # Create symlinks for Neovim
+mkdir .config
 symlink ~/.dotfiles/config/ ~/config/
-mv config .config
 
 # Create symlink for SSH
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
