@@ -6,17 +6,9 @@ function symlink() {
     echo "Symlinked $1 to $2"
 }
 
-# Check if .bashrc exists
-if [ -f ~/.bashrc ]; then
-    echo ".bashrc exists, appending content..."
-    echo "source ~/.dotfiles/bash/.bashrc" >> ~/.bashrc
-else
-    echo ".bashrc does not exist, creating and adding content..."
-    touch ~/.bashrc
-    echo "source ~/.dotfiles/bash/.bashrc" > ~/.bashrc
-fi
-
-echo ""
+# Create symlinks for Bash
+symlink ~/.dotfiles/bash/.bashrc ~/.bashrc
+source ~/.bashrc
 
 # Create symlinks for Git
 symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
