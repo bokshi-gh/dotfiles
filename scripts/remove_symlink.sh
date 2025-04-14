@@ -13,9 +13,7 @@ remove_symlink ~/.gitignore_global
 # Remove symlinks for Vim
 remove_symlink ~/.vimrc
 
-echo ""
 
-# Ensure all necessary directories are removed after all the symlinks are removed
 rm -rf ~/.config
 
 if [ ! -d ~/.config ]
