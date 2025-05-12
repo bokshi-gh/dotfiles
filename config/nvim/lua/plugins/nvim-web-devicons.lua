@@ -33,7 +33,7 @@ return {
 
 -- Terminal and How to Change Font
 -- Alacritty:	Edit ~/.config/alacritty/alacritty.yml → font.family: "JetBrainsMono Nerd Font"
--- Kitty:	    Edit ~/.config/kitty/kitty.conf → font_family JetBrainsMono Nerd Font
+-- Kitty:	Edit ~/.config/kitty/kitty.conf → font_family JetBrainsMono Nerd Font
 -- iTerm2 (macOS): Preferences → Profiles → Text → Font
 -- Windows Terminal: Settings → Profile → Appearance → Font face
 
