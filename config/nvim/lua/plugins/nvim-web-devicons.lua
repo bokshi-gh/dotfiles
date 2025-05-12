@@ -31,11 +31,11 @@ return {
 -- 3. Set Terminal to Use the Nerd Font
 -- Go to your terminal settings and change the font:
 
--- Terminal	        How to Change Font
--- Alacritty	      Edit ~/.config/alacritty/alacritty.yml → font.family: "JetBrainsMono Nerd Font"
--- Kitty	          Edit ~/.config/kitty/kitty.conf → font_family JetBrainsMono Nerd Font
--- iTerm2 (macOS)	  Preferences → Profiles → Text → Font
--- Windows Terminal	Settings → Profile → Appearance → Font face
+-- Terminal	  How to Change Font
+-- Alacritty:	Edit ~/.config/alacritty/alacritty.yml → font.family: "JetBrainsMono Nerd Font"
+-- Kitty:	    Edit ~/.config/kitty/kitty.conf → font_family JetBrainsMono Nerd Font
+-- iTerm2 (macOS): Preferences → Profiles → Text → Font
+-- Windows Terminal: Settings → Profile → Appearance → Font face
 
 -- 4. Restart Your Terminal and Neovim
 -- Then open Neovim and check if the icons appear correctly in plugins like Neo-tree.
