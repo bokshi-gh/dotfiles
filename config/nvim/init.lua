@@ -1,3 +1,5 @@
+vim.cmd("set number")
+
 vim.g.mapleader = ' '
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
