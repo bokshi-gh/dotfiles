@@ -1,4 +1,4 @@
-vim.cmd("set number")
+vim.opt.number = true
 vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
