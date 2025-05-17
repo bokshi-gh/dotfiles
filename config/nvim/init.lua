@@ -1,6 +1,11 @@
 vim.opt.number = true
 vim.g.mapleader = " "
 
+vim.keymap.set('n', '<leader>t', ':terminal<CR>') -- open terminal
+vim.keymap.set('n', '<leader>s', ':w')            -- write
+vim.keymap.set('n', '<leader>q', ':q!')           -- quite and dont save
+vim.keymap.set('n', '<leader>sq', ':wq')          -- write and quit
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
