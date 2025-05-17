@@ -19,12 +19,13 @@ This project supports the following platforms:
 
 - {{Platform 1 (e.g., Linux)}}
 - {{Platform 2 (e.g., macOS)}}
-- {{Platform 3 (e.g., Windows/WSL)}}
+- {{Platform 3 (e.g., Windows)}}
+- {{Add more platforms as needed}}
 
 ### Requirements
 
-- {{Requirement 1 (e.g., C++11 or later)}}
-- {{Requirement 2 (e.g., CMake 3.10+)}}
+- {{Requirement 1 (e.g., language version, tools, dependencies)}}
+- {{Requirement 2}}
 - {{Additional requirements}}
 
 ### Installation
@@ -35,41 +36,16 @@ This project supports the following platforms:
     cd {{your-repo-name}}
     ```
 
-2. **Build the project:**
+2. **Build or set up the project:**
     ```sh
-    mkdir build
-    cd build
-    cmake ..
-    cmake --build .
+    {{build or setup commands here}}
     ```
 
-3. **Install the executables:**
+3. **Install the project (if applicable):**
     ```sh
-    cmake --install . --prefix ../dist
+    {{installation commands here}}
     ```
-    > Note: The `dist` directory will be created at the root of the project.
-
-4. **Usage**
-
-    Write your code or run the program:
-
-    ```sh
-    ./{{executable-name}} [options]
-    ```
-
-5. **Example**
-
-    Here's a minimal example of how to use this project:
-
-    ```cpp
-    // Example code snippet
-    #include "{{main-header-or-library}}"
-
-    int main() {
-        // Your code here
-        return 0;
-    }
-    ```
+    > Note: {{Notes about install location or directories}}
 
 ## Configuration
 
