@@ -52,6 +52,11 @@ This project supports the following platforms:
 - {{How to configure the project if applicable}}
 - {{Environment variables or config files}}
 
+## Usage
+
+- {{Demostration of project usage}}
+- {{Environment variables or config files}}
+
 ## Contributing
 
 If you want to contribute, please open an issue or submit a pull request.
