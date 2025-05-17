@@ -2,9 +2,10 @@ vim.opt.number = true
 vim.g.mapleader = " "
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>') -- open terminal
-vim.keymap.set('n', '<leader>s', ':w<CR>')        -- write
-vim.keymap.set('n', '<leader>q', ':q!<CR>')       -- quite and dont save
-vim.keymap.set('n', '<leader>sq', ':wq<CR>')      -- write and quit
+vim.keymap.set('n', '<leader>w', ':w<CR>')        -- write
+vim.keymap.set('n', '<leader>q', ':q <CR>')       -- quite
+vim.keymap.set('n', '<leader>q!', ':q! <CR>')      -- quite and dont save
+vim.keymap.set('n', '<leader>wq', ':wq<CR>')      -- write and quit
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
