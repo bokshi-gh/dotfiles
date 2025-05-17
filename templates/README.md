@@ -55,7 +55,7 @@ This project supports the following platforms:
 ## Usage
 
 - {{Demostration of project usage}}
-- {{Environment variables or config files}}
+- {{...}}
 
 ## Contributing
 
