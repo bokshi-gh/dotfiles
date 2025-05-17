@@ -59,7 +59,7 @@ This project supports the following platforms:
 
 ## Contributing
 
-If you want to contribute, please open an issue or submit a pull request.
+Contributions are welcome! Please fork the repo, make changes, and submit pull requests. Open issues for bugs or feature requests.
 
 ## License
 
