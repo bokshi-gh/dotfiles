@@ -8,6 +8,9 @@ return {
 	},
 	config = function()
 		local builtin = require("telescope.builtin")
-		vim.keymap.set('n', '<leader>n', ':Neotree filesystem reveal left<CR>')
+		vim.keymap.set('n', '<leader>ntl', ':Neotree filesystem reveal left<CR>')
+		vim.keymap.set('n', '<leader>ntr', ':Neotree filesystem reveal right<CR>')
+		vim.keymap.set('n', '<leader>ntt', ':Neotree filesystem reveal top<CR>')
+		vim.keymap.set('n', '<leader>ntb', ':Neotree filesystem reveal bottom<CR>')
 	end
 }
