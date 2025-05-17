@@ -63,4 +63,4 @@ Contributions are welcome! Please fork the repo, make changes, and submit pull r
 
 ## License
 
-This project is licensed under the {{License Name}} License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the "{{License Name}}" License - see the [LICENSE](LICENSE) file for details.
