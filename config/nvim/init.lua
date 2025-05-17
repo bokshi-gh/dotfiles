@@ -1,5 +1,8 @@
-vim.opt.number = true
 vim.g.mapleader = " "
+
+vim.opt.number = true
+vim.opt.timeout = true
+vim.opt.timeoutlen = 500
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>') -- open terminal
 vim.keymap.set('n', '<leader>w', ':w<CR>')        -- write
