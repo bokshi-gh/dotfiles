@@ -1,47 +1,66 @@
-# Grishma Investment Web
+# {{Project Name}}
 
 ## Overview
 
-This repository contains the main source code for the Grishma Investment web application.
+{{Brief description of what the project does, its purpose, and why it exists.}}
+
+## Features
+
+- {{Feature 1 description}}
+- {{Feature 2 description}}
+- {{Feature 3 description}}
+- {{Add more features as needed}}
 
 ## Getting Started
 
+### Platforms
+
+This project supports the following platforms:
+
+- {{Platform 1 (e.g., Linux)}}
+- {{Platform 2 (e.g., macOS)}}
+- {{Platform 3 (e.g., Windows)}}
+- {{Add more platforms as needed}}
 
 ### Requirements
 
-- Node.js (version 16 or higher recommended)
+- {{Requirement 1 (e.g., language version, tools, dependencies)}}
+- {{Requirement 2}}
+- {{Additional requirements}}
 
 ### Installation
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/grishma-investment/grishma-investment-web.git
-    cd grishma-investment-web
+    git clone https://github.com/{{your-username}}/{{your-repo-name}}.git
+    cd {{your-repo-name}}
     ```
 
-2. **Install the dependencies:**
+2. **Build or set up the project:**
     ```sh
-    npm install
+    {{build or setup commands here}}
     ```
 
-3. **Run the project:**
+3. **Install the project (if applicable):**
     ```sh
-    npm run dev
+    {{installation commands here}}
     ```
+    > Note: {{Notes about install location or directories}}
 
 ## Configuration
 
-- Create a `.env` file in the root directory to configure environment variables.
-- Copy the example file `.env.example` (if available) or define your own variables such as:
+- {{How to configure the project if applicable}}
+- {{Environment variables or config files}}
 
-```env
-VITE_SERVER_IP= 'https://api.grishmainvestment.com'
-```
+## Usage
 
-- Make sure to add .env to your .gitignore to keep sensitive information secure.
-- Adjust other configuration files if needed, depending on your project setup.
-
+- {{Demostration of project usage}}
+- {{...}}
 
 ## Contributing
 
 Contributions are welcome! Please fork the repo, make changes, and submit pull requests. Open issues for bugs or feature requests.
+
+## License
+
+This project is licensed under the "{{License Name}}" License - see the [LICENSE](LICENSE) file for details.
