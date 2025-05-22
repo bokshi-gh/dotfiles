@@ -11,6 +11,12 @@
 - {{Feature 3 description}}
 - {{Add more features as needed}}
 
+## Tools and Technology used
+
+- {{Tool 1}}
+- {{Tool 2}}
+- {{Tool 3}}
+
 ## Getting Started
 
 ### Platforms
