@@ -1,33 +1,14 @@
 #!/bin/bash
 
-# Symlink removal function
-function remove_symlink() {
-    rm -rf "$1"
-    echo "Symlink $1 is removed"
-}
+echo "[🧹 Removing symlinks...]"
 
-# Remove symlinks for Bash
-remove_symlink ~/.bashrc
+rm -f ~/.bashrc && echo "Removed ~/.bashrc"
+rm -f ~/.gitconfig && echo "Removed ~/.gitconfig"
+rm -f ~/.gitignore_global && echo "Removed ~/.gitignore_global"
+rm -f ~/.vimrc && echo "Removed ~/.vimrc"
+rm -f ~/.config/nvim && echo "Removed ~/.config/nvim"
+rm -f ~/.ssh/config && echo "Removed ~/.ssh/config"
+rm -f ~/.ssh/id_rsa_github && echo "Removed ~/.ssh/id_rsa_github"
 
-# Remove symlinks for Git
-remove_symlink ~/.gitconfig
-remove_symlink ~/.gitignore_global
+echo "[✅ Removal complete!]"
 
-# Remove symlinks for Vim
-remove_symlink ~/.vimrc
-
-rm -rf ~/.config
-if [ ! -d ~/.config ]
-then
-    dir_name="~/.config"
-    echo "Directory $dir_name is removed"
-fi
-
-echo ""
-
-rm -rf ~/.ssh
-if [ ! -d ~/.ssh ]
-then
-    dir_name="~/.config"
-    echo "Directory $dir_name is removed"
-fi
