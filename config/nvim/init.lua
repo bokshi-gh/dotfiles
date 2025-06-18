@@ -6,8 +6,8 @@ vim.opt.timeoutlen = 2000
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>') -- open terminal
 vim.keymap.set('n', '<leader>w', ':w<CR>')        -- write
-vim.keymap.set('n', '<leader>q', ':q <CR>')       -- quite
-vim.keymap.set('n', '<leader>Q', ':q! <CR>')     -- quite and dont save
+vim.keymap.set('n', '<leader>q', ':q <CR>')       -- quit
+vim.keymap.set('n', '<leader>qd', ':q! <CR>')     -- quit and dont save
 vim.keymap.set('n', '<leader>wq', ':wq<CR>')      -- write and quit
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
