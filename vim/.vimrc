@@ -4,6 +4,9 @@ set number
 " Enable syntax highlighting
 syntax on
 
+" Enable smart auto-indenting when starting a new line
+set smartindent
+
 let mapleader = " "
 
 set timeout          " enable timeout for mapped sequences
@@ -19,7 +22,7 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 
 " Quit without saving
-nnoremap <leader>Q :q!<CR>
+nnoremap <leader>qd :q!<CR>
 
 " Write and quit
 nnoremap <leader>wq :wq<CR>
