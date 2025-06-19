@@ -11,7 +11,9 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
-      require("mason-lspconfig").setup({
+      local mason_lspconfig = require("mason-lspconfig")
+
+      mason_lspconfig.setup({
         ensure_installed = {
           -- LSP servers for selected languages
           "clangd",          -- C, C++
@@ -28,32 +30,31 @@ return {
           "sqlls",           -- SQL
         },
         automatic_installation = true,
-      })
+        handlers = {
+          -- Default handler for all servers
+          function(server_name)
+            local lspconfig = require("lspconfig")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            lspconfig[server_name].setup({
+              capabilities = capabilities,
+              on_attach = function(client, bufnr)
+                -- Common LSP keymaps
+                vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Docs", buffer = bufnr })
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buffer = bufnr })
+                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buffer = bufnr })
+                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation", buffer = bufnr })
+                vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "List References", buffer = bufnr })
+                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename Symbol", buffer = bufnr })
+                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = bufnr })
+                vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format File", buffer = bufnr })
 
-      local lspconfig = require("lspconfig")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          lspconfig[server_name].setup({
-            capabilities = capabilities,
-            on_attach = function(client, bufnr)
-              -- Common LSP keymaps
-              vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Docs", buffer = bufnr })
-              vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buffer = bufnr })
-              vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buffer = bufnr })
-              vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation", buffer = bufnr })
-              vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "List References", buffer = bufnr })
-              vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename Symbol", buffer = bufnr })
-              vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = bufnr })
-              vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format File", buffer = bufnr })
-
-              vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic", buffer = bufnr })
-              vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic", buffer = bufnr })
-              vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show Diagnostic", buffer = bufnr })
-            end,
-          })
-        end,
+                vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic", buffer = bufnr })
+                vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic", buffer = bufnr })
+                vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show Diagnostic", buffer = bufnr })
+              end,
+            })
+          end,
+        },
       })
     end,
   },
@@ -158,7 +159,7 @@ return {
 
 -- External tools to install (Ubuntu/Debian):
 --   sudo apt update
---   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk
+--   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk dotnet-sdk-6.0
 
 --   Install C# formatter (csharpier) via .NET SDK global tool:
 --     dotnet tool install -g csharpier
