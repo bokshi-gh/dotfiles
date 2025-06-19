@@ -156,27 +156,20 @@ return {
 
 -- NOTE:
 
--- [External tools to install (Ubuntu/Debian)]
-
--- sudo apt update
--- sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm python3-pip openjdk-11-jdk
-
--- Then install language tools:
-
--- npm install -g eslint prettier csharpier
--- pip3 install black flake8
--- rustup component add rustfmt
-
-
--- [External tools to install (macOS - using Homebrew)]
-
--- brew install unzip clang-format clang node python openjdk
-
--- Then install language tools:
-
--- npm install -g eslint prettier csharpier
--- pip3 install black flake8
--- rustup component add rustfmt
-
-
--- [Java language server (jdtls) requires Java JDK installed (see above)]
+-- External tools to install (Ubuntu/Debian):
+--   sudo apt update
+--   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk
+--
+--   Install C# formatter (csharpier) via .NET SDK global tool:
+--     dotnet tool install -g csharpier
+--     # Make sure ~/.dotnet/tools is in your PATH
+--
+--   Install JS/TS formatters and linters:
+--     npm install -g eslint prettier
+--
+--   Rust toolchain setup:
+--     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+--     # Follow prompts to install rustup and Rust toolchain
+--     # After installation, add cargo bin to PATH if not done automatically:
+--     export PATH="$HOME/.cargo/bin:$PATH"
+--     rustup component add rustfmt
