@@ -159,14 +159,14 @@ return {
 -- External tools to install (Ubuntu/Debian):
 --   sudo apt update
 --   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk
---
+
 --   Install C# formatter (csharpier) via .NET SDK global tool:
 --     dotnet tool install -g csharpier
 --     # Make sure ~/.dotnet/tools is in your PATH
---
+
 --   Install JS/TS formatters and linters:
 --     npm install -g eslint prettier
---
+
 --   Rust toolchain setup:
 --     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 --     # Follow prompts to install rustup and Rust toolchain
