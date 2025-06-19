@@ -156,7 +156,6 @@ return {
 
 -- NOTE:
 
-
 -- [External tools to install (Ubuntu/Debian)]
 
 -- sudo apt update
