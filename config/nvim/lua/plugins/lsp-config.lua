@@ -25,7 +25,6 @@ return {
           "bashls",          -- Bash
           "lua_ls",          -- Lua
           "gopls",           -- Go
-          "asm_lsp",         -- Assembly (if available)
           "sqlls",           -- SQL
         },
         automatic_installation = true,
@@ -157,7 +156,7 @@ return {
 
 -- NOTE:
 
--- 1. External tools to install (Ubuntu/Debian):
+-- [External tools to install (Ubuntu/Debian)]
 
 -- sudo apt update
 -- sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm python3-pip openjdk-11-jdk
@@ -166,23 +165,16 @@ return {
 
 -- npm install -g eslint prettier csharpier
 -- pip3 install black flake8
-
 -- rustup component add rustfmt
 
--- 2. External tools to install (macOS - using Homebrew):
+-- [External tools to install (macOS - using Homebrew)]
 
 -- brew install unzip clang-format clang node python openjdk
 
+-- Then install language tools:
+
 -- npm install -g eslint prettier csharpier
 -- pip3 install black flake8
-
 -- rustup component add rustfmt
 
--- 3. Java language server (jdtls) requires Java JDK installed (see above).
-
--- 4. Assembly language support depends on asm_lsp availability in Mason.
-
--- 5. Make sure the external tools are on your system PATH for Neovim to find them.
-
--- 6. You can install Mason packages manually with :Mason or automatically via ensure_installed.
-
+-- [Java language server (jdtls) requires Java JDK installed (see above)]
