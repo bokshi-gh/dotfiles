@@ -167,6 +167,7 @@ return {
 -- pip3 install black flake8
 -- rustup component add rustfmt
 
+
 -- [External tools to install (macOS - using Homebrew)]
 
 -- brew install unzip clang-format clang node python openjdk
@@ -176,5 +177,6 @@ return {
 -- npm install -g eslint prettier csharpier
 -- pip3 install black flake8
 -- rustup component add rustfmt
+
 
 -- [Java language server (jdtls) requires Java JDK installed (see above)]
