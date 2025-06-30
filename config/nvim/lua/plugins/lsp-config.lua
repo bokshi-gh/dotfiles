@@ -15,30 +15,17 @@ return {
 
       mason_lspconfig.setup({
         ensure_installed = {
-          -- LSP servers for selected languages
-          "clangd",          -- C, C++
-          "csharp_ls",       -- C#
-          "jdtls",           -- Java
-          "rust_analyzer",   -- Rust
-          "pyright",         -- Python
-          "html",            -- HTML
-          "cssls",           -- CSS
-          "tsserver",        -- JavaScript & TypeScript
-          "bashls",          -- Bash
-          "lua_ls",          -- Lua
-          "gopls",           -- Go
-          "sqlls",           -- SQL
+          "clangd", "csharp_ls", "jdtls", "rust_analyzer", "pyright",
+          "html", "cssls", "tsserver", "bashls", "lua_ls", "gopls", "sqlls"
         },
         automatic_installation = true,
         handlers = {
-          -- Default handler for all servers
           function(server_name)
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             lspconfig[server_name].setup({
               capabilities = capabilities,
               on_attach = function(client, bufnr)
-                -- Common LSP keymaps
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Docs", buffer = bufnr })
                 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buffer = bufnr })
                 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buffer = bufnr })
@@ -59,40 +46,69 @@ return {
     end,
   },
 
-  -- null-ls for formatters and linters integration
+  -- none-ls for formatters and linters integration
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "williamboman/mason.nvim" },
     config = function()
-      local null_ls = require("null-ls")
+      local none_ls = require("none-ls")
 
-      null_ls.setup({
+      none_ls.setup({
         sources = {
           -- Formatters
-          null_ls.builtins.formatting.prettier,       -- JS/TS/HTML/CSS
-          null_ls.builtins.formatting.black,          -- Python
-          null_ls.builtins.formatting.stylua,         -- Lua
-          null_ls.builtins.formatting.gofmt,          -- Go
-          null_ls.builtins.formatting.rustfmt,        -- Rust
-          null_ls.builtins.formatting.clang_format,   -- C, C++
-          null_ls.builtins.formatting.csharpier,      -- C#
-          -- No widely used formatter for Java in null-ls, rely on LSP (jdtls)
+          none_ls.builtins.formatting.prettier,
+          none_ls.builtins.formatting.black,
+          none_ls.builtins.formatting.stylua,
+          none_ls.builtins.formatting.gofmt,
+          none_ls.builtins.formatting.rustfmt,
+          none_ls.builtins.formatting.clang_format,
+          none_ls.builtins.formatting.csharpier,
 
           -- Linters
-          null_ls.builtins.diagnostics.eslint,        -- JS/TS
-          null_ls.builtins.diagnostics.flake8,        -- Python
-          null_ls.builtins.diagnostics.shellcheck,    -- Bash
-          null_ls.builtins.diagnostics.chktex,        -- LaTeX (optional)
-          null_ls.builtins.diagnostics.clang_check,   -- C, C++
-          -- No widely used linter for C# or Java in null-ls; rely on LSP
+          none_ls.builtins.diagnostics.eslint,
+          none_ls.builtins.diagnostics.flake8,
+          none_ls.builtins.diagnostics.shellcheck,
+          none_ls.builtins.diagnostics.chktex,
+          none_ls.builtins.diagnostics.clang_check,
         },
         on_attach = function(client, bufnr)
           if client.supports_method("textDocument/formatting") then
             vim.keymap.set("n", "<leader>F", function()
               vim.lsp.buf.format({ bufnr = bufnr })
-            end, { buffer = bufnr, desc = "Format buffer with null-ls" })
+            end, { buffer = bufnr, desc = "Format buffer with none-ls" })
           end
         end,
+      })
+    end,
+  },
+
+  -- Auto install formatters and linters using Mason for none-ls
+  {
+    "nvimtools/mason-none-ls.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "nvimtools/none-ls.nvim",
+    },
+    config = function()
+      require("mason-null-ls").setup({
+        ensure_installed = {
+          -- Formatters
+          "prettier",
+          "black",
+          "stylua",
+          "gofmt",
+          "rustfmt",
+          "clang-format",
+          "csharpier",
+
+          -- Linters
+          "eslint",
+          "flake8",
+          "shellcheck",
+          "chktex",
+          "clang-check",
+        },
+        automatic_installation = true,
       })
     end,
   },
@@ -155,22 +171,22 @@ return {
   },
 }
 
--- NOTE:
+-- SYSTEM DEPENDENCY NOTE:
 
--- External tools to install (Ubuntu/Debian):
+-- External runtimes required (Mason cannot install these):
+-- 
+-- Install system dependencies (Ubuntu/Debian):
 --   sudo apt update
 --   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk dotnet-sdk-6.0
-
---   Install C# formatter (csharpier) via .NET SDK global tool:
---     dotnet tool install -g csharpier
---     # Make sure ~/.dotnet/tools is in your PATH
-
---   Install JS/TS formatters and linters:
---     npm install -g eslint prettier
-
---   Rust toolchain setup:
---     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
---     # Follow prompts to install rustup and Rust toolchain
---     # After installation, add cargo bin to PATH if not done automatically:
---     export PATH="$HOME/.cargo/bin:$PATH"
---     rustup component add rustfmt
+-- 
+-- C# formatter (csharpier) — install via .NET SDK:
+--   dotnet tool install -g csharpier
+--   # Make sure ~/.dotnet/tools is in your PATH
+-- 
+-- JS/TS formatters and linters:
+--   npm install -g eslint prettier
+-- 
+-- Rust toolchain:
+--   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+--   export PATH="$HOME/.cargo/bin:$PATH"
+--   rustup component add rustfmt
