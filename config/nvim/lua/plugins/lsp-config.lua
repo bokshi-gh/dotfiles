@@ -12,12 +12,10 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       local mason_lspconfig = require("mason-lspconfig")
+      local servers = mason_lspconfig.get_available_servers()
 
       mason_lspconfig.setup({
-        ensure_installed = {
-          "clangd", "csharp_ls", "jdtls", "rust_analyzer", "pyright",
-          "html", "cssls", "tsserver", "bashls", "lua_ls", "gopls", "sqlls"
-        },
+        ensure_installed = servers,
         automatic_installation = true,
         handlers = {
           function(server_name)
@@ -46,69 +44,38 @@ return {
     end,
   },
 
-  -- none-ls for formatters and linters integration
+  -- null-ls for formatters and linters integration
   {
     "nvimtools/none-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "williamboman/mason.nvim" },
     config = function()
-      local none_ls = require("none-ls")
+      local null_ls = require("null-ls")
 
-      none_ls.setup({
+      null_ls.setup({
         sources = {
           -- Formatters
-          none_ls.builtins.formatting.prettier,
-          none_ls.builtins.formatting.black,
-          none_ls.builtins.formatting.stylua,
-          none_ls.builtins.formatting.gofmt,
-          none_ls.builtins.formatting.rustfmt,
-          none_ls.builtins.formatting.clang_format,
-          none_ls.builtins.formatting.csharpier,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.gofmt,
+          null_ls.builtins.formatting.rustfmt,
+          null_ls.builtins.formatting.clang_format,
+          null_ls.builtins.formatting.csharpier,
 
           -- Linters
-          none_ls.builtins.diagnostics.eslint,
-          none_ls.builtins.diagnostics.flake8,
-          none_ls.builtins.diagnostics.shellcheck,
-          none_ls.builtins.diagnostics.chktex,
-          none_ls.builtins.diagnostics.clang_check,
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.diagnostics.flake8,
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.diagnostics.chktex,
+          null_ls.builtins.diagnostics.clang_check,
         },
         on_attach = function(client, bufnr)
           if client.supports_method("textDocument/formatting") then
             vim.keymap.set("n", "<leader>F", function()
               vim.lsp.buf.format({ bufnr = bufnr })
-            end, { buffer = bufnr, desc = "Format buffer with none-ls" })
+            end, { buffer = bufnr, desc = "Format buffer with null-ls" })
           end
         end,
-      })
-    end,
-  },
-
-  -- Auto install formatters and linters using Mason for none-ls
-  {
-    "nvimtools/mason-none-ls.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-    },
-    config = function()
-      require("mason-null-ls").setup({
-        ensure_installed = {
-          -- Formatters
-          "prettier",
-          "black",
-          "stylua",
-          "gofmt",
-          "rustfmt",
-          "clang-format",
-          "csharpier",
-
-          -- Linters
-          "eslint",
-          "flake8",
-          "shellcheck",
-          "chktex",
-          "clang-check",
-        },
-        automatic_installation = true,
       })
     end,
   },
@@ -174,18 +141,18 @@ return {
 -- SYSTEM DEPENDENCY NOTE:
 
 -- External runtimes required (Mason cannot install these):
--- 
+--
 -- Install system dependencies (Ubuntu/Debian):
 --   sudo apt update
---   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk dotnet-sdk-6.0
--- 
+--   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk dotnet-sdk-6.0 shellcheck chktex python3 flake8
+--
 -- C# formatter (csharpier) — install via .NET SDK:
 --   dotnet tool install -g csharpier
 --   # Make sure ~/.dotnet/tools is in your PATH
--- 
+--
 -- JS/TS formatters and linters:
 --   npm install -g eslint prettier
--- 
+--
 -- Rust toolchain:
 --   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 --   export PATH="$HOME/.cargo/bin:$PATH"
