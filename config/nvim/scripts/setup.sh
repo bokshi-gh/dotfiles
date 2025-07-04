@@ -1,69 +1,41 @@
 #!/bin/bash
+set -e
 
-set -e  # Exit immediately on error
+# ANSI color codes
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
 
-echo "🔧 Updating package list..."
+echo -e "${GREEN}[🔄 Updating package list...]${NC}"
 sudo apt update
 
-echo "📦 Installing system dependencies..."
-sudo apt install -y unzip curl wget git software-properties-common \
+echo -e "${GREEN}[📦 Installing system packages...]${NC}"
+sudo apt install -y \
+  curl wget git unzip software-properties-common \
   clang-format clang-tools clang clang-tidy \
-  nodejs npm openjdk-11-jdk shellcheck chktex python3 flake8 ripgrep
+  nodejs npm openjdk-11-jdk shellcheck chktex python3 python3-pip flake8 ripgrep golang-go
 
-# ------------------------------------
-# 📝 Install Neovim (AppImage method)
-# ------------------------------------
-echo "📝 Installing Neovim..."
-if ! command -v nvim &>/dev/null; then
-  mkdir -p ~/.local/bin
-  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-  chmod u+x nvim.appimage
-  mv nvim.appimage ~/.local/bin/nvim
-
-  # Add to PATH if not already
-  if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    export PATH="$HOME/.local/bin:$PATH"
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.profile
-  fi
-else
-  echo "✅ Neovim is already installed"
-fi
-
-# ------------------------------------
-# 📦 Fix npm global install permissions
-# ------------------------------------
-echo "📦 Fixing npm global install permissions..."
-mkdir -p "$HOME/.npm-global"
-npm config set prefix "$HOME/.npm-global"
-export PATH="$HOME/.npm-global/bin:$PATH"
-echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.profile
-
-echo "🧹 Installing JavaScript/TypeScript formatters and linters..."
-npm install -g eslint prettier
-
-# ------------------------------------
-# 🦀 Install Rust toolchain
-# ------------------------------------
-echo "🦀 Installing Rust toolchain..."
+echo -e "${GREEN}[🦀 Installing Rust toolchain...]${NC}"
 if ! command -v rustup &>/dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   source "$HOME/.cargo/env"
 fi
-
-# Ensure cargo bin is in PATH
-export PATH="$HOME/.cargo/bin:$PATH"
-echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.profile
-
-# Set default toolchain to stable
 rustup default stable
-
-echo "🧰 Adding rustfmt..."
 rustup component add rustfmt
 
-# ------------------------------------
-# ✅ Finalization
-# ------------------------------------
-echo "✅ All development tools and dependencies installed successfully."
+echo -e "${GREEN}[📦 Installing npm packages: prettier, eslint]${NC}"
+npm install -g prettier eslint
 
-# Load updated paths for this session
-source ~/.profile || true
+echo -e "${GREEN}[🐍 Installing Python packages: black]${NC}"
+pip3 install --user black
+
+echo -e "${GREEN}[☕ Installing Java language server (Eclipse JDT LS)]${NC}"
+JDTLS_DIR="$HOME/.local/share/eclipse.jdt.ls"
+if [ ! -d "$JDTLS_DIR" ]; then
+  mkdir -p "$JDTLS_DIR"
+  curl -L -o /tmp/jdtls.tar.gz https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
+  tar -xzf /tmp/jdtls.tar.gz -C "$JDTLS_DIR" --strip-components=1
+  rm /tmp/jdtls.tar.gz
+fi
+
+echo -e "${GREEN}[✅ All tools installed!]${NC}"

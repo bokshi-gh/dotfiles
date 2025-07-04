@@ -24,6 +24,13 @@ remove_symlink() {
     fi
 }
 
+if [ -f ~/.config/nvim/scripts/clean.sh ]; then
+    echo -e "${GREEN}[🧹 Running Neovim clean script...]${NC}"
+    bash ~/.config/nvim/scripts/clean.sh
+else
+    echo -e "${YELLOW}⚠️ Neovim clean.sh script not found. Skipping Neovim cleanup.${NC}"
+fi
+
 remove_symlink ~/.gitconfig
 remove_symlink ~/.gitignore_global
 remove_symlink ~/.vimrc
@@ -32,11 +39,3 @@ remove_symlink ~/.ssh/config
 remove_symlink ~/.ssh/id_rsa_github
 
 echo -e "${GREEN}[✅ Symlink removal complete]${NC}"
-
-if [ -f ~/.config/nvim/scripts/clean.sh ]; then
-    echo -e "${GREEN}[🧹 Running Neovim clean script...]${NC}"
-    bash ~/.config/nvim/scripts/clean.sh
-else
-    echo -e "${YELLOW}⚠️ Neovim clean.sh script not found. Skipping Neovim cleanup.${NC}"
-fi
-
