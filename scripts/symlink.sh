@@ -1,11 +1,21 @@
 #!/bin/bash
 
-echo "[🧹 Clearing older symlinks...]"
+GREEN='\033[1;32m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}[🧹 Starting cleanup of old symlinks...]${NC}"
 
 if [ -f ~/.dotfiles/scripts/remove_symlink.sh ]; then
     bash ~/.dotfiles/scripts/remove_symlink.sh
 else
-    echo "⚠️ remove_symlink.sh not found. Skipping cleanup."
+    echo "⚠️ remove_symlink.sh not found. Skipping symlink cleanup."
+fi
+
+if [ -f ~/.config/nvim/scripts/clean.sh ]; then
+    echo -e "${GREEN}[🧹 Running Neovim clean script...]${NC}"
+    bash ~/.config/nvim/scripts/clean.sh
+else
+    echo "⚠️ Neovim clean.sh script not found. Skipping Neovim cleanup."
 fi
 
 symlink() {
@@ -18,51 +28,32 @@ symlink() {
     fi
 
     ln -sf "$src" "$dest"
-    echo "✅ Symlinked $src → $dest"
+    echo "✅ Symlink created: $src → $dest"
 }
 
 mkdir -p ~/.config
 mkdir -p ~/.ssh
 
 echo ""
-echo "[🔗 Setting up symlinks...]"
+echo -e "${GREEN}[🔗 Setting up dotfiles symlinks...]${NC}"
 
-# Git
 symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
 symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
-
-# Vim
 symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
-
-# Neovim
 symlink ~/.dotfiles/config/nvim ~/.config/nvim
-
-# SSH
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
 symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
 
-# Bash config block
+chmod 600 ~/.dotfiles/ssh/id_rsa_github
+
 echo ""
-echo "[⚙️  Setting up Bash config block...]"
+echo -e "${GREEN}[🚀 Running Neovim setup script...]${NC}"
 
-BASHRC_FILE=~/.bashrc
-START_MARKER="# >>> dotfiles bashrc config start >>>"
-END_MARKER="# <<< dotfiles bashrc config end <<<"
-
-if [ ! -f "$BASHRC_FILE" ] || ! grep -Fxq "$START_MARKER" "$BASHRC_FILE"; then
-    {
-        echo ""
-        echo "$START_MARKER"
-        echo "source ~/.dotfiles/bash/.bashrc"
-        echo "$END_MARKER"
-    } >> "$BASHRC_FILE"
-    echo "✅ Added dotfiles bashrc config block to ~/.bashrc"
+if [ -f ~/.config/nvim/scripts/setup.sh ]; then
+    bash ~/.config/nvim/scripts/setup.sh
 else
-    echo "ℹ️ Dotfiles bashrc config block already present in ~/.bashrc"
+    echo "⚠️ Neovim setup.sh script not found. Skipping Neovim setup."
 fi
 
-# Optionally source immediately (comment if you prefer manual reload)
-source ~/.bashrc
-
 echo ""
-echo "[🎉 All done! Dotfiles setup complete.]"
+echo -e "${GREEN}[🎉 All done! Dotfiles setup and configuration complete.]${NC}"

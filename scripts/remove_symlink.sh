@@ -1,45 +1,42 @@
 #!/bin/bash
 
-echo "[🧹 Removing symlinks...]"
+# ANSI color codes
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+RED='\033[1;31m'
+NC='\033[0m' # No Color
 
-# Remove bashrc block
-BASHRC_FILE=~/.bashrc
-START_MARKER="# >>> dotfiles bashrc config start >>>"
-END_MARKER="# <<< dotfiles bashrc config end <<<"
+echo -e "${GREEN}[🧹 Removing old dotfiles symlinks...]${NC}"
 
-if [ -f "$BASHRC_FILE" ]; then
-    if grep -q "$START_MARKER" "$BASHRC_FILE"; then
-        sed -i "/$START_MARKER/,/$END_MARKER/d" "$BASHRC_FILE"
-        echo "✅ Removed dotfiles bashrc config block from ~/.bashrc"
+remove_symlink() {
+    local target=$1
+    if [ -L "$target" ]; then
+        local dest
+        dest=$(readlink "$target")
+        if [[ "$dest" == ~/.dotfiles* ]]; then
+            rm "$target"
+            echo -e "${GREEN}🗑️ Removed symlink:${NC} $target -> $dest"
+        else
+            echo -e "${YELLOW}⚠️ Skipping${NC} $target: not a symlink to ~/.dotfiles"
+        fi
     else
-        echo "ℹ️ Dotfiles bashrc config block not found in ~/.bashrc"
-    fi
-fi
-
-# Function to remove symlink if it exists
-remove_if_symlink() {
-    local file=$1
-    if [ -L "$file" ]; then
-        rm -f "$file" && echo "Removed $file"
-    else
-        echo "ℹ️ Skipped $file (not a symlink or does not exist)"
+        echo -e "${YELLOW}⚠️ $target is not a symlink, skipping${NC}"
     fi
 }
 
-# Run Neovim cleanup script if it exists before removing config
+remove_symlink ~/.gitconfig
+remove_symlink ~/.gitignore_global
+remove_symlink ~/.vimrc
+remove_symlink ~/.config/nvim
+remove_symlink ~/.ssh/config
+remove_symlink ~/.ssh/id_rsa_github
+
+echo -e "${GREEN}[✅ Symlink removal complete]${NC}"
+
 if [ -f ~/.config/nvim/scripts/clean.sh ]; then
-    echo "🧹 Running Neovim cleanup script before removing config..."
+    echo -e "${GREEN}[🧹 Running Neovim clean script...]${NC}"
     bash ~/.config/nvim/scripts/clean.sh
 else
-    echo "⚠️ Neovim cleanup script not found, skipping."
+    echo -e "${YELLOW}⚠️ Neovim clean.sh script not found. Skipping Neovim cleanup.${NC}"
 fi
 
-remove_if_symlink ~/.config/nvim
-
-remove_if_symlink ~/.gitconfig
-remove_if_symlink ~/.gitignore_global
-remove_if_symlink ~/.vimrc
-remove_if_symlink ~/.ssh/config
-remove_if_symlink ~/.ssh/id_rsa_github
-
-echo "[✅ Removal complete!]"
