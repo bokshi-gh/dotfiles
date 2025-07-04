@@ -9,16 +9,6 @@ NC='\033[0m'
 
 echo -e "${YELLOW}[🧹 Cleaning up installed tools...]${NC}"
 
-echo -e "${YELLOW}Removing system packages...${NC}"
-sudo apt remove --purge -y \
-  curl wget git unzip software-properties-common \
-  clang-format clang-tools clang clang-tidy \
-  nodejs npm openjdk-11-jdk shellcheck chktex python3-pip flake8 ripgrep golang-go || true
-
-# Be cautious removing python3 itself; usually not recommended
-# echo -e "${YELLOW}Removing python3 (not recommended)...${NC}"
-# sudo apt remove --purge -y python3 || true
-
 echo -e "${YELLOW}Removing Rust toolchain...${NC}"
 if command -v rustup &>/dev/null; then
   rustup self uninstall -y || true
@@ -38,5 +28,17 @@ rm -rf "$HOME/.cache/nvim"
 
 echo -e "${YELLOW}Removing Java language server...${NC}"
 rm -rf "$HOME/.local/share/eclipse.jdt.ls"
+
+
+echo -e "${YELLOW}Removing system packages...${NC}"
+sudo apt remove --purge -y \
+  curl wget git unzip software-properties-common \
+  clang-format clang-tools clang clang-tidy \
+  nodejs npm openjdk-11-jdk shellcheck chktex python3-pip flake8 ripgrep golang-go || true
+
+# Be cautious removing python3 itself; usually not recommended
+# echo -e "${YELLOW}Removing python3 (not recommended)...${NC}"
+# sudo apt remove --purge -y python3 || true
+
 
 echo -e "${GREEN}[✅ Cleanup complete!]${NC}"
