@@ -1,55 +1,56 @@
 return {
-  -- Mason: Installer for LSP servers, linters, formatters
+  -- mason: Installer for LSP servers, linters, formatters
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
     config = true,
   },
 
-  -- Mason-lspconfig bridge & LSP servers
+  -- mason-lspconfig: bridge between mason and nvim-lspconfig
   {
     "williamboman/mason-lspconfig.nvim",
+    version = "v1.3.0",
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       local mason_lspconfig = require("mason-lspconfig")
-      -- local servers = mason_lspconfig.get_available_servers()
-	 local servers = {
-		"lua_ls", "rust_analyzer", "clangd", "eslint", "pyright", "tsserver"
-	 }
+      local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+      -- Automatically install specified servers
       mason_lspconfig.setup({
-        ensure_installed = servers,
+        ensure_installed = { "bashls", "clangd", "lua_ls", "pyright", "rust_analyzer", "tsserver" },
         automatic_installation = true,
-        handlers = {
-          function(server_name)
-            local lspconfig = require("lspconfig")
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            lspconfig[server_name].setup({
-              capabilities = capabilities,
-              on_attach = function(client, bufnr)
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Docs", buffer = bufnr })
-                vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buffer = bufnr })
-                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buffer = bufnr })
-                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation", buffer = bufnr })
-                vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "List References", buffer = bufnr })
-                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename Symbol", buffer = bufnr })
-                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = bufnr })
-                vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format File", buffer = bufnr })
+      })
 
-                vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic", buffer = bufnr })
-                vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic", buffer = bufnr })
-                vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show Diagnostic", buffer = bufnr })
-              end,
-            })
-          end,
-        },
+      mason_lspconfig.setup_handlers({
+        function(server_name)
+          lspconfig[server_name].setup({
+            capabilities = capabilities,
+            on_attach = function(_, bufnr)
+              local map = function(mode, key, fn, desc)
+                vim.keymap.set(mode, key, fn, { buffer = bufnr, desc = desc })
+              end
+              map("n", "K", vim.lsp.buf.hover, "Hover Docs")
+              map("n", "gd", vim.lsp.buf.definition, "Go to Definition")
+              map("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
+              map("n", "gi", vim.lsp.buf.implementation, "Go to Implementation")
+              map("n", "gr", vim.lsp.buf.references, "List References")
+              map("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+              map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+              map("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, "Format File")
+              map("n", "[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
+              map("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic")
+              map("n", "<leader>e", vim.diagnostic.open_float, "Show Diagnostic")
+            end,
+          })
+        end,
       })
     end,
   },
 
-  -- null-ls for formatters and linters integration
+  -- null-ls: for formatters and linters integration
   {
-    "nvimtools/none-ls.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "williamboman/mason.nvim" },
     config = function()
       local null_ls = require("null-ls")
@@ -82,7 +83,7 @@ return {
     end,
   },
 
-  -- Autocomplete engine and snippet support
+  -- nvim-cmp: Autocomplete engine and snippet support
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -140,18 +141,3 @@ return {
   },
 }
 
--- SYSTEM DEPENDENCY NOTE:
-
--- External runtimes required (Mason cannot install these):
---
--- Install system dependencies (Ubuntu/Debian):
---   sudo apt update
---   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk shellcheck chktex python3 flake8
---
--- JS/TS formatters and linters:
---   npm install -g eslint prettier
---
--- Rust toolchain:
---   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
---   export PATH="$HOME/.cargo/bin:$PATH"
---   rustup component add rustfmt
