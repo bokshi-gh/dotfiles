@@ -1,16 +1,13 @@
 #!/bin/bash
 
-echo ""
 echo "[🧹 Clearing older symlinks...]"
 
-# Run cleanup script first
 if [ -f ~/.dotfiles/scripts/remove_symlink.sh ]; then
     bash ~/.dotfiles/scripts/remove_symlink.sh
 else
-    echo "⚠️  remove_symlink.sh not found. Skipping cleanup."
+    echo "⚠️ remove_symlink.sh not found. Skipping cleanup."
 fi
 
-# Function to create symlink safely
 symlink() {
     local src=$1
     local dest=$2
@@ -24,47 +21,47 @@ symlink() {
     echo "✅ Symlinked $src → $dest"
 }
 
-# Ensure base directories exist
 mkdir -p ~/.config
 mkdir -p ~/.ssh
 
 echo ""
 echo "[🔗 Setting up symlinks...]"
 
-# Git config
+# Git
 symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
 symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
 
-# Vim config
+# Vim
 symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 
-# Neovim config
+# Neovim
 symlink ~/.dotfiles/config/nvim ~/.config/nvim
 
-# SSH config
+# SSH
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
 symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
 
-# Bash config setup
+# Bash config block
 echo ""
-echo "[⚙️  Setting up Bash config...]"
+echo "[⚙️  Setting up Bash config block...]"
 
-BASHRC_LINE="source ~/.dotfiles/bash/.bashrc"
 BASHRC_FILE=~/.bashrc
+START_MARKER="# >>> dotfiles bashrc config start >>>"
+END_MARKER="# <<< dotfiles bashrc config end <<<"
 
-if [ -f "$BASHRC_FILE" ]; then
-    if ! grep -Fxq "$BASHRC_LINE" "$BASHRC_FILE"; then
-        echo "$BASHRC_LINE" >> "$BASHRC_FILE"
-        echo "✅ Appended bash config sourcing to ~/.bashrc"
-    else
-        echo "ℹ️ Bash config sourcing already present in ~/.bashrc"
-    fi
+if [ ! -f "$BASHRC_FILE" ] || ! grep -Fxq "$START_MARKER" "$BASHRC_FILE"; then
+    {
+        echo ""
+        echo "$START_MARKER"
+        echo "source ~/.dotfiles/bash/.bashrc"
+        echo "$END_MARKER"
+    } >> "$BASHRC_FILE"
+    echo "✅ Added dotfiles bashrc config block to ~/.bashrc"
 else
-    echo "$BASHRC_LINE" > "$BASHRC_FILE"
-    echo "✅ Created ~/.bashrc and added bash config sourcing"
+    echo "ℹ️ Dotfiles bashrc config block already present in ~/.bashrc"
 fi
 
-# Optional: Source the bashrc to apply immediately
+# Optionally source immediately (comment if you prefer manual reload)
 source ~/.bashrc
 
 echo ""
