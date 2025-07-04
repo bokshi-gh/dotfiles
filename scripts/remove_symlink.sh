@@ -2,24 +2,27 @@
 
 echo "[🧹 Removing symlinks...]"
 
-# Only remove the specific line added to ~/.bashrc
-BASHRC_LINE="source ~/.dotfiles/bash/.bashrc"
+# Remove bashrc block
 BASHRC_FILE=~/.bashrc
+START_MARKER="# >>> dotfiles bashrc config start >>>"
+END_MARKER="# <<< dotfiles bashrc config end <<<"
 
 if [ -f "$BASHRC_FILE" ]; then
-    if grep -Fxq "$BASHRC_LINE" "$BASHRC_FILE"; then
-        sed -i "\|$BASHRC_LINE|d" "$BASHRC_FILE"
-        echo "Cleaned line from ~/.bashrc"
+    if grep -q "$START_MARKER" "$BASHRC_FILE"; then
+        sed -i "/$START_MARKER/,/$END_MARKER/d" "$BASHRC_FILE"
+        echo "✅ Removed dotfiles bashrc config block from ~/.bashrc"
     else
-        echo "Line not found in ~/.bashrc — nothing to clean"
+        echo "ℹ️ Dotfiles bashrc config block not found in ~/.bashrc"
     fi
 fi
 
-# Remove symlinks (ignore if not symlink or not exist)
+# Remove symlinks only if they exist and are symlinks
 remove_if_symlink() {
     local file=$1
     if [ -L "$file" ]; then
         rm -f "$file" && echo "Removed $file"
+    else
+        echo "ℹ️ Skipped $file (not a symlink or does not exist)"
     fi
 }
 
