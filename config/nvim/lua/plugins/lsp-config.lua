@@ -12,7 +12,10 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       local mason_lspconfig = require("mason-lspconfig")
-      local servers = mason_lspconfig.get_available_servers()
+      -- local servers = mason_lspconfig.get_available_servers()
+	 local servers = {
+		"lua_ls", "rust_analyzer", "clangd", "eslint", "pyright", "tsserver"
+	 }
 
       mason_lspconfig.setup({
         ensure_installed = servers,
@@ -60,7 +63,6 @@ return {
           null_ls.builtins.formatting.gofmt,
           null_ls.builtins.formatting.rustfmt,
           null_ls.builtins.formatting.clang_format,
-          null_ls.builtins.formatting.csharpier,
 
           -- Linters
           null_ls.builtins.diagnostics.eslint,
@@ -144,11 +146,7 @@ return {
 --
 -- Install system dependencies (Ubuntu/Debian):
 --   sudo apt update
---   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk dotnet-sdk-6.0 shellcheck chktex python3 flake8
---
--- C# formatter (csharpier) — install via .NET SDK:
---   dotnet tool install -g csharpier
---   # Make sure ~/.dotnet/tools is in your PATH
+--   sudo apt install -y unzip clang-format clang-tools clang clang-tidy nodejs npm openjdk-11-jdk shellcheck chktex python3 flake8
 --
 -- JS/TS formatters and linters:
 --   npm install -g eslint prettier

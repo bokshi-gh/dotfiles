@@ -16,7 +16,7 @@ if [ -f "$BASHRC_FILE" ]; then
     fi
 fi
 
-# Remove symlinks only if they exist and are symlinks
+# Function to remove symlink if it exists
 remove_if_symlink() {
     local file=$1
     if [ -L "$file" ]; then
@@ -26,10 +26,19 @@ remove_if_symlink() {
     fi
 }
 
+# Run Neovim cleanup script if it exists before removing config
+if [ -f ~/.config/nvim/scripts/clean.sh ]; then
+    echo "🧹 Running Neovim cleanup script before removing config..."
+    bash ~/.config/nvim/scripts/clean.sh
+else
+    echo "⚠️ Neovim cleanup script not found, skipping."
+fi
+
+remove_if_symlink ~/.config/nvim
+
 remove_if_symlink ~/.gitconfig
 remove_if_symlink ~/.gitignore_global
 remove_if_symlink ~/.vimrc
-remove_if_symlink ~/.config/nvim
 remove_if_symlink ~/.ssh/config
 remove_if_symlink ~/.ssh/id_rsa_github
 

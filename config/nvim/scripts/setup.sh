@@ -30,24 +30,6 @@ else
 fi
 
 # ------------------------------------
-# ⚙️ Install .NET SDK 8.0 (via Microsoft script)
-# ------------------------------------
-echo "⚙️ Installing .NET SDK 8.0..."
-DOTNET_SCRIPT="dotnet-install.sh"
-wget -q https://dot.net/v1/$DOTNET_SCRIPT -O $DOTNET_SCRIPT
-chmod +x $DOTNET_SCRIPT
-./$DOTNET_SCRIPT --version 8.0.302
-
-# Add .dotnet/tools to PATH
-if [[ ":$PATH:" != *":$HOME/.dotnet/tools:"* ]]; then
-  export PATH="$HOME/.dotnet/tools:$PATH"
-  echo 'export PATH="$HOME/.dotnet/tools:$PATH"' >> ~/.profile
-fi
-
-echo "⚙️ Installing C# formatter (csharpier)..."
-~/.dotnet/dotnet tool install -g csharpier || echo "✅ csharpier may already be installed"
-
-# ------------------------------------
 # 📦 Fix npm global install permissions
 # ------------------------------------
 echo "📦 Fixing npm global install permissions..."
