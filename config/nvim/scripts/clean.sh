@@ -32,9 +32,12 @@ rm -rf "$HOME/.local/share/eclipse.jdt.ls"
 
 echo -e "${YELLOW}Removing system packages...${NC}"
 sudo apt remove --purge -y \
-  curl wget git unzip software-properties-common \
+  curl wget unzip software-properties-common \
   clang-format clang-tools clang clang-tidy \
   nodejs npm openjdk-11-jdk shellcheck chktex python3-pip flake8 ripgrep golang-go || true
+
+echo -e "${YELLOW}Removing orphaned packages...${NC}"
+sudo apt autoremove
 
 # Be cautious removing python3 itself; usually not recommended
 # echo -e "${YELLOW}Removing python3 (not recommended)...${NC}"
