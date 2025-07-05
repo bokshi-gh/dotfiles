@@ -141,3 +141,7 @@ return {
   },
 }
 
+-- NOTE: While Mason installs and manages LSP servers automatically, you must separately install the required language-specific toolchains and runtimes on your system.
+-- For example, for rust-analyzer to work properly, you need to install the Rust toolchain via rustup.
+-- Similarly, for tsserver you need Node.js and npm installed.
+-- Without these language-specific tools, features like formatting, linting, and code analysis may not function correctly.
