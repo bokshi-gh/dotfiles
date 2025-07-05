@@ -62,6 +62,7 @@ return {
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.gofmt,
+          null_ls.builtins.formatting.rustfmt,
           null_ls.builtins.formatting.clang_format,
 
           -- Linters
@@ -140,7 +141,7 @@ return {
   },
 }
 
--- NOTE: Requires Neovim version >= 0.10.0 for proper functionality.
+-- NOTE: Requires Neovim version >= 0.11.0 for proper functionality.
 -- NOTE: While Mason installs and manages LSP servers automatically, you must separately install the required language-specific toolchains and runtimes on your system.
 -- For example, for rust-analyzer to work properly, you need to install the Rust toolchain via rustup.
 -- Similarly, for tsserver you need Node.js and npm installed.
