@@ -21,8 +21,7 @@ npm uninstall -g prettier eslint || true
 echo -e "${YELLOW}Removing Python user package black...${NC}"
 pip3 uninstall -y black || true
 
-echo -e "${YELLOW}Removing Neovim config, cache, and data directories...${NC}"
-rm -rf "$HOME/.config/nvim"
+echo -e "${YELLOW}Removing Neovim cache, and data directories...${NC}"
 rm -rf "$HOME/.local/share/nvim"
 rm -rf "$HOME/.cache/nvim"
 
