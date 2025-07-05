@@ -50,7 +50,7 @@ return {
 
   -- null-ls: for formatters and linters integration
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "williamboman/mason.nvim" },
     config = function()
       local null_ls = require("null-ls")
