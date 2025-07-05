@@ -1,3 +1,3 @@
 # Dotfiles
 
-Personal dotfiles and setup scripts for a customized Unix/Linux development environment.Personal dotfiles and setup scripts for a customized Unix/Linux development environment.
+This repository contains my personal configuration files for various tools and applications. By keeping these configuration files under version control, I can easily maintain and sync my setup across multiple machines.
