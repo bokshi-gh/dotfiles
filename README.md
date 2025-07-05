@@ -4,4 +4,4 @@ This repository contains my personal configuration files for various tools and a
 
 ## TODO
 - Debugger in Neovim
-- Fix rust analyzer interuptions
+- setup.sh and clean.sh
