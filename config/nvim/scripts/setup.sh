@@ -21,6 +21,7 @@ if ! command -v rustup &>/dev/null; then
   source "$HOME/.cargo/env"
 fi
 rustup default stable
+rustup component add rustfmt
 
 echo -e "${GREEN}[📦 Installing npm packages: prettier, eslint]${NC}"
 npm install -g prettier eslint
