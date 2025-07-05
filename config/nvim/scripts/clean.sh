@@ -31,7 +31,7 @@ rm -rf "$HOME/.local/share/eclipse.jdt.ls"
 
 echo -e "${YELLOW}Removing system packages...${NC}"
 sudo apt remove --purge -y \
-  curl \
+  curl unzip \
   clang-format clang-tools clang clang-tidy \
   nodejs npm openjdk-11-jdk shellcheck chktex python3-pip flake8 ripgrep golang-go || true
 
