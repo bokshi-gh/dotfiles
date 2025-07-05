@@ -1,7 +1,7 @@
 
 # SSH Overview and Commands
 
-## 1. **Generating SSH Key Pair**
+## **Generating SSH Key Pair**
 ```sh
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
@@ -16,7 +16,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArYHJ6jU+OnEwLOIhJz8LBX1nPRA6Oik9m4hklpqlyDAi
 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtmUpX+Ymg7z5UE9y+Go6HRBYa3oFvhrpJ2geq5/JxN9lMKf5Ls17rwP1GV6hddjzZoHtYq44JvH1CGvZhUdmF61Rh3e0Em8J8yMLp/j2S7hfNm0AKn1unRFLVlfcuFggZn9mvoTpq7uAMi3VAHHf4plTmC4gHe95p7a34TmPG1ZmRtjmIMuFmu4sb0K5WVdT6ohCSM8nBbg1A== another_user@hostname
 ```
 
-## 2. **Adding to SSH Agent**
+## **Adding to SSH Agent**
 - The SSH agent stores your keys and handles authentication for you, so you don’t need to re-enter the passphrase each time.
 ```sh
 eval "$(ssh-agent -s)"
@@ -31,14 +31,14 @@ ssh username@remote_host
 ```
 - This command connects to a remote server using the provided username and prompts you for a password (unless you’re using SSH keys for authentication).
 
-## 4. **SSH with Key (No Password)**
+## **SSH with Key (No Password)**
 ```sh
 ssh -i /path/to/id_rsa/file username@remote_host
 ```
 - This allows SSH authentication using the private key (`-i` option), without entering a password, if your key is authorized on the remote server.
 - If `-i` is not provided, the default key used is `~/.ssh/id_rsa`.
 
-## 5. **Copying Files with SCP (Secure Copy)**
+## **Copying Files with SCP (Secure Copy)**
 - Copy a file from remote server to local machine:
   ```sh
   scp username@remote_host:/path/to/remote/file /path/to/local/directory
@@ -48,39 +48,39 @@ ssh -i /path/to/id_rsa/file username@remote_host
   scp /path/to/local/file username@remote_host:/path/to/remote/directory
   ```
 
-## 6. **Execute Commands on a Remote Server**
+## **Execute Commands on a Remote Server**
 ```sh
 ssh username@remote_host 'command'
 ```
 - This runs a command directly on the remote server without logging into an interactive session.
 
-## 7. **Using Different Port**
+## **Using Different Port**
 ```sh
 ssh -p 2222 username@remote_host
 ```
 - If the SSH service on the remote server is running on a different port (e.g., 2222), you can specify it with the `-p` flag.
 - If the port is not specified, SSH defaults to port `22`.
 
-## 8. **Port Forwarding**
+## **Port Forwarding**
 - Port forwarding lets you tunnel a port from your local machine to a remote machine.
   ```sh
   ssh -L local_port:remote_host:remote_port username@remote_host
   ```
 - This will forward traffic from `local_port` on your local machine to `remote_port` on the `remote_host`.
 
-## 9. **Flags**
+## **Flags**
 - **`-T`**: Disables terminal allocation (useful when you don’t need a terminal, such as when executing commands non-interactively).
   ```sh
   ssh -T username@remote_host 'command'
   ```
 
-## 10. **`authorized_keys` File**
+## **`authorized_keys` File**
 - Located on the remote server in `~/.ssh/authorized_keys`, this file contains the public keys of users who are authorized to log in to the server without a password.
 
-## 11. **`known_hosts` File**
+## **`known_hosts` File**
 - Located on your local machine in `~/.ssh/known_hosts`, this file stores the fingerprints of remote hosts you’ve connected to. It’s used to verify the identity of the server during future connections.
 
-## 12. **SSH Config File**
+## **SSH Config File**
 - Located on your local machine in `~/.ssh/config`.
 - Simplifies connecting to multiple hosts with specific configurations:
   ```txt
