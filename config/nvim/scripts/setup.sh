@@ -11,7 +11,7 @@ sudo apt update
 
 echo -e "${GREEN}[📦 Installing system packages...]${NC}"
 sudo apt install -y \
-  curl \
+  curl unzip \
   clang-format clang-tools clang clang-tidy \
   nodejs npm openjdk-11-jdk shellcheck chktex python3 python3-pip flake8 ripgrep golang-go
 
