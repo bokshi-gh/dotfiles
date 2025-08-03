@@ -39,5 +39,3 @@ if [ -f ~/.dotfiles/config/nvim/scripts/cleanup.sh ]; then
 else
     echo -e "${RED}NEOVIM CLEANUP SCRIPT NOT FOUND:${NC} ~/.config/nvim/scripts/cleanup.sh"
 fi
-
-echo -e "${GREEN}[ALL DONE! SYMLINKS REMOVAL COMPLETE]${NC}"
