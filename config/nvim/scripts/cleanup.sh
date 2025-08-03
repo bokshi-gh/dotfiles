@@ -16,7 +16,6 @@ confirm() {
     esac
 }
 
-# --- APT packages ---
 if confirm "C/C++ tools (build-essential, clang)"; then
     sudo apt remove --purge -y build-essential clang
 fi
@@ -52,7 +51,6 @@ fi
 sudo apt autoremove -y
 sudo apt clean
 
-# --- Rust ---
 if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
     if confirm "Rust (rustup, cargo)"; then
         rustup self uninstall -y || true
