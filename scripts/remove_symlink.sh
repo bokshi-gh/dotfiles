@@ -31,4 +31,4 @@ remove_symlink ~/.config/nvim
 remove_symlink ~/.ssh/config
 remove_symlink ~/.ssh/id_rsa_github
 
-echo -e "${GREEN}[All Done! Symlink removal complete]${NC}"
+echo -e "${GREEN}[ALL DONE! SYMLINKS REMOVAL COMPLETE]${NC}"
