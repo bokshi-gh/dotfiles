@@ -26,7 +26,6 @@ remove_symlink() {
 
 # Run cleanup script
 if [ -f ~/.config/nvim/scripts/cleanup.sh ]; then
-    echo ""
     echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT]${NC}"
     bash ~/.config/nvim/scripts/cleanup.sh
 else
