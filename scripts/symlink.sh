@@ -18,7 +18,7 @@ symlink() {
     fi
 
     ln -sf "$src" "$dest"
-    echo "${GREEN}Symlink created: $src → $dest${NC}"
+    echo "${GREEN}Symlink created:${NC} $src → $dest"
 }
 
 mkdir -p ~/.config
