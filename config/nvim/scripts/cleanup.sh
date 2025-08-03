@@ -1,11 +1,12 @@
 #!/bin/bash
 
+set -e
+
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-set -e
-
-echo "${YELLOW}=== Selectively removing toolchain installed by setup.sh ===${NC}"
+echo -e "${YELLOW}=== 
+SELECTIVELY REMOVING TOOLCHAIN INSTALLED FOR NEOVIM ===${NC}"
 
 confirm() {
     read -p "Remove $1? [y/n]: " choice
