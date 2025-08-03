@@ -1,41 +1,47 @@
 #!/bin/bash
+
 set -e
 
-# ANSI color codes
-GREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+echo "=== Updating system ==="
+sudo apt update && sudo apt upgrade -y
 
-echo -e "${GREEN}[🔄 Updating package list...]${NC}"
-sudo apt update
+echo "=== Installing build tools (C/C++) ==="
+sudo apt install -y build-essential clang
 
-echo -e "${GREEN}[📦 Installing system packages...]${NC}"
-sudo apt install -y \
-  curl unzip \
-  clang-format clang-tools clang clang-tidy \
-  nodejs npm openjdk-11-jdk shellcheck chktex python3 python3-pip flake8 ripgrep golang-go
+echo "=== Installing Java (JDK 17) ==="
+sudo apt install -y openjdk-17-jdk
 
-echo -e "${GREEN}[🦀 Installing Rust toolchain...]${NC}"
-if ! command -v rustup &>/dev/null; then
+echo "=== Installing Lua ==="
+sudo apt install -y lua5.4
+
+echo "=== Installing Go ==="
+sudo apt install -y golang
+
+echo "=== Installing Python ==="
+sudo apt install -y python3 python3-pip
+
+echo "=== Installing Rust (via rustup) ==="
+if ! command -v rustc &>/dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   source "$HOME/.cargo/env"
 fi
-rustup default stable
-rustup component add rustfmt
 
-echo -e "${GREEN}[📦 Installing npm packages: prettier, eslint]${NC}"
-npm install -g prettier eslint
-
-echo -e "${GREEN}[🐍 Installing Python packages: black]${NC}"
-pip3 install --user black
-
-echo -e "${GREEN}[☕ Installing Java language server (Eclipse JDT LS)]${NC}"
-JDTLS_DIR="$HOME/.local/share/eclipse.jdt.ls"
-if [ ! -d "$JDTLS_DIR" ]; then
-  mkdir -p "$JDTLS_DIR"
-  curl -L -o /tmp/jdtls.tar.gz https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
-  tar -xzf /tmp/jdtls.tar.gz -C "$JDTLS_DIR" --strip-components=1
-  rm /tmp/jdtls.tar.gz
+echo "=== Installing Node.js and npm ==="
+sudo apt install -y nodejs npm
+# Ensure latest Node if distro version is old
+if [ "$(node -v | cut -d. -f1 | tr -d v)" -lt 18 ]; then
+  echo "Node.js is old, installing latest via NodeSource..."
+  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+  sudo apt install -y nodejs
 fi
 
-echo -e "${GREEN}[✅ All tools installed!]${NC}"
+echo "=== Installing Git (required for Lazy.nvim) ==="
+sudo apt install -y git
+
+echo "=== Installing Neovim (stable) ==="
+sudo apt install -y neovim
+
+echo "=== All dependencies installed! ==="
+echo "Next steps:"
+echo "1. Open Neovim and run :Lazy sync"
+echo "2. Run :Mason to confirm LSP servers & formatters installed"
