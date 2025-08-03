@@ -1,96 +1,79 @@
 return {
-  -- mason: Installer for LSP servers, linters, formatters
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
-    config = true,
+    config = function()
+      require("mason").setup()
+    end,
   },
 
-  -- mason-lspconfig: bridge between mason and nvim-lspconfig
   {
     "williamboman/mason-lspconfig.nvim",
-    version = "v1.3.0",
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
-      local mason_lspconfig = require("mason-lspconfig")
       local lspconfig = require("lspconfig")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- Automatically install specified servers
-      mason_lspconfig.setup({
-        ensure_installed = { "bashls", "clangd", "lua_ls", "pyright", "rust_analyzer", "tsserver" },
+      -- Helper function for keymaps
+      local function map(mode, lhs, rhs, desc, bufnr)
+        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, noremap = true, silent = true, desc = desc })
+      end
+
+      local on_attach = function(_, bufnr)
+        map("n", "K", vim.lsp.buf.hover, "Hover Docs", bufnr)
+        map("n", "gd", vim.lsp.buf.definition, "Go to Definition", bufnr)
+        map("n", "gD", vim.lsp.buf.declaration, "Go to Declaration", bufnr)
+        map("n", "gi", vim.lsp.buf.implementation, "Go to Implementation", bufnr)
+        map("n", "gr", vim.lsp.buf.references, "List References", bufnr)
+        map("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol", bufnr)
+        map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action", bufnr)
+        map("n", "<leader>f", function()
+          vim.lsp.buf.format({ async = true })
+        end, "Format File", bufnr)
+        map("n", "[d", vim.diagnostic.goto_prev, "Previous Diagnostic", bufnr)
+        map("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic", bufnr)
+        map("n", "<leader>e", vim.diagnostic.open_float, "Show Diagnostic", bufnr)
+      end
+
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "clangd", "jdtls", "lua_ls", "gopls", "pyright",
+          "rust_analyzer", "tsserver", "html", "cssls"
+        },
         automatic_installation = true,
       })
 
-      mason_lspconfig.setup_handlers({
-        function(server_name)
-          lspconfig[server_name].setup({
-            capabilities = capabilities,
-            on_attach = function(_, bufnr)
-              local map = function(mode, key, fn, desc)
-                vim.keymap.set(mode, key, fn, { buffer = bufnr, desc = desc })
-              end
-              map("n", "K", vim.lsp.buf.hover, "Hover Docs")
-              map("n", "gd", vim.lsp.buf.definition, "Go to Definition")
-              map("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
-              map("n", "gi", vim.lsp.buf.implementation, "Go to Implementation")
-              map("n", "gr", vim.lsp.buf.references, "List References")
-              map("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
-              map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-              map("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, "Format File")
-              map("n", "[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
-              map("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic")
-              map("n", "<leader>e", vim.diagnostic.open_float, "Show Diagnostic")
-            end,
-          })
-        end,
-      })
-    end,
-  },
-
-  -- null-ls: for formatters and linters integration
-  {
-    "nvimtools/none-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "williamboman/mason.nvim" },
-    config = function()
-      local null_ls = require("null-ls")
-
-      null_ls.setup({
-        sources = {
-          -- Formatters
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.formatting.black,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.gofmt,
-          null_ls.builtins.formatting.rustfmt,
-          null_ls.builtins.formatting.clang_format,
-
-          -- Linters
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.diagnostics.flake8,
-          null_ls.builtins.diagnostics.shellcheck,
-          null_ls.builtins.diagnostics.chktex,
-          null_ls.builtins.diagnostics.clang_check,
+      local servers = {
+        clangd = {},
+        jdtls = {},
+        lua_ls = {
+          settings = {
+            Lua = { diagnostics = { globals = { "vim" } } },
+          },
         },
-        on_attach = function(client, bufnr)
-          if client.supports_method("textDocument/formatting") then
-            vim.keymap.set("n", "<leader>F", function()
-              vim.lsp.buf.format({ bufnr = bufnr })
-            end, { buffer = bufnr, desc = "Format buffer with null-ls" })
-          end
-        end,
-      })
+        gopls = {},
+        pyright = {},
+        rust_analyzer = {},
+        tsserver = {},
+        html = {},
+        cssls = {},
+      }
+
+      for name, config in pairs(servers) do
+        config.capabilities = cmp_capabilities
+        config.on_attach = on_attach
+        lspconfig[name].setup(config)
+      end
     end,
   },
 
-  -- nvim-cmp: Autocomplete engine and snippet support
+  -- nvim-cmp setup (completion)
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
     },
@@ -107,42 +90,44 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
+          ["<Tab>"] = cmp.mapping.select_next_item(),
+          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "luasnip" },
-        }, {
           { name = "buffer" },
           { name = "path" },
         }),
-        window = {
-          documentation = cmp.config.window.bordered(),
+      })
+    end,
+  },
+
+  -- null-ls (formatting & linting)
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = { "williamboman/mason.nvim", "jay-babu/mason-null-ls.nvim" },
+    config = function()
+      local null_ls = require("null-ls")
+
+      require("mason-null-ls").setup({
+        ensure_installed = {
+          "clang-format", "eslint_d", "prettier",
+          "black", "stylua", "gofmt", "rustfmt",
+        },
+        automatic_installation = true,
+      })
+
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.clang_format,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.gofmt,
+          null_ls.builtins.formatting.rustfmt,
+          null_ls.builtins.diagnostics.eslint_d,
         },
       })
     end,
   },
 }
-
--- NOTE: Requires Neovim version >= 0.11.0 for proper functionality.
--- NOTE: While Mason installs and manages LSP servers automatically, you must separately install the required language-specific toolchains and runtimes on your system.
--- For example, for rust-analyzer to work properly, you need to install the Rust toolchain via rustup.
--- Similarly, for tsserver you need Node.js and npm installed.
--- Without these language-specific tools, features like formatting, linting, and code analysis may not function correctly.
