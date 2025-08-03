@@ -4,11 +4,11 @@ vim.opt.number = true
 vim.opt.timeout = true
 vim.opt.timeoutlen = 2000
 
-vim.keymap.set('n', '<leader>t', ':terminal<CR>') -- open terminal
-vim.keymap.set('n', '<leader>w', ':w<CR>')        -- write
-vim.keymap.set('n', '<leader>q', ':q <CR>')       -- quit
-vim.keymap.set('n', '<leader>qd', ':q! <CR>')     -- quit and dont save
-vim.keymap.set('n', '<leader>wq', ':wq<CR>')      -- write and quit
+vim.keymap.set('n', '<leader>t', ':terminal<CR>')
+vim.keymap.set('n', '<leader>w', ':w<CR>')
+vim.keymap.set('n', '<leader>q', ':q<CR>')
+vim.keymap.set('n', '<leader>qd', ':q!<CR>')
+vim.keymap.set('n', '<leader>wq', ':wq<CR>')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -27,3 +27,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
+
+-- Autoformat on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
