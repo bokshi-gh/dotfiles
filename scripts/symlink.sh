@@ -1,6 +1,7 @@
 #!/bin/bash
 
 GREEN='\033[1;32m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 # Remove older symlinks
@@ -13,7 +14,7 @@ symlink() {
     local dest=$2
 
     if [ ! -e "$src" ]; then
-        echo "❌ Source not found: $src"
+        echo -e "${RED}Source not found:${NC} $src"
         return 1
     fi
 
@@ -36,4 +37,4 @@ symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
 
 chmod 600 ~/.dotfiles/ssh/id_rsa_github
 
-echo -e "${GREEN}[All done! Dotfiles setup and configuration complete]${NC}"
+echo -e "${GREEN}[ALL DONE! DOTFILES SETUP AND CONFIGURATION COMPLETE]${NC}"
