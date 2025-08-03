@@ -5,7 +5,7 @@ set -e
 echo "=== Selectively removing toolchain installed by setup.sh ==="
 
 confirm() {
-    read -p "Remove $1? [y/N]: " choice
+    read -p "Remove $1? [y/n]: " choice
     case "$choice" in
         y|Y ) return 0 ;;
         * ) return 1 ;;
@@ -56,13 +56,5 @@ if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
     fi
 fi
 
-# --- Neovim cache ---
-echo "Removing Neovim cache..."
 rm -rf "$HOME/.cache/nvim"
-
-# --- Neovim plugin data ---
-if confirm "Neovim plugin data (~/.local/share/nvim)"; then
-    rm -rf "$HOME/.local/share/nvim"
-fi
-
-echo "=== Selected developer tools removed, Neovim data and cache cleared ==="
+rm -rf "$HOME/.local/share/nvim"
