@@ -15,12 +15,12 @@ remove_symlink() {
         dest=$(readlink "$target")
         if [[ "$dest" == ~/.dotfiles* ]]; then
             rm "$target"
-            echo -e "${GREEN}🗑️ Removed symlink:${NC} $target -> $dest"
+            echo -e "${GREEN}Removed symlink:${NC} $target -> $dest"
         else
-            echo -e "${YELLOW}⚠️ Skipping${NC} $target: not a symlink to ~/.dotfiles"
+            echo -e "${YELLOW}Skipping${NC} $target: not a symlink to ~/.dotfiles"
         fi
     else
-        echo -e "${YELLOW}⚠️ $target is not a symlink, skipping${NC}"
+        echo -e "${YELLOW}$target is not a symlink, skipping${NC}"
     fi
 }
 
