@@ -1,8 +1,11 @@
 #!/bin/bash
 
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
 set -e
 
-echo "=== Selectively removing toolchain installed by setup.sh ==="
+echo "${YELLOW}=== Selectively removing toolchain installed by setup.sh ===${NC}"
 
 confirm() {
     read -p "Remove $1? [y/n]: " choice
