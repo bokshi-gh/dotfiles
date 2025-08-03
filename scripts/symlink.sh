@@ -3,19 +3,10 @@
 GREEN='\033[1;32m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}[🧹 Starting cleanup of old symlinks...]${NC}"
+echo -e "${GREEN}[CLEANING OLDER SYMLINKS]${NC}"
 
 if [ -f ~/.dotfiles/scripts/remove_symlink.sh ]; then
     bash ~/.dotfiles/scripts/remove_symlink.sh
-else
-    echo "⚠️ remove_symlink.sh not found. Skipping symlink cleanup."
-fi
-
-if [ -f ~/.config/nvim/scripts/clean.sh ]; then
-    echo -e "${GREEN}[🧹 Running Neovim clean script...]${NC}"
-    bash ~/.config/nvim/scripts/clean.sh
-else
-    echo "⚠️ Neovim clean.sh script not found. Skipping Neovim cleanup."
 fi
 
 symlink() {
@@ -35,7 +26,7 @@ mkdir -p ~/.config
 mkdir -p ~/.ssh
 
 echo ""
-echo -e "${GREEN}[🔗 Setting up dotfiles symlinks...]${NC}"
+echo -e "${GREEN}[SETTING UP SYMLINKS]${NC}"
 
 symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
 symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
@@ -47,13 +38,4 @@ symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
 chmod 600 ~/.dotfiles/ssh/id_rsa_github
 
 echo ""
-echo -e "${GREEN}[🚀 Running Neovim setup script...]${NC}"
-
-if [ -f ~/.config/nvim/scripts/setup.sh ]; then
-    bash ~/.config/nvim/scripts/setup.sh
-else
-    echo "⚠️ Neovim setup.sh script not found. Skipping Neovim setup."
-fi
-
-echo ""
-echo -e "${GREEN}[🎉 All done! Dotfiles setup and configuration complete.]${NC}"
+echo -e "${GREEN}[All done! Dotfiles setup and configuration complete]${NC}"
