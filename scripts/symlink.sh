@@ -39,8 +39,6 @@ chmod 600 ~/.dotfiles/ssh/id_rsa_github
 
 # Run setup script for Neovim
 if [ -f ~/.config/nvim/scripts/setup.sh ]; then
-    echo ""
-    echo -e "${GREEN}[RUNNING NEOVIM SETUP SCRIPT]${NC}"
     bash ~/.config/nvim/scripts/setup.sh
 else
     echo -e "${RED}NEOVIM SETUP SCRIPT NOT FOUND:${NC} ~/.config/nvim/scripts/setup.sh"
