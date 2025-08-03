@@ -3,8 +3,7 @@
 GREEN='\033[1;32m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}[CLEANING OLDER SYMLINKS]${NC}"
-
+# Remove older symlinks
 if [ -f ~/.dotfiles/scripts/remove_symlink.sh ]; then
     bash ~/.dotfiles/scripts/remove_symlink.sh
 fi
@@ -19,7 +18,7 @@ symlink() {
     fi
 
     ln -sf "$src" "$dest"
-    echo "✅ Symlink created: $src → $dest"
+    echo "${GREEN}Symlink created: $src → $dest${NC}"
 }
 
 mkdir -p ~/.config
@@ -37,5 +36,4 @@ symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
 
 chmod 600 ~/.dotfiles/ssh/id_rsa_github
 
-echo ""
 echo -e "${GREEN}[All done! Dotfiles setup and configuration complete]${NC}"
