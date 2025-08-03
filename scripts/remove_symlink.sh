@@ -24,6 +24,15 @@ remove_symlink() {
     fi
 }
 
+# Run cleanup script
+if [ -f ~/.config/nvim/scripts/cleanup.sh ]; then
+    echo ""
+    echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT]${NC}"
+    bash ~/.config/nvim/scripts/cleanup.sh
+else
+    echo -e "${RED}NEOVIM CLEANUP SCRIPT NOT FOUND:${NC} ~/.config/nvim/scripts/cleanup.sh"
+fi
+
 remove_symlink ~/.gitconfig
 remove_symlink ~/.gitignore_global
 remove_symlink ~/.vimrc
