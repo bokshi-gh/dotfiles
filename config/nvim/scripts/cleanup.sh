@@ -3,9 +3,11 @@
 
 set -e
 
+GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
+echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT]${NC}"
 echo -e "${YELLOW}=== SELECTIVELY REMOVING TOOLCHAIN INSTALLED FOR NEOVIM ===${NC}"
 
 confirm() {
