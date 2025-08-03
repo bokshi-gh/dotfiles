@@ -2,46 +2,54 @@
 
 set -e
 
-echo "=== Updating system ==="
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
 sudo apt update && sudo apt upgrade -y
 
-echo "=== Installing build tools (C/C++) ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING BUILD TOOLS (C/C++) ===${NC}"
 sudo apt install -y build-essential clang
 
-echo "=== Installing Java (JDK 17) ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING JAVA (JDK 17) ===${NC}"
 sudo apt install -y openjdk-17-jdk
 
-echo "=== Installing Lua ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING LUA ===${NC}"
 sudo apt install -y lua5.4
 
-echo "=== Installing Go ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING GO ===${NC}"
 sudo apt install -y golang
 
-echo "=== Installing Python ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING PYTHON ===${NC}"
 sudo apt install -y python3 python3-pip
 
-echo "=== Installing Rust (via rustup) ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING RUST (VIA RUSTUP) ===${NC}"
 if ! command -v rustc &>/dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   source "$HOME/.cargo/env"
 fi
 
-echo "=== Installing Node.js and npm ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING NODE.JS AND NPM ===${NC}"
 sudo apt install -y nodejs npm
 # Ensure latest Node if distro version is old
 if [ "$(node -v | cut -d. -f1 | tr -d v)" -lt 18 ]; then
-  echo "Node.js is old, installing latest via NodeSource..."
+  echo ""
+  echo -e "${YELLOW}NODE.JS IS OLD, INSTALLING LATEST VIA NODESOURCE...${NC}"
   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
   sudo apt install -y nodejs
 fi
 
-echo "=== Installing Git (required for Lazy.nvim) ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING GIT (REQUIRED FOR LAZY.NVIM) ===${NC}"
 sudo apt install -y git
 
-echo "=== Installing Neovim (stable) ==="
+echo ""
+echo -e "${YELLOW}=== INSTALLING NEOVIM (STABLE) ===${NC}"
 sudo apt install -y neovim
-
-echo "=== All dependencies installed! ==="
-echo "Next steps:"
-echo "1. Open Neovim and run :Lazy sync"
-echo "2. Run :Mason to confirm LSP servers & formatters installed"
