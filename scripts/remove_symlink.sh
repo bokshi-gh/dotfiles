@@ -15,7 +15,11 @@ remove_symlink() {
         if [[ "$dest" == ~/.dotfiles* ]]; then
             rm "$target"
             echo -e "${GREEN}Removed symlink:${NC} $target → $dest"
+        else
+            echo -e "${RED}Skipped:${NC} $target is not pointing to ~/.dotfiles"
         fi
+    else
+        echo -e "${RED}Skipped:${NC} $target is not a symlink"
     fi
 }
 
@@ -32,5 +36,5 @@ if [ -f ~/.dotfiles/config/nvim/scripts/cleanup.sh ]; then
     echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT]${NC}"
     bash ~/.dotfiles/config/nvim/scripts/cleanup.sh
 else
-    echo -e "${RED}NEOVIM CLEANUP SCRIPT NOT FOUND:${NC} ~/.config/nvim/scripts/cleanup.sh"
+    echo -e "${RED}NEOVIM CLEANUP SCRIPT NOT FOUND:${NC} ~/.dotfiles/config/nvim/scripts/cleanup.sh"
 fi
