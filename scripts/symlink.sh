@@ -38,8 +38,8 @@ symlink ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
 chmod 600 ~/.dotfiles/ssh/id_rsa_github
 
 # Run setup script for Neovim
-if [ -f ~/.config/nvim/scripts/setup.sh ]; then
-    bash ~/.config/nvim/scripts/setup.sh
+if [ -f ~/.dotfiles/config/nvim/scripts/setup.sh ]; then
+    bash ~/.dotfiles/config/nvim/scripts/setup.sh
 else
-    echo -e "${RED}NEOVIM SETUP SCRIPT NOT FOUND:${NC} ~/.config/nvim/scripts/setup.sh"
+    echo -e "${RED}NEOVIM SETUP SCRIPT NOT FOUND:${NC} ~/.dotfiles/config/nvim/scripts/setup.sh"
 fi
