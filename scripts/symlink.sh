@@ -45,5 +45,3 @@ if [ -f ~/.config/nvim/scripts/setup.sh ]; then
 else
     echo -e "${RED}NEOVIM SETUP SCRIPT NOT FOUND:${NC} ~/.config/nvim/scripts/setup.sh"
 fi
-
-echo -e "${GREEN}[ALL DONE! DOTFILES SETUP AND CONFIGURATION COMPLETE]${NC}"
