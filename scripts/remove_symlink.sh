@@ -32,8 +32,6 @@ remove_symlink ~/.ssh/id_rsa_github
 
 # Run cleanup script
 if [ -f ~/.dotfiles/config/nvim/scripts/cleanup.sh ]; then
-    echo ""
-    echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT]${NC}"
     bash ~/.dotfiles/config/nvim/scripts/cleanup.sh
 else
     echo -e "${RED}NEOVIM CLEANUP SCRIPT NOT FOUND:${NC} ~/.dotfiles/config/nvim/scripts/cleanup.sh"
