@@ -1,9 +1,5 @@
 vim.g.mapleader = " "
 
-vim.opt.number = true
-vim.opt.timeout = true
-vim.opt.timeoutlen = 2000
-
 vim.keymap.set('n', '<leader>t', ':terminal<CR>')
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 vim.keymap.set('n', '<leader>q', ':q<CR>')
@@ -27,10 +23,3 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-
--- Autoformat on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-  callback = function()
-    vim.lsp.buf.format({ async = false })
-  end,
-})
