@@ -14,7 +14,7 @@ sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
-sudo apt install neovim why two time update
+sudo apt install neovim
 
 echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
 sudo apt update && sudo apt upgrade -y
