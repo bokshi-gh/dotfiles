@@ -6,6 +6,10 @@ vim.keymap.set('n', '<leader>q', ':q<CR>')
 vim.keymap.set('n', '<leader>qd', ':q!<CR>')
 vim.keymap.set('n', '<leader>wq', ':wq<CR>')
 
+vim.keymap.set('n', '<leader>cc', ':!gcc % -o %:r<CR>')
+vim.keymap.set('n', '<leader>ccr', ':!gcc % -o %:r && ./%:r<CR>')
+vim.keymap.set('n', '<leader>rpy', ':!python3 %<CR>')
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
