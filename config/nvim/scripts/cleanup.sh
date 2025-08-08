@@ -9,7 +9,7 @@ NC='\033[0m'
 
 echo ""
 echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT]${NC}"
-echo -e "${YELLOW}=== SELECTIVELY REMOVING TOOLCHAIN INSTALLED FOR NEOVIM ===${NC}"
+echo -e "${YELLOW}=== SELECTIVELY REMOVING PACKAGES INSTALLED FOR NEOVIM ===${NC}"
 
 confirm() {
     read -p "Remove $1? [y/n]: " choice
