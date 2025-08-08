@@ -29,7 +29,6 @@ echo ""
 echo -e "${GREEN}[SETTING UP SYMLINKS]${NC}"
 
 symlink ~/.dotfiles/git/.gitconfig ~/.gitconfig
-symlink ~/.dotfiles/git/.gitignore_global ~/.gitignore_global
 symlink ~/.dotfiles/vim/.vimrc ~/.vimrc
 symlink ~/.dotfiles/config/nvim ~/.config/nvim
 symlink ~/.dotfiles/ssh/config ~/.ssh/config
