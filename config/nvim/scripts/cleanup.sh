@@ -19,8 +19,9 @@ confirm() {
     esac
 }
 
-if confirm "Neovim"; then
+if confirm "Neovim and software-properties-common"; then
     sudo apt remove --purge -y neovim
+    sudo apt remove --purge -y software-properties-common
 fi
 
 if confirm "C/C++ tools (build-essential, clang)"; then
