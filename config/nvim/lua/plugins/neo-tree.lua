@@ -12,5 +12,6 @@ return {
 		vim.keymap.set('n', '<leader>ntr', ':Neotree filesystem reveal right<CR>')
 		vim.keymap.set('n', '<leader>ntt', ':Neotree filesystem reveal top<CR>')
 		vim.keymap.set('n', '<leader>ntb', ':Neotree filesystem reveal bottom<CR>')
+		vim.keymap.set('n', '<leader>ntc', ':Neotree close<CR>')
 	end
 }
