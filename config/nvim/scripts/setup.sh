@@ -9,6 +9,13 @@ NC='\033[0m'
 echo ""
 echo -e "${GREEN}[RUNNING NEOVIM SETUP SCRIPT]${NC}"
 
+echo -e "${YELLOW}=== INSTALLING NEOVIM (LATEST UNSTABLE) ===${NC}"
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
+sudo apt install neovim why two time update
+
 echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
 sudo apt update && sudo apt upgrade -y
 
@@ -45,6 +52,3 @@ fi
 
 echo -e "${YELLOW}=== INSTALLING GIT (REQUIRED FOR LAZY.NVIM) ===${NC}"
 sudo apt install -y git
-
-echo -e "${YELLOW}=== INSTALLING NEOVIM (STABLE) ===${NC}"
-sudo apt install -y neovim
