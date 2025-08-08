@@ -24,7 +24,6 @@ remove_symlink() {
 }
 
 remove_symlink ~/.gitconfig
-remove_symlink ~/.gitignore_global
 remove_symlink ~/.vimrc
 remove_symlink ~/.config/nvim
 remove_symlink ~/.ssh/config
