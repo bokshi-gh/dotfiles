@@ -51,15 +51,15 @@ if confirm "Git"; then
     sudo apt remove --purge -y git
 fi
 
-sudo apt autoremove -y
-sudo apt clean
-
 if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
     if confirm "Rust (rustup, cargo)"; then
         rustup self uninstall -y || true
         rm -rf "$HOME/.cargo" "$HOME/.rustup"
     fi
 fi
+
+sudo apt autoremove -y
+sudo apt clean
 
 rm -rf "$HOME/.cache/nvim"
 rm -rf "$HOME/.local/share/nvim"
