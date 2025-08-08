@@ -9,15 +9,14 @@ NC='\033[0m'
 echo ""
 echo -e "${GREEN}[RUNNING NEOVIM SETUP SCRIPT]${NC}"
 
+echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
+sudo apt update && sudo apt upgrade -y
+
 echo -e "${YELLOW}=== INSTALLING NEOVIM (LATEST UNSTABLE) ===${NC}"
-sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 sudo apt install neovim
-
-echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
-sudo apt update && sudo apt upgrade -y
 
 echo -e "${YELLOW}=== INSTALLING BUILD TOOLS (C/C++) ===${NC}"
 sudo apt install -y build-essential clang
