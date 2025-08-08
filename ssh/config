@@ -1,4 +1,7 @@
-Host github
+# Git internally uses SSH to connect to github.com for operations like clone, pull, and push,
+# so it automatically invokes `ssh github.com` under the hood.
+# Therefore, the hostname in this config must be exactly github.com; otherwise, it won't be used.
+Host github.com
     HostName github.com
     User git
     Port 22
