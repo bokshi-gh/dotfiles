@@ -48,10 +48,6 @@ if confirm "Node.js and npm"; then
     sudo apt remove --purge -y nodejs npm
 fi
 
-if confirm "Neovim"; then
-    sudo apt remove --purge -y neovim
-fi
-
 if confirm "Git"; then
     sudo apt remove --purge -y git
 fi
