@@ -19,6 +19,10 @@ confirm() {
     esac
 }
 
+if confirm "Neovim"; then
+    sudo apt remove --purge -y neovim
+fi
+
 if confirm "C/C++ tools (build-essential, clang)"; then
     sudo apt remove --purge -y build-essential clang
 fi
