@@ -54,7 +54,7 @@ return {
         gopls = {},
         pyright = {},
         rust_analyzer = {},
-        tsserver = {},
+        ts_ls = {},
         html = {},
         cssls = {},
       }
