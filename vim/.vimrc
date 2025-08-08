@@ -9,9 +9,6 @@ set smartindent
 
 let mapleader = " "
 
-set timeout          " enable timeout for mapped sequences
-set timeoutlen=1000  " wait 2000 ms (2 second)
-
 " Open terminal (Vim 8+)
 nnoremap <leader>t :terminal<CR>
 
