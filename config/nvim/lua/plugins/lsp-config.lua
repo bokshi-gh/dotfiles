@@ -38,7 +38,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "clangd", "jdtls", "lua_ls", "gopls", "pyright",
-          "rust_analyzer", "tsserver", "html", "cssls"
+          "rust_analyzer", "ts_ls", "html", "cssls"
         },
         automatic_installation = true,
       })
