@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+vim.keymap.set('n', '<leader>sn', ':set number')
+vim.keymap.set('n', '<leader>un', ':set nonumber')
+
 vim.keymap.set('n', '<leader>t', ':terminal<CR>')
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 vim.keymap.set('n', '<leader>q', ':q<CR>')
@@ -9,6 +12,8 @@ vim.keymap.set('n', '<leader>wq', ':wq<CR>')
 vim.keymap.set('n', '<leader>cc', ':!gcc % -o %:r<CR>')
 vim.keymap.set('n', '<leader>ccr', ':!gcc % -o %:r && ./%:r<CR>')
 vim.keymap.set('n', '<leader>rpy', ':!python3 %<CR>')
+
+
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
