@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+vim.o.timeout = true          -- enable timeouts
+vim.o.timeoutlen = 100        -- wait 100ms after pressing leader
+
 vim.keymap.set('n', '<leader>t', ':terminal<CR>')
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 vim.keymap.set('n', '<leader>q', ':q<CR>')
