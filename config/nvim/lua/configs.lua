@@ -1,17 +1,14 @@
 vim.g.mapleader = " "
 
-vim.o.timeout = true          -- enable timeouts
-vim.o.timeoutlen = 100        -- wait 100ms after pressing leader
-
 vim.keymap.set('n', '<leader>t', ':terminal<CR>')
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 vim.keymap.set('n', '<leader>q', ':q<CR>')
 vim.keymap.set('n', '<leader>qd', ':q!<CR>')
 vim.keymap.set('n', '<leader>wq', ':wq<CR>')
 
-vim.keymap.set('n', '<leader>cc', ':!gcc % -o %:r<CR>')
-vim.keymap.set('n', '<leader>ccr', ':!gcc % -o %:r && ./%:r<CR>')
-vim.keymap.set('n', '<leader>rpy', ':!python3 %<CR>')
+vim.keymap.set('n', '<leader>cgcc', ':!gcc % -o %:r<CR>')
+vim.keymap.set('n', '<leader>crgcc', ':!gcc % -o %:r && ./%:r<CR>')
+vim.keymap.set('n', '<leader>rpy', ':!python %<CR>')
 
 -- Toggle absolute line numbers (number)
 vim.keymap.set('n', '<leader>tn', function()
