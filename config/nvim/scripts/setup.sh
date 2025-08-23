@@ -42,5 +42,4 @@ sudo pacman -S --noconfirm nodejs npm
 echo -e "${YELLOW}=== INSTALLING GIT (REQUIRED FOR LAZY.NVIM) ===${NC}"
 sudo pacman -S --noconfirm git
 
-echo ""
 echo -e "${GREEN}[SETUP COMPLETE]${NC}"
