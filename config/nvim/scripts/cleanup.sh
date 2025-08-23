@@ -68,5 +68,4 @@ rm -rf "$HOME/.cache/nvim"
 rm -rf "$HOME/.local/share/nvim"
 rm -rf "$HOME/.config/nvim"
 
-echo ""
 echo -e "${GREEN}[CLEANUP COMPLETE]${NC}"
