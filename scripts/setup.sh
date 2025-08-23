@@ -25,7 +25,7 @@ copy_file_or_dir() {
 mkdir -p ~/.config
 mkdir -p ~/.ssh
 
-echo -e "${GREEN}[SETTING UP FILES]${NC}"
+echo -e "${GREEN}[SETTING UP CONFIGURATION FILES AND FOLDERS]${NC}"
 
 copy_file_or_dir ~/.dotfiles/git/.gitconfig ~/.gitconfig
 copy_file_or_dir ~/.dotfiles/vim/.vimrc ~/.vimrc
