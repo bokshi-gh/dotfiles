@@ -1,8 +1,6 @@
 return {
   "L3MON4D3/LuaSnip",
-  dependencies = { 
-    "rafamadriz/friendly-snippets" -- prebuilt snippets
-  },
+  dependencies = { "rafamadriz/friendly-snippets" },
   config = function()
     local ls = require("luasnip")
     local s = ls.snippet
@@ -10,13 +8,13 @@ return {
     local i = ls.insert_node
     local fmt = require("luasnip.extras.fmt").fmt
 
-    -- Load prebuilt VSCode-style snippets
+    -- Load prebuilt snippets
     require("luasnip.loaders.from_vscode").lazy_load()
 
-    -- Define your own snippets
+    -- Minimal custom snippets
     ls.snippets = {
       all = {
-        s("hw", { t("Hello, World!") }), -- snippet for any file
+        s("hw", { t("Hello, World!") }),
       },
       lua = {
         s("fn", fmt("function {}({})\n  {}\nend", { i(1, "name"), i(2, "args"), i(3, "body") })),
