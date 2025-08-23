@@ -6,7 +6,6 @@ GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo ""
 echo -e "${GREEN}[RUNNING NEOVIM SETUP SCRIPT - ARCH LINUX]${NC}"
 
 echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
