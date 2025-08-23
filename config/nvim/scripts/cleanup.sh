@@ -29,6 +29,13 @@ if confirm "Java (jdk17-openjdk)"; then
     sudo pacman -Rns --noconfirm jdk17-openjdk
 fi
 
+if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
+    if confirm "Rust (rustup, cargo)"; then
+        rustup self uninstall -y || true
+        rm -rf "$HOME/.cargo" "$HOME/.rustup"
+    fi
+fi
+
 if confirm "Lua"; then
     sudo pacman -Rns --noconfirm lua
 fi
@@ -53,13 +60,6 @@ fi
 
 if confirm "Ripgrep"; then
     sudo pacman -Rns --noconfirm ripgrep
-fi
-
-if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
-    if confirm "Rust (rustup, cargo)"; then
-        rustup self uninstall -y || true
-        rm -rf "$HOME/.cargo" "$HOME/.rustup"
-    fi
 fi
 
 echo -e "${YELLOW}=== CLEANING UNUSED DEPENDENCIES ===${NC}"
