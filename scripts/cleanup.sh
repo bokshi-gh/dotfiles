@@ -5,7 +5,7 @@ GREEN='\033[1;32m'
 RED='\033[1;31m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}[DELETING DOTFILES FILES/FOLDERS]${NC}"
+echo -e "${GREEN}[DELETING CONFIGURATION FILES AND FOLDERS]${NC}"
 
 delete_file_or_dir() {
     local target=$1
