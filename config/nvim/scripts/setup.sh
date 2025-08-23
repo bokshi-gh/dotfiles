@@ -12,7 +12,7 @@ echo -e "${GREEN}[RUNNING NEOVIM SETUP SCRIPT - ARCH LINUX]${NC}"
 echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
 sudo pacman -Syu --noconfirm
 
-echo -e "${YELLOW}=== INSTALLING NEOVIM (LATEST FROM PACMAN) ===${NC}"
+echo -e "${YELLOW}=== INSTALLING NEOVIM ===${NC}"
 sudo pacman -S --noconfirm neovim
 
 echo -e "${YELLOW}=== INSTALLING BUILD TOOLS (C/C++) ===${NC}"
@@ -39,18 +39,8 @@ fi
 echo -e "${YELLOW}=== INSTALLING NODE.JS AND NPM ===${NC}"
 sudo pacman -S --noconfirm nodejs npm
 
-# Ensure Node >= 18 (Arch usually has latest, but just in case)
-NODE_MAJOR=$(node -v | cut -d. -f1 | tr -d v)
-if [ "$NODE_MAJOR" -lt 18 ]; then
-  echo ""
-  echo -e "${YELLOW}NODE.JS IS OLD, INSTALLING LATEST VIA NVM...${NC}"
-  if ! command -v nvm &>/dev/null; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  fi
-  nvm install 20
-fi
-
 echo -e "${YELLOW}=== INSTALLING GIT (REQUIRED FOR LAZY.NVIM) ===${NC}"
 sudo pacman -S --noconfirm git
+
+echo ""
+echo -e "${GREEN}[SETUP COMPLETE]${NC}"
