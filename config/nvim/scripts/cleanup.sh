@@ -7,7 +7,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 echo ""
-echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT]${NC}"
+echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT - ARCH LINUX]${NC}"
 echo -e "${YELLOW}=== SELECTIVELY REMOVING PACKAGES INSTALLED FOR NEOVIM ===${NC}"
 
 confirm() {
@@ -18,37 +18,36 @@ confirm() {
     esac
 }
 
-if confirm "Neovim and software-properties-common"; then
-    sudo apt remove --purge -y neovim
-    sudo apt remove --purge -y software-properties-common
+if confirm "Neovim"; then
+    sudo pacman -Rns --noconfirm neovim
 fi
 
-if confirm "C/C++ tools (build-essential, clang)"; then
-    sudo apt remove --purge -y build-essential clang
+if confirm "C/C++ tools (base-devel, clang)"; then
+    sudo pacman -Rns --noconfirm base-devel clang
 fi
 
-if confirm "Java (openjdk-17-jdk)"; then
-    sudo apt remove --purge -y openjdk-17-jdk
+if confirm "Java (jdk17-openjdk)"; then
+    sudo pacman -Rns --noconfirm jdk17-openjdk
 fi
 
-if confirm "Lua (lua5.4)"; then
-    sudo apt remove --purge -y lua5.4
+if confirm "Lua"; then
+    sudo pacman -Rns --noconfirm lua
 fi
 
-if confirm "Go (golang)"; then
-    sudo apt remove --purge -y golang
+if confirm "Go"; then
+    sudo pacman -Rns --noconfirm go
 fi
 
-if confirm "Python (python3, pip3)"; then
-    sudo apt remove --purge -y python3 python3-pip
+if confirm "Python (python, pip)"; then
+    sudo pacman -Rns --noconfirm python python-pip
 fi
 
 if confirm "Node.js and npm"; then
-    sudo apt remove --purge -y nodejs npm
+    sudo pacman -Rns --noconfirm nodejs npm
 fi
 
 if confirm "Git"; then
-    sudo apt remove --purge -y git
+    sudo pacman -Rns --noconfirm git
 fi
 
 if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
@@ -58,8 +57,16 @@ if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
     fi
 fi
 
-sudo apt autoremove -y
-sudo apt clean
+echo -e "${YELLOW}=== CLEANING UNUSED DEPENDENCIES ===${NC}"
+sudo pacman -Rns $(pacman -Qdtq) --noconfirm || true
 
+echo -e "${YELLOW}=== CLEANING PACKAGE CACHE ===${NC}"
+sudo pacman -Sc --noconfirm
+
+echo -e "${YELLOW}=== REMOVING NEOVIM CONFIGURATION ===${NC}"
 rm -rf "$HOME/.cache/nvim"
 rm -rf "$HOME/.local/share/nvim"
+rm -rf "$HOME/.config/nvim"
+
+echo ""
+echo -e "${GREEN}[CLEANUP COMPLETE]${NC}"
