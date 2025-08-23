@@ -28,10 +28,3 @@ remove_symlink ~/.vimrc
 remove_symlink ~/.config/nvim
 remove_symlink ~/.ssh/config
 remove_symlink ~/.ssh/id_rsa_github
-
-# Run cleanup script for Neovim
-if [ -f ~/.dotfiles/config/nvim/scripts/cleanup.sh ]; then
-    bash ~/.dotfiles/config/nvim/scripts/cleanup.sh
-else
-    echo -e "${RED}NEOVIM CLEANUP SCRIPT NOT FOUND:${NC} ~/.dotfiles/config/nvim/scripts/cleanup.sh"
-fi
