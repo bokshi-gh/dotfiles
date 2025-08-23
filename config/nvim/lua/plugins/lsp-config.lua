@@ -67,7 +67,7 @@ return {
     end,
   },
 
-  -- nvim-cmp setup (completion)
+  -- nvim-cmp (completion)
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
