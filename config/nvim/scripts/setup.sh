@@ -34,9 +34,11 @@ if ! command -v rustc &>/dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   source "$HOME/.cargo/env"
 fi
+rustup component add rustfmt
 
 echo -e "${YELLOW}=== INSTALLING NODE.JS AND NPM ===${NC}"
 sudo pacman -S --noconfirm nodejs npm
+sudo npm install -g eslint_d
 
 echo -e "${YELLOW}=== INSTALLING GIT (REQUIRED FOR LAZY.NVIM) ===${NC}"
 sudo pacman -S --noconfirm git
