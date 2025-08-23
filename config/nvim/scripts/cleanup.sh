@@ -49,6 +49,10 @@ if confirm "Git"; then
     sudo pacman -Rns --noconfirm git
 fi
 
+if confirm "Ripgrep"; then
+    sudo pacman -Rns --noconfirm ripgrep
+fi
+
 if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
     if confirm "Rust (rustup, cargo)"; then
         rustup self uninstall -y || true
