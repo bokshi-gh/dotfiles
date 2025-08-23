@@ -43,6 +43,8 @@ fi
 
 if confirm "Node.js and npm"; then
     sudo pacman -Rns --noconfirm nodejs npm
+    rm -rf ~/.npm
+    sudo rm -rf /usr/lib/node_modules
 fi
 
 if confirm "Git"; then
