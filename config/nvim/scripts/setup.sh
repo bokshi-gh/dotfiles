@@ -7,31 +7,28 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 echo ""
-echo -e "${GREEN}[RUNNING NEOVIM SETUP SCRIPT]${NC}"
+echo -e "${GREEN}[RUNNING NEOVIM SETUP SCRIPT - ARCH LINUX]${NC}"
 
 echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
-sudo apt update && sudo apt upgrade -y
+sudo pacman -Syu --noconfirm
 
-echo -e "${YELLOW}=== INSTALLING NEOVIM (LATEST UNSTABLE) ===${NC}"
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
-sudo apt install neovim
+echo -e "${YELLOW}=== INSTALLING NEOVIM (LATEST FROM PACMAN) ===${NC}"
+sudo pacman -S --noconfirm neovim
 
 echo -e "${YELLOW}=== INSTALLING BUILD TOOLS (C/C++) ===${NC}"
-sudo apt install -y build-essential clang
+sudo pacman -S --noconfirm base-devel clang
 
 echo -e "${YELLOW}=== INSTALLING JAVA (JDK 17) ===${NC}"
-sudo apt install -y openjdk-17-jdk
+sudo pacman -S --noconfirm jdk17-openjdk
 
 echo -e "${YELLOW}=== INSTALLING LUA ===${NC}"
-sudo apt install -y lua5.4
+sudo pacman -S --noconfirm lua
 
 echo -e "${YELLOW}=== INSTALLING GO ===${NC}"
-sudo apt install -y golang
+sudo pacman -S --noconfirm go
 
 echo -e "${YELLOW}=== INSTALLING PYTHON ===${NC}"
-sudo apt install -y python3 python3-pip
+sudo pacman -S --noconfirm python python-pip
 
 echo -e "${YELLOW}=== INSTALLING RUST (VIA RUSTUP) ===${NC}"
 if ! command -v rustc &>/dev/null; then
@@ -40,14 +37,20 @@ if ! command -v rustc &>/dev/null; then
 fi
 
 echo -e "${YELLOW}=== INSTALLING NODE.JS AND NPM ===${NC}"
-sudo apt install -y nodejs npm
-# Ensure latest Node if distro version is old
-if [ "$(node -v | cut -d. -f1 | tr -d v)" -lt 18 ]; then
+sudo pacman -S --noconfirm nodejs npm
+
+# Ensure Node >= 18 (Arch usually has latest, but just in case)
+NODE_MAJOR=$(node -v | cut -d. -f1 | tr -d v)
+if [ "$NODE_MAJOR" -lt 18 ]; then
   echo ""
-  echo -e "${YELLOW}NODE.JS IS OLD, INSTALLING LATEST VIA NODESOURCE...${NC}"
-  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-  sudo apt install -y nodejs
+  echo -e "${YELLOW}NODE.JS IS OLD, INSTALLING LATEST VIA NVM...${NC}"
+  if ! command -v nvm &>/dev/null; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  fi
+  nvm install 20
 fi
 
 echo -e "${YELLOW}=== INSTALLING GIT (REQUIRED FOR LAZY.NVIM) ===${NC}"
-sudo apt install -y git
+sudo pacman -S --noconfirm git
