@@ -41,4 +41,7 @@ sudo pacman -S --noconfirm nodejs npm
 echo -e "${YELLOW}=== INSTALLING GIT (REQUIRED FOR LAZY.NVIM) ===${NC}"
 sudo pacman -S --noconfirm git
 
+echo -e "${YELLOW}=== INSTALLING RIPGREP (REQUIRED FOR TELESCOPE FUZZY FINDING) ===${NC}"
+sudo pacman -S --noconfirm ripgrep
+
 echo -e "${GREEN}[SETUP COMPLETE]${NC}"
