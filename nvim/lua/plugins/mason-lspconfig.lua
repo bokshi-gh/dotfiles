@@ -31,8 +31,6 @@ return {
       map_buf(bufnr)
     end
 
-    require("mason").setup()
-
     require("mason-lspconfig").setup({
       ensure_installed = {
         "clangd", "jdtls", "lua_ls", "gopls", "pyright",
