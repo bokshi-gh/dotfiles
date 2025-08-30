@@ -10,7 +10,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 - The key pair is stored in the `~/.ssh/` directory by default.
 - If a custom name is not provided, the key pair files will be named `id_rsa` (private key) and `id_rsa.pub` (public key).
 - After generating key pair put the pubic key content to SSH server's authorized_keys file.
-- You can do this manually or using `ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote_host`
+- You can do this manually or using `ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote_host`.
 - It appends the key automatically to SSH server's `~/.ssh/authorized_keys`. You only need to enter your password once; afterward, passwordless login works.
 - If `-i` is not provided, the default public key used is `.ssh/id_rsa.pub`.
 - authorized_keys file looks like this:
