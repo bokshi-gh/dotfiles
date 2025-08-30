@@ -1,11 +1,14 @@
 return {
   "williamboman/mason-lspconfig.nvim",
-  dependencies = { "neovim/nvim-lspconfig" },
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
+    "hrsh7th/cmp-nvim-lsp",
+  },
   config = function()
     local lspconfig = require("lspconfig")
     local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    -- Helper function for keymaps
     local function map(mode, lhs, rhs, desc, bufnr)
       vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, noremap = true, silent = true, desc = desc })
     end
@@ -29,31 +32,33 @@ return {
     require("mason-lspconfig").setup({
       ensure_installed = {
         "clangd", "jdtls", "lua_ls", "gopls", "pyright",
-        "rust_analyzer", "ts_ls", "html", "cssls",
+        "rust_analyzer", "tsserver", "html", "cssls",
       },
       automatic_installation = true,
     })
 
-    local servers = {
-      clangd = {},
-      jdtls = {},
-      lua_ls = {
-        settings = {
-          Lua = { diagnostics = { globals = { "vim" } } },
-        },
-      },
-      gopls = {},
-      pyright = {},
-      rust_analyzer = {},
-      ts_ls = {},
-      html = {},
-      cssls = {},
-    }
-
-    for name, config in pairs(servers) do
-      config.capabilities = cmp_capabilities
-      config.on_attach = on_attach
-      lspconfig[name].setup(config)
-    end
+    require("mason-lspconfig").setup_handlers({
+      -- default setup for all servers
+      function(server_name)
+        lspconfig[server_name].setup({
+          capabilities = cmp_capabilities,
+          on_attach = on_attach,
+        })
+      end,
+      -- overrides
+      ["lua_ls"] = function()
+        lspconfig.lua_ls.setup({
+          capabilities = cmp_capabilities,
+          on_attach = on_attach,
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { "vim" },
+              },
+            },
+          },
+        })
+      end,
+    })
   end,
 }
