@@ -1,7 +1,7 @@
 vim.o.background = "dark"
 
 -- Remove ~ at end of buffer
-vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "NONE" })
+vim.0.fillchars = "eob: "
 
 -- Make normal buffer and NeoTree transparent / use terminal background
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
