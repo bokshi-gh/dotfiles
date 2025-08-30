@@ -29,7 +29,7 @@ echo -e "${GREEN}[SETTING UP CONFIGURATION FILES AND FOLDERS]${NC}"
 
 copy_file_or_dir ~/.dotfiles/git/.gitconfig ~/.gitconfig
 copy_file_or_dir ~/.dotfiles/vim/.vimrc ~/.vimrc
-copy_file_or_dir ~/.dotfiles/config/nvim ~/.config/nvim
+copy_file_or_dir ~/.dotfiles/nvim ~/.config/nvim
 copy_file_or_dir ~/.dotfiles/ssh/config ~/.ssh/config
 copy_file_or_dir ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
 
