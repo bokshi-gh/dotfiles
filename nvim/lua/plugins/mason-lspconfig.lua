@@ -12,7 +12,7 @@ return {
     local function map(mode, lhs, rhs, desc, bufnr)
       vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, noremap = true, silent = true, desc = desc })
     end
-
+-- Set dark background
     local on_attach = function(_, bufnr)
       map("n", "K", vim.lsp.buf.hover, "Hover Docs", bufnr)
       map("n", "gd", vim.lsp.buf.definition, "Go to Definition", bufnr)
@@ -32,7 +32,7 @@ return {
     require("mason-lspconfig").setup({
       ensure_installed = {
         "clangd", "jdtls", "lua_ls", "gopls", "pyright",
-        "rust_analyzer", "tsserver", "html", "cssls",
+        "rust_analyzer", "ts_ls", "html", "cssls",
       },
       automatic_installation = true,
     })
