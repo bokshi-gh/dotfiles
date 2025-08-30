@@ -12,22 +12,22 @@ echo -e "${YELLOW}=== UPDATING SYSTEM ===${NC}"
 sudo pacman -Syu --noconfirm
 
 echo -e "${YELLOW}=== INSTALLING NEOVIM ===${NC}"
-sudo pacman -S --noconfirm neovim
+sudo pacman -S --needed --noconfirm neovim
 
 echo -e "${YELLOW}=== INSTALLING BUILD TOOLS (C/C++) ===${NC}"
-sudo pacman -S --noconfirm base-devel clang
+sudo pacman -S --needed --noconfirm base-devel clang
 
 echo -e "${YELLOW}=== INSTALLING JAVA (JDK 17) ===${NC}"
-sudo pacman -S --noconfirm jdk17-openjdk
+sudo pacman -S --needed --noconfirm jdk17-openjdk
 
 echo -e "${YELLOW}=== INSTALLING LUA ===${NC}"
-sudo pacman -S --noconfirm lua
+sudo pacman -S --needed --noconfirm lua
 
 echo -e "${YELLOW}=== INSTALLING GO ===${NC}"
-sudo pacman -S --noconfirm go
+sudo pacman -S --needed --noconfirm go
 
 echo -e "${YELLOW}=== INSTALLING PYTHON ===${NC}"
-sudo pacman -S --noconfirm python python-pip
+sudo pacman -S --needed --noconfirm python python-pip
 
 echo -e "${YELLOW}=== INSTALLING RUST (VIA RUSTUP) ===${NC}"
 if ! command -v rustc &>/dev/null; then
@@ -36,13 +36,13 @@ if ! command -v rustc &>/dev/null; then
 fi
 
 echo -e "${YELLOW}=== INSTALLING NODE.JS AND NPM ===${NC}"
-sudo pacman -S --noconfirm nodejs npm
+sudo pacman -S --needed --noconfirm nodejs npm
 sudo npm install -g eslint_d
 
 echo -e "${YELLOW}=== INSTALLING GIT (REQUIRED FOR LAZY.NVIM) ===${NC}"
-sudo pacman -S --noconfirm git
+sudo pacman -S --needed --noconfirm git
 
 echo -e "${YELLOW}=== INSTALLING RIPGREP (REQUIRED FOR TELESCOPE FUZZY FINDING) ===${NC}"
-sudo pacman -S --noconfirm ripgrep
+sudo pacman -S --needed --noconfirm ripgrep
 
 echo -e "${GREEN}[SETUP COMPLETE]${NC}"
