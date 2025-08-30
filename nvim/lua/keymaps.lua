@@ -6,8 +6,10 @@ vim.keymap.set('n', '<leader>q', ':q<CR>')
 vim.keymap.set('n', '<leader>qd', ':q!<CR>')
 vim.keymap.set('n', '<leader>wq', ':wq<CR>')
 
-vim.keymap.set('n', '<leader>cgcc', ':!gcc % -o %:r<CR>')
-vim.keymap.set('n', '<leader>crgcc', ':!gcc % -o %:r && ./%:r<CR>')
+vim.keymap.set('n', '<leader>rc', ':!gcc % -o %:r<CR>')
+vim.keymap.set('n', '<leader>rcpp', ':!g++ % -o %:r && ./%:r<CR>')
+vim.keymap.set('n', '<leader>rjv', ':!javac % && java ./%:r<CR>')
+vim.keymap.set('n', '<leader>rjs', ':!node %<CR>')
 vim.keymap.set('n', '<leader>rpy', ':!python %<CR>')
 
 -- Toggle absolute line numbers (number)
