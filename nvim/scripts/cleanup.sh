@@ -7,68 +7,52 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 echo -e "${GREEN}[RUNNING NEOVIM CLEANUP SCRIPT - ARCH LINUX]${NC}"
-echo -e "${YELLOW}=== SELECTIVELY REMOVING PACKAGES INSTALLED FOR NEOVIM ===${NC}"
+echo -e "${YELLOW}=== REMOVING PACKAGES INSTALLED FOR NEOVIM ===${NC}"
 
-confirm() {
-    read -p "Remove $1? [y/n]: " choice
-    case "$choice" in
-        y|Y ) return 0 ;;
-        * ) return 1 ;;
-    esac
-}
+echo -e "${YELLOW}Removing Neovim...${NC}"
+sudo pacman -Rns neovim
 
-if confirm "Neovim"; then
-    sudo pacman -Rns --noconfirm neovim
-fi
+echo -e "${YELLOW}Removing C/C++ tools (base-devel, clang)...${NC}"
+sudo pacman -Rns base-devel clang
 
-if confirm "C/C++ tools (base-devel, clang)"; then
-    sudo pacman -Rns --noconfirm base-devel clang
-fi
+echo -e "${YELLOW}Removing Java (jdk17-openjdk)...${NC}"
+sudo pacman -Rns jdk17-openjdk
 
-if confirm "Java (jdk17-openjdk)"; then
-    sudo pacman -Rns --noconfirm jdk17-openjdk
-fi
+echo -e "${YELLOW}Removing Lua...${NC}"
+sudo pacman -Rns lua
 
-if confirm "Lua"; then
-    sudo pacman -Rns --noconfirm lua
-fi
+echo -e "${YELLOW}Removing Go...${NC}"
+sudo pacman -Rns go
 
-if confirm "Go"; then
-    sudo pacman -Rns --noconfirm go
-fi
-
-if confirm "Python (python, pip)"; then
-    sudo pacman -Rns --noconfirm python python-pip
-fi
+echo -e "${YELLOW}Removing Python (python, pip)...${NC}"
+sudo pacman -Rns python python-pip
 
 if [ -d "$HOME/.cargo" ] || [ -d "$HOME/.rustup" ]; then
-    if confirm "Rust (rustup, cargo)"; then
-        rustup self uninstall -y || true
-        rm -rf "$HOME/.cargo" "$HOME/.rustup"
-    fi
+    echo -e "${YELLOW}Removing Rust (rustup, cargo)...${NC}"
+    rustup self uninstall -y || true
+    rm -rf "$HOME/.cargo" "$HOME/.rustup"
 fi
 
-if confirm "Node.js and npm"; then
-    sudo pacman -Rns --noconfirm nodejs npm
-    rm -rf ~/.npm
-    sudo rm -rf /usr/lib/node_modules
+echo -e "${YELLOW}Removing Node.js and npm...${NC}"
+sudo pacman -Rns nodejs npm
+rm -rf ~/.npm
+sudo rm -rf /usr/lib/node_modules
+
+echo -e "${YELLOW}Removing Git...${NC}"
+sudo pacman -Rns git
+
+echo -e "${YELLOW}Removing Ripgrep...${NC}"
+sudo pacman -Rns ripgrep
+
+echo -e "${YELLOW}Cleaning unused dependencies...${NC}"
+if pacman -Qdtq &>/dev/null; then
+    sudo pacman -Rns $(pacman -Qdtq)
 fi
 
-if confirm "Git"; then
-    sudo pacman -Rns --noconfirm git
-fi
+echo -e "${YELLOW}Cleaning package cache...${NC}"
+sudo pacman -Sc
 
-if confirm "Ripgrep"; then
-    sudo pacman -Rns --noconfirm ripgrep
-fi
-
-echo -e "${YELLOW}=== CLEANING UNUSED DEPENDENCIES ===${NC}"
-sudo pacman -Rns $(pacman -Qdtq) --noconfirm || true
-
-echo -e "${YELLOW}=== CLEANING PACKAGE CACHE ===${NC}"
-sudo pacman -Sc --noconfirm
-
-echo -e "${YELLOW}=== REMOVING NEOVIM CONFIGURATION ===${NC}"
+echo -e "${YELLOW}Removing Neovim configuration...${NC}"
 rm -rf "$HOME/.cache/nvim"
 rm -rf "$HOME/.local/share/nvim"
 rm -rf "$HOME/.config/nvim"
