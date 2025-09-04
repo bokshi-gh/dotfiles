@@ -36,4 +36,14 @@ alias e='echo'
 alias cl='clear'
 alias off='poweroff'
 alias rb='reboot'
+alias pi='sudo pacman -S'
+alias pu='sudo pacman -R'
+
+alias nv='nvim'
+
+alias dotsu='~/.dotfiles/scripts/setup.sh'
+alias dotcu='~/.dotfiles/scripts/cleanup.sh'
+alias nvimsu='~/.dotfiles/nvim/scripts/setup.sh'
+alias nvimcu='~/.dotfiles/nvim/scripts/cleanup.sh'
+
 # BASH COMMAND ALIASES END
