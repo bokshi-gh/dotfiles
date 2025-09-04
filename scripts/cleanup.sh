@@ -32,3 +32,4 @@ done
 
 # Restoring previous bashrc
 [ -f ~/.previous-bashrc ] && mv ~/.previous-bashrc ~/.bashrc
+source ~/.bashrc
