@@ -19,9 +19,21 @@ alias gr='git remote'
 alias gra='git remote add'
 
 alias gpu='git push'
+alias gpuom='git push -u origin main'
 alias gpl='git pull'
+alias gplom='git pull -u origin main'
 # GIT ALIASES END
 
 # BASH COMMAND ALIASES START
-alias cleandir='rm -rf ./* ./.??*'
+alias clrdir='rm -rf ./* ./.??*'
+alias l='ls'
+alias la='ls -a'
+alias c='cd'
+alias m='mkdir'
+alias t='touch'
+alias r='rm -rf'
+alias e='echo'
+alias cl='clear'
+alias off='poweroff'
+alias rb='reboot'
 # BASH COMMAND ALIASES END
