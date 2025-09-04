@@ -14,8 +14,8 @@ alias gco='git checkout'
 alias gr='git remote'
 alias gra='git remote add'
 
-alias gpl='git pull'
 alias gps='git push'
+alias gpl='git pull'
 # GIT ALIASES END
 
 # BASH COMMAND ALIASES START
