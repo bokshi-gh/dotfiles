@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# NOTE: After running this setup.sh, manually run `source ~/.bashrc` 
+# to apply the updated shell configuration in the current session.
+
 GREEN='\033[1;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
@@ -39,4 +42,3 @@ chmod 600 ~/.ssh/id_rsa_github
 cp ~/.dotfiles/bash/.bashrc ~/.bashrc
 echo " " >> ~/.bashrc
 [ -f ~/.previous-bashrc ] && cat ~/.previous-bashrc >> ~/.bashrc
-source ~/.bashrc
