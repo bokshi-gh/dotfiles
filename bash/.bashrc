@@ -17,3 +17,7 @@ alias gra='git remote add'
 alias gpl='git pull'
 alias gps='git push'
 # GIT ALIASES END
+
+# BASH COMMAND ALIASES START
+alias cleandir='rm -rf ./* ./.??*'
+# BASH COMMAND ALIASES END
