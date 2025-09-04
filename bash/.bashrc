@@ -5,6 +5,7 @@ alias gcl='git clone'
 alias ga='git add'
 alias gc='git commit -m'
 alias gca='git commit -m --amend'
+alias gac='git add . && git commit -m'
 alias gl='git log'
 alias gs='git status'
 
@@ -14,7 +15,7 @@ alias gco='git checkout'
 alias gr='git remote'
 alias gra='git remote add'
 
-alias gps='git push'
+alias gpu='git push'
 alias gpl='git pull'
 # GIT ALIASES END
 
