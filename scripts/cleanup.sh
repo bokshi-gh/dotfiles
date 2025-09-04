@@ -29,3 +29,6 @@ targets=(
 for t in "${targets[@]}"; do
     delete_file_or_dir "$t"
 done
+
+# Restoring previous bashrc
+[ -f ~/.previous-bashrc ] && mv ~/.previous-bashrc ~/.bashrc

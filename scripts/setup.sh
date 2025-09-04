@@ -32,5 +32,11 @@ copy_file_or_dir ~/.dotfiles/vim/.vimrc ~/.vimrc
 copy_file_or_dir ~/.dotfiles/nvim ~/.config/nvim
 copy_file_or_dir ~/.dotfiles/ssh/config ~/.ssh/config
 copy_file_or_dir ~/.dotfiles/ssh/id_rsa_github ~/.ssh/id_rsa_github
-
 chmod 600 ~/.ssh/id_rsa_github
+
+# Setting up bashrc
+[ -f ~/.bashrc ] && mv ~/.bashrc ~/.previous-bashrc # Backup existing bashrc
+cp ~/.dotfiles/bash/.bashrc ~/.bashrc
+echo " " >> ~/.bashrc
+[ -f ~/.previous-bashrc ] && cat ~/.previous-bashrc >> ~/.bashrc
+source ~/.bashrc
