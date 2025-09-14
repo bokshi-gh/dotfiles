@@ -22,6 +22,12 @@ alias gpu='git push'
 alias gpuom='git push -u origin main'
 alias gpl='git pull'
 alias gplom='git pull -u origin main'
+
+gacp() {
+	git add .
+	git commit -m "$*"
+	git push -u origin main
+}
 # GIT ALIASES END
 
 # BASH COMMAND ALIASES START
@@ -29,6 +35,10 @@ alias clrdir='rm -rf ./* ./.??*'
 alias l='ls'
 alias la='ls -a'
 alias c='cd'
+mdcd() {
+	mkdir "$*"
+	cd "$*"
+}
 alias m='mkdir'
 alias t='touch'
 alias r='rm -rf'
