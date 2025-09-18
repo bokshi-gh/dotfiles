@@ -63,6 +63,12 @@ This project supports the following platforms:
 - {{Demostration of project usage}}
 - {{...}}
 
+## References
+
+- [Topic - Source]()
+- [Topic - Source]()
+- [Topic - Source]()
+
 ## Contributing
 
 Contributions are welcome! Please fork the repo, make changes, and submit pull requests. Open issues for bugs or feature requests.
