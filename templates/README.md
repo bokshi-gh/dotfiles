@@ -65,9 +65,8 @@ This project supports the following platforms:
 
 ## References
 
-- [{{Topic - Source}}]()
-- [{{Topic - Source}}]()
-- [{{Topic - Source}}]()
+- [{{Topic - Source}}]({{link}})
+- [{{Topic}}]({{link}})
 
 ## Contributing
 
