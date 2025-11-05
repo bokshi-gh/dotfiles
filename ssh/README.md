@@ -1,4 +1,3 @@
-
 # SSH Overview and Commands
 
 ## **Generating SSH Key Pair**
@@ -28,7 +27,7 @@ ssh-add /path/to/id_rsa
 - `eval "$(ssh-agent -s)"` starts the SSH agent in the background.
 - `ssh-add /path/to/id_rsa` adds your private key to the agent for authentication.
 
-## 3. **SSH with Remote Host (Password Authentication)**
+## **SSH with Remote Host (Password Authentication)**
 ```sh
 ssh username@remote_host
 ```
