@@ -26,7 +26,7 @@ packages=(
 for pkg in "${packages[@]}"; do
     echo -e "${YELLOW}== REMOVING $pkg ==${NC}"
     if ! sudo pacman -Rns "$pkg"; then
-        echo -e "${YELLOW}== SKIPPING $pkg, IT MAY BE REQUIRED BY OTHER PACKAGES ==${NC}"
+        echo -e "${YELLOW}= SKIPPING $pkg, IT MAY BE REQUIRED BY OTHER PACKAGES =${NC}"
     fi
 done
 
@@ -42,7 +42,7 @@ sudo rm -rf /usr/lib/node_modules
 
 echo -e "${YELLOW}== CLEANING UNUSED DEPENDENCIES ==${NC}"
 if pacman -Qdtq &>/dev/null; then
-    sudo pacman -Rns $(pacman -Qdtq) || echo "== NO ORPHANED PACKAGES TO REMOVE =="
+    sudo pacman -Rns $(pacman -Qdtq) || echo "= NO ORPHANED PACKAGES TO REMOVE ="
 fi
 
 echo -e "${YELLOW}== CLEANING PACKAGE CACHE ==${NC}"
