@@ -1,4 +1,2 @@
 *.un~
 *.swp
-
-/config/nvim/lazy-lock.json
