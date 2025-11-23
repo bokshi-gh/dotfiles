@@ -45,4 +45,7 @@ sudo pacman -S --needed --noconfirm git
 echo -e "${YELLOW}=== INSTALLING RIPGREP (REQUIRED FOR TELESCOPE FUZZY FINDING) ===${NC}"
 sudo pacman -S --needed --noconfirm ripgrep
 
+echo -e "${YELLOW}=== INSTALLING UNZIP (REQUIRED FOR MASON) ===${NC}"
+sudo pacman -S --needed --noconfirm unzip
+
 echo -e "${GREEN}[SETUP COMPLETE]${NC}"
