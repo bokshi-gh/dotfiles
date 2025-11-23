@@ -21,6 +21,7 @@ packages=(
     npm
     git
     ripgrep
+    unzip
 )
 
 for pkg in "${packages[@]}"; do
