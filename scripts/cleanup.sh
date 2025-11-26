@@ -33,4 +33,4 @@ done
 
 # Restoring previous bashrc
 [ -f ~/.previous-bashrc ] && mv ~/.previous-bashrc ~/.bashrc
-echo -e "${GREEN}Restored: ~/.previous-bashrc${NC}"
+echo -e "${GREEN}Restored:${NC} ~/.previous-bashrc"
