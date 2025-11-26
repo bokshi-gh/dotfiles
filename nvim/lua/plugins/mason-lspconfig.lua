@@ -55,7 +55,7 @@ return {
     for name, config in pairs(servers) do
       config.capabilities = cmp_capabilities
       config.on_attach = on_attach
-      vim.lsp.config[name].setup(config)
+      vim.lsp.configs[name].setup(config)
     end
   end,
 }
