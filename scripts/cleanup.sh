@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# ANSI color codes
 GREEN='\033[1;32m'
 RED='\033[1;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 # NOTE: After running this clean.sh, manually run `source ~/.bashrc` 
 # to apply the updated shell configuration in the current session.
@@ -20,7 +19,6 @@ delete_file_or_dir() {
     fi
 }
 
-# List of files/folders to delete
 targets=(
     ~/.gitconfig
     ~/.vimrc
@@ -35,3 +33,4 @@ done
 
 # Restoring previous bashrc
 [ -f ~/.previous-bashrc ] && mv ~/.previous-bashrc ~/.bashrc
+echo -e "${GREEN}Restored previous bashrc${NC}"
