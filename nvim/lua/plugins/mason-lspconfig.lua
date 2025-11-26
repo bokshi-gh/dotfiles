@@ -6,7 +6,6 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
-    local lspconfig = require("lspconfig")
     local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     local function map_buf(bufnr)
@@ -34,7 +33,7 @@ return {
     require("mason-lspconfig").setup({
       ensure_installed = {
         "clangd", "jdtls", "lua_ls", "gopls", "pyright",
-        "rust_analyzer", "ts_ls", "html", "cssls",
+        "rust_analyzer", "tsserver", "html", "cssls",
       },
       automatic_installation = true,
     })
@@ -43,14 +42,12 @@ return {
       clangd = {},
       jdtls = {},
       lua_ls = {
-        settings = {
-          Lua = { diagnostics = { globals = { "vim" } } }
-        }
+        settings = { Lua = { diagnostics = { globals = { "vim" } } } }
       },
       gopls = {},
       pyright = {},
       rust_analyzer = {},
-      ts_ls = {},
+      tsserver = {},
       html = {},
       cssls = {},
     }
@@ -58,7 +55,7 @@ return {
     for name, config in pairs(servers) do
       config.capabilities = cmp_capabilities
       config.on_attach = on_attach
-      lspconfig[name].setup(config)
+      vim.lsp.config[name].setup(config)
     end
   end,
 }
