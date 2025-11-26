@@ -42,4 +42,4 @@ chmod 600 ~/.ssh/id_rsa_github
 cp ~/.dotfiles/bash/.bashrc ~/.bashrc
 echo " " >> ~/.bashrc
 [ -f ~/.previous-bashrc ] && cat ~/.previous-bashrc >> ~/.bashrc
-echo -e "${GREEN}Configured:${NC} bashrc"
+echo -e "${GREEN}Configured:${NC} ~/.bashrc"
