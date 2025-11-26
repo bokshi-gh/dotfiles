@@ -6,10 +6,11 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
+    local mason_lspconfig = require("mason-lspconfig")
     local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    local function map_buf(bufnr)
-      local function nmap(lhs, rhs, desc)
+    local function on_attach(_, bufnr)
+      local nmap = function(lhs, rhs, desc)
         vim.keymap.set("n", lhs, rhs, { buffer = bufnr, noremap = true, silent = true, desc = desc })
       end
 
@@ -26,11 +27,7 @@ return {
       nmap("<leader>e", vim.diagnostic.open_float, "Show Diagnostic")
     end
 
-    local on_attach = function(_, bufnr)
-      map_buf(bufnr)
-    end
-
-    require("mason-lspconfig").setup({
+    mason_lspconfig.setup({
       ensure_installed = {
         "clangd", "jdtls", "lua_ls", "gopls", "pyright",
         "rust_analyzer", "tsserver", "html", "cssls",
@@ -41,9 +38,7 @@ return {
     local servers = {
       clangd = {},
       jdtls = {},
-      lua_ls = {
-        settings = { Lua = { diagnostics = { globals = { "vim" } } } }
-      },
+      lua_ls = { settings = { Lua = { diagnostics = { globals = { "vim" } } } } },
       gopls = {},
       pyright = {},
       rust_analyzer = {},
@@ -52,10 +47,11 @@ return {
       cssls = {},
     }
 
+    local lspconfig = require("lspconfig")
     for name, config in pairs(servers) do
       config.capabilities = cmp_capabilities
       config.on_attach = on_attach
-      vim.lsp.configs[name].setup(config)
+      lspconfig[name].setup(config)
     end
   end,
 }
