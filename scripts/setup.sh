@@ -5,7 +5,7 @@
 
 GREEN='\033[1;32m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 copy_file_or_dir() {
     local src=$1
@@ -42,3 +42,4 @@ chmod 600 ~/.ssh/id_rsa_github
 cp ~/.dotfiles/bash/.bashrc ~/.bashrc
 echo " " >> ~/.bashrc
 [ -f ~/.previous-bashrc ] && cat ~/.previous-bashrc >> ~/.bashrc
+echo -e ${GREEN}Configured:${NC} .bashrc"
