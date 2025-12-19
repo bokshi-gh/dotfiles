@@ -10,6 +10,10 @@ vim.keymap.set('n', '<leader>rjv', ':!javac % && java %:r<CR>', { desc = "Compil
 vim.keymap.set('n', '<leader>rpy', ':!python %<CR>', { desc = "Run Python file" })
 vim.keymap.set('n', '<leader>rjs', ':!node %<CR>', { desc = "Run Node.js file" })
 
-vim.keymap.set('n', '<leader>tn', function()
+vim.keymap.set('n', '<leader>n', function()
   vim.wo.number = not vim.wo.number
 end, { desc = "Toggle line numbers" })
+
+vim.keymap.set('n', '<leader>rn', function()
+  vim.wo.number = not vim.wo.number
+end, { desc = "Toggle relative line numbers" })
