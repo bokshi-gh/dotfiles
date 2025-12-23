@@ -14,6 +14,6 @@ vim.keymap.set('n', '<leader>n', function()
   vim.wo.number = not vim.wo.number
 end, { desc = "Toggle line numbers" })
 
-vim.keymap.set('n', '<leader>rn', function()
+vim.keymap.set('n', '<leader>r', function()
   vim.wo.number = not vim.wo.relativenumber
 end, { desc = "Toggle relative line numbers" })
