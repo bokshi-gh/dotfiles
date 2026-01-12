@@ -1,6 +1,6 @@
-rm -rf ~/.config/nvim \
-       ~/.local/state/nvim \
-       ~/.local/share/nvim
+rm -rf ~/.config/nvim
+rm -rf ~/.local/state/nvim
+rm -rf ~/.local/share/nvim
 
 orphans=$(pacman -Qdtq)
 
