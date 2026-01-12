@@ -18,15 +18,6 @@ ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArYHJ6jU+OnEwLOIhJz8LBX1nPRA6Oik9m4hklpqlyDAi
 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtmUpX+Ymg7z5UE9y+Go6HRBYa3oFvhrpJ2geq5/JxN9lMKf5Ls17rwP1GV6hddjzZoHtYq44JvH1CGvZhUdmF61Rh3e0Em8J8yMLp/j2S7hfNm0AKn1unRFLVlfcuFggZn9mvoTpq7uAMi3VAHHf4plTmC4gHe95p7a34TmPG1ZmRtjmIMuFmu4sb0K5WVdT6ohCSM8nBbg1A== another_user@hostname
 ```
 
-## **Adding to SSH Agent**
-- The SSH agent stores your keys and handles authentication for you, so you don’t need to re-enter the passphrase each time.
-```sh
-eval "$(ssh-agent -s)"
-ssh-add /path/to/id_rsa
-```
-- `eval "$(ssh-agent -s)"` starts the SSH agent in the background.
-- `ssh-add /path/to/id_rsa` adds your private key to the agent for authentication.
-
 ## **SSH with Remote Host (Password Authentication)**
 ```sh
 ssh username@remote_host
@@ -56,19 +47,14 @@ ssh username@remote_host 'command'
 ```
 - This runs a command directly on the remote server without logging into an interactive session.
 
-## **Using Different Port**
+## **Adding to SSH Agent**
+- The SSH agent stores your keys and handles authentication for you, so you don’t need to re-enter the passphrase each time.
 ```sh
-ssh -p 2222 username@remote_host
+eval "$(ssh-agent -s)"
+ssh-add /path/to/id_rsa
 ```
-- If the SSH service on the remote server is running on a different port (e.g., 2222), you can specify it with the `-p` flag.
-- If the port is not specified, SSH defaults to port `22`.
-
-## **Port Forwarding**
-- Port forwarding lets you tunnel a port from your local machine to a remote machine.
-  ```sh
-  ssh -L local_port:remote_host:remote_port username@remote_host
-  ```
-- This will forward traffic from `local_port` on your local machine to `remote_port` on the `remote_host`.
+- `eval "$(ssh-agent -s)"` starts the SSH agent in the background.
+- `ssh-add /path/to/id_rsa` adds your private key to the agent for authentication.
 
 ## **Flags**
 - **`-T`**: Disables terminal allocation (useful when you don’t need a terminal, such as when executing commands non-interactively).
