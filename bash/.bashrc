@@ -4,6 +4,12 @@ mdcd() {
 	mkdir "$*"
 	cd "$*"
 }
+rdcd() {
+    local dir
+    dir="$(pwd)"
+    cd .. || return 1
+    rm -rf "$dir"
+}
 # BASH COMMAND ALIASES AND SHELL FUNCTION END
 
 # GIT COMMAND ALIASES AND SHELL FUNCTION START
