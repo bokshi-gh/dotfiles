@@ -47,6 +47,12 @@ ssh username@remote_host 'command'
 ```
 - This runs a command directly on the remote server without logging into an interactive session.
 
+## **Flags**
+- **`-T`**: Disables terminal allocation (useful when you don’t need a terminal, such as when executing commands non-interactively).
+  ```sh
+  ssh -T username@remote_host 'command'
+  ```
+
 ## **Adding to SSH Agent**
 - The SSH agent stores your keys and handles authentication for you, so you don’t need to re-enter the passphrase each time.
 ```sh
@@ -55,12 +61,6 @@ ssh-add /path/to/id_rsa
 ```
 - `eval "$(ssh-agent -s)"` starts the SSH agent in the background.
 - `ssh-add /path/to/id_rsa` adds your private key to the agent for authentication.
-
-## **Flags**
-- **`-T`**: Disables terminal allocation (useful when you don’t need a terminal, such as when executing commands non-interactively).
-  ```sh
-  ssh -T username@remote_host 'command'
-  ```
 
 ## **`authorized_keys` File**
 - Located on the remote server in `~/.ssh/authorized_keys`, this file contains the public keys of users who are authorized to log in to the server without a password.
