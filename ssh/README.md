@@ -1,4 +1,4 @@
-# SSH Overview and Commands
+# SSH
 
 ## **Generating SSH Key Pair**
 ```sh
