@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# NOTE: After running clean.sh, manually run `source ~/.bashrc` so the updated shell configuration takes effect in the current session.
+
 GREEN='\033[1;32m'
 RED='\033[1;31m'
 NC='\033[0m'
