@@ -1,8 +1,4 @@
 # BASH COMMAND ALIASES AND SHELL FUNCTION START
-alias dotsu='~/.dotfiles/scripts/setup.sh'
-alias dotcu='~/.dotfiles/scripts/cleanup.sh'
-alias nvimsu='~/.dotfiles/nvim/scripts/setup.sh'
-alias nvimcu='~/.dotfiles/nvim/scripts/cleanup.sh'
 alias clrdir='rm -rf ./* ./.??*'
 mdcd() {
 	mkdir "$*"

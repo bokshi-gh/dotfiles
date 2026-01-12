@@ -4,13 +4,10 @@ GREEN='\033[1;32m'
 RED='\033[1;31m'
 NC='\033[0m'
 
-# NOTE: After running this clean.sh, manually run `source ~/.bashrc` 
-# to apply the updated shell configuration in the current session.
-
 echo -e "${GREEN}[DELETING CONFIGURATION FILES AND FOLDERS]${NC}"
 
 delete_file_or_dir() {
-    local target=$1
+    local target="$1"
     if [ -e "$target" ]; then
         rm -rf "$target"
         echo -e "${GREEN}Deleted:${NC} $target"
@@ -20,16 +17,21 @@ delete_file_or_dir() {
 }
 
 targets=(
-    ~/.gitconfig
-    ~/.vimrc
-    ~/.ssh/config
-    ~/.ssh/id_rsa_github
+    "$HOME/.gitconfig"
+    "$HOME/.vimrc"
+    "$HOME/.ssh/config"
+    "$HOME/.ssh/id_rsa_github"
 )
 
 for t in "${targets[@]}"; do
     delete_file_or_dir "$t"
 done
 
-# Restoring previous bashrc
-[ -f ~/.previous-bashrc ] && mv ~/.previous-bashrc ~/.bashrc
-echo -e "${GREEN}Restored:${NC} ~/.previous-bashrc"
+if [ -f "$HOME/.previous-bashrc" ]; then
+    rm -f "$HOME/.bashrc"
+    mv "$HOME/.previous-bashrc" "$HOME/.bashrc"
+    echo -e "${GREEN}Restored:${NC} ~/.bashrc from ~/.previous-bashrc"
+else
+    echo -e "${RED}No backup found:${NC} ~/.previous-bashrc"
+fi
+
