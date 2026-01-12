@@ -22,7 +22,6 @@ delete_file_or_dir() {
 targets=(
     ~/.gitconfig
     ~/.vimrc
-    ~/.config/nvim
     ~/.ssh/config
     ~/.ssh/id_rsa_github
 )
