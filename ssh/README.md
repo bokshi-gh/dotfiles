@@ -6,7 +6,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 - This command generates a new SSH key pair with the RSA algorithm (`-t rsa`) and a key length of 4096 bits (`-b 4096`).
 - The `-C` flag adds a label (usually your email) for identifying the key.
-- The key pair is stored in the `~/.ssh/` directory by default.
+- The key pair is usually placed in the `~/.ssh/` directory.
 - If a custom name is not provided, the key pair files will be named `id_rsa` (private key) and `id_rsa.pub` (public key).
 - After generating key pair put the pubic key content to SSH server's authorized_keys file.
 - You can do this manually or using `ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote_host`.
