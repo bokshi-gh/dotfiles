@@ -7,8 +7,6 @@ GREEN='\033[1;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-sudo ~/.dotfiles/cleanup.sh
-
 copy_file_or_dir() {
     local src=$1
     local dest=$2
