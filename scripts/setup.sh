@@ -6,11 +6,11 @@ NC='\033[0m'
 
 if [ -f "$HOME/.dotfiles/scripts/cleanup.sh" ]; then
     bash "$HOME/.dotfiles/scripts/cleanup.sh"
-    echo ""
 else
     echo -e "${RED}Cleanup script not found${NC}"
-    echo ""
 fi
+
+echo ""
 
 copy_file_or_dir() {
     local src="$1"
