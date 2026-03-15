@@ -4,7 +4,7 @@ mdcd() {
 	mkdir "$*"
 	cd "$*"
 }
-rdcd() {
+cdrd() {
     local dir
     dir="$(pwd)"
     cd .. || return 1
