@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# NOTE: After running setup.sh, manually run `source ~/.bashrc` so the updated shell configuration takes effect in the current session.
+
 GREEN='\033[1;32m'
 RED='\033[0;31m'
 NC='\033[0m'
