@@ -1,3 +1,8 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+NC='\033[0m'
+
 if [ -f "$HOME/.dotfiles/nvchad/scripts/cleanup.sh" ]; then
     bash "$HOME/.dotfiles/nvchad/scripts/cleanup.sh"
 else
