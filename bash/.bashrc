@@ -13,6 +13,9 @@ cdrd() {
 # BASH COMMAND ALIASES AND SHELL FUNCTION END
 
 # GIT COMMAND ALIASES AND SHELL FUNCTION START
+gcl() {
+	git clone "$*"
+}
 gac() {
     git add .
     git commit -m "$*"
