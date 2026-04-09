@@ -27,7 +27,7 @@ gph() {
 	git push -u origin main
 }
 gpl() {
-	git pull -u origin main
+	git pull origin main
 }
 gacph() {
 	git add .
