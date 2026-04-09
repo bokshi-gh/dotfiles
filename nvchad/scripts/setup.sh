@@ -15,7 +15,4 @@ sudo pacman -S --needed --noconfirm neovim
 sudo pacman -S --needed --noconfirm ripgrep
 sudo pacman -S --needed --noconfirm base-devel gcc make
 
-git clone https://github.com/NvChad/starter ~/.config/nvim && \
-nvim --headless "+Lazy sync" "+MasonInstallAll" "+TSInstallAll" "+qa" && \
-rm -rf ~/.config/nvim/.git && \
-nvim
+git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
