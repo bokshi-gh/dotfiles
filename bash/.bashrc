@@ -16,11 +16,20 @@ cdrd() {
 gcl() {
 	git clone "$*"
 }
+ga() {
+	git add .
+}
 gac() {
     git add .
     git commit -m "$*"
 }
-gacp() {
+gph() {
+	git push -u origin main
+}
+gpl() {
+	git pull -u origin main
+}
+gacph() {
 	git add .
 	git commit -m "$*"
 	git push -u origin main
