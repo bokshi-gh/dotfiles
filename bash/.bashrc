@@ -16,6 +16,9 @@ cdrd() {
 gcl() {
 	git clone "$*"
 }
+gs() {
+  git status
+}
 ga() {
 	git add .
 }
@@ -23,7 +26,7 @@ gac() {
     git add .
     git commit -m "$*"
 }
-gph() {
+gps() {
 	git push -u origin main
 }
 gpl() {
