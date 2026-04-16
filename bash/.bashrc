@@ -32,7 +32,7 @@ gps() {
 gpl() {
 	git pull origin main
 }
-gacph() {
+gacps() {
 	git add .
 	git commit -m "$*"
 	git push -u origin main
