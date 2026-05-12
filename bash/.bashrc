@@ -1,6 +1,25 @@
 # BASH COMMAND ALIASES AND SHELL FUNCTION START
-alias r='./'
 alias clrdir='rm -rf ./* ./.??*'
+run() {
+    "./$1" "${@:2}"
+}
+freeport() {
+    pid=$(lsof -t -i :"$1")
+
+    if [ -z "$pid" ]; then
+        echo "No process using port $1"
+        return 1
+    fi
+
+    read -p "Kill process $pid on port $1? [y/N] " ans
+
+    if [[ "$ans" =~ ^[Yy]$ ]]; then
+        kill "$pid"
+        echo "Killed."
+    else
+        echo "Cancelled."
+    fi
+}
 mdcd() {
 	mkdir "$*"
 	cd "$*"
