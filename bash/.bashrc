@@ -1,4 +1,5 @@
 # BASH COMMAND ALIASES AND SHELL FUNCTION START
+alias r='./'
 alias clrdir='rm -rf ./* ./.??*'
 mdcd() {
 	mkdir "$*"
