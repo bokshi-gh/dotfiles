@@ -10,12 +10,12 @@ cdrd() {
     cd .. || return 1
     rm -rf "$dir"
 }
-run() {
+r() {
     "./$1" "${@:2}"
 }
-freeport() {
+fp() {
     if [ $# -eq 0 ]; then
-        echo "Usage: freeport <port1> [port2] [port3] ..."
+        echo "Usage: fp <port1> [port2] [port3] ..."
         return 1
     fi
 
