@@ -39,6 +39,22 @@ fp() {
 gcl() {
 	git clone "$*"
 }
+gclcd() {
+    if [ -z "$1" ]; then
+        echo "Error: Please provide a repository URL."
+        return 1
+    fi
+
+    # Clone the repository
+    git clone "$1" || return 1
+
+    # Extract the directory name from the URL
+    local repo_dir
+    repo_dir=$(basename "$1" .git)
+
+    # Change into the directory
+    cd "$repo_dir" || return 1
+}
 gs() {
   git status
 }
