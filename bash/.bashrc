@@ -55,6 +55,14 @@ gclcd() {
     # Change into the directory
     cd "$repo_dir" || return 1
 }
+grao() {
+    if [ -z "$1" ]; then
+        echo "Usage: grao <repository-url>"
+        return 1
+    fi
+
+    git remote add origin "$1"
+}
 gs() {
   git status
 }
