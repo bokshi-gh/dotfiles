@@ -1,5 +1,3 @@
-Yes, this is better. I’d just make the headings consistent and put the recommended font directly under the Nerd Font heading:
-
 # NvChad
 
 ## References
@@ -9,21 +7,14 @@ Yes, this is better. I’d just make the headings consistent and put the recomme
 
 ## Post [setup.sh](./scripts/setup.sh)
 
-### [Nerd Font](https://www.nerdfonts.com/) as Your Terminal Font
+* Set [**Nerd Font**](https://www.nerdfonts.com/) as your terminal font.
 
-Recommended: **JetBrainsMono Nerd Font**
+  Recommended: **JetBrainsMono Nerd Font**
 
-### Run `:MasonInstallAll` and `:TSInstallAll`
+* Run `:MasonInstallAll` and `:TSInstallAll` after `lazy.nvim` finishes downloading plugins.
 
-Run these commands after `lazy.nvim` finishes downloading plugins:
+* Delete the `.git` folder from the `nvim` folder:
 
-```vim
-:MasonInstallAll
-:TSInstallAll
-```
-
-### Delete the `.git` Folder
-
-```bash
-rm -rf ~/.config/nvim/.git
-```
+  ```bash
+  rm -rf ~/.config/nvim/.git
+  ```
