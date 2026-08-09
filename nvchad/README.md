@@ -1,5 +1,10 @@
 # NvChad
 
+## References
+
+* [**Docs**](https://nvchad.com/docs/quickstart/install)
+* [**Tutorial**](https://youtu.be/Mtgo-nP_r8Y?si=zVTb6dbvyACUSGIl)
+
 ## Post [setup.sh](./scripts/setup.sh)
 
 ### Nerd Font
@@ -20,8 +25,3 @@ After `lazy.nvim` finishes:
 ```bash
 rm -rf ~/.config/nvim/.git
 ```
-
-## References
-
-* [**Docs**](https://nvchad.com/docs/quickstart/install)
-* [**Tutorial**](https://youtu.be/Mtgo-nP_r8Y?si=zVTb6dbvyACUSGIl)
