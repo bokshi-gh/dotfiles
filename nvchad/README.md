@@ -7,10 +7,6 @@
 
 ## Post [setup.sh](./scripts/setup.sh)
 
-* Set [**Nerd Font**](https://www.nerdfonts.com/) as your terminal font.
-
-  Recommended: **JetBrainsMono Nerd Font**
-
 * Run `:MasonInstallAll` and `:TSInstallAll` after `lazy.nvim` finishes downloading plugins.
 
 * Delete the `.git` folder from the `nvim` folder:
@@ -18,3 +14,7 @@
   ```bash
   rm -rf ~/.config/nvim/.git
   ```
+
+* Set [**Nerd Font**](https://www.nerdfonts.com/) as your terminal font.
+
+  Recommended: **JetBrainsMono Nerd Font**
