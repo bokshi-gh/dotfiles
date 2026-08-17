@@ -1,5 +1,13 @@
 # SSH
 
+## Installation
+
+Install OpenSSH:
+
+```sh
+sudo pacman -S openssh
+```
+
 ## Generating an SSH Key Pair
 
 Generate a new Ed25519 SSH key pair:
