@@ -121,11 +121,11 @@ fp() {
 # =============================
 
 # Git
-if [[ -f "$HOME/.dotfiles/bash/git.sh" ]]; then
-    source "$HOME/.dotfiles/bash/git.sh"
+if [[ -f "$HOME/dotfiles/bash/git.sh" ]]; then
+    source "$HOME/dotfiles/bash/git.sh"
 fi
 
 # Codeforces
-if [[ -f "$HOME/.dotfiles/bash/codeforces.sh" ]]; then
-    source "$HOME/.dotfiles/bash/codeforces.sh"
+if [[ -f "$HOME/dotfiles/bash/codeforces.sh" ]]; then
+    source "$HOME/dotfiles/bash/codeforces.sh"
 fi
