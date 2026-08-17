@@ -185,7 +185,7 @@ EOF
             echo "Usage:"
             echo "  cf init <contest_id>                   Initialize a contest"
             echo "  cf new <problem_index>                 Create a single-test problem"
-            echo "  cf new <problem_index> -t | --tests    Create a multi-test problem"
+            echo "  cf new <problem_index> [-t | --tests]  Create a multi-test problem"
             echo "  cf run <problem_index>                 Compile and run a problem"
             return 1
             ;;
