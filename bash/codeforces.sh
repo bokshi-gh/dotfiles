@@ -54,11 +54,11 @@ cf() {
             ;;
 
 
-        # Create a new problem
+        # Create a new solution
         new)
             if [[ -z "$2" ]]; then
                 echo "Usage: cf new <problem_index>"
-                echo "       cf new <problem_index> -t | --tests"
+                echo "       cf new <problem_index> [-t | --tests]"
                 return 1
             fi
 
@@ -81,13 +81,13 @@ cf() {
                     ;;
                 *)
                     echo "Usage: cf new <problem_index>"
-                    echo "       cf new <problem_index> -t | --tests"
+                    echo "       cf new <problem_index> [-t | --tests]"
                     return 1
                     ;;
             esac
 
             if [[ -f "$file" ]]; then
-                echo "Problem already exists: $file"
+                echo "Solution already exists: $file"
                 nvim "$file"
                 return
             fi
@@ -141,7 +141,7 @@ EOF
             ;;
 
 
-        # Compile and run a problem
+        # Compile and run a solution
         run)
             if [[ -z "$2" ]]; then
                 echo "Usage: cf run <problem_index>"
@@ -160,7 +160,7 @@ EOF
             fi
 
             if [[ ! -f "$file" ]]; then
-                echo "Problem not found: $file"
+                echo "Solution not found: $file"
                 return 1
             fi
 
@@ -184,9 +184,9 @@ EOF
         *)
             echo "Usage:"
             echo "  cf init <contest_id>                   Initialize a contest"
-            echo "  cf new <problem_index>                 Create a single-test problem"
-            echo "  cf new <problem_index> [-t | --tests]  Create a multi-test problem"
-            echo "  cf run <problem_index>                 Compile and run a problem"
+            echo "  cf new <problem_index>                 Create a single-test solution file"
+            echo "  cf new <problem_index> [-t | --tests]  Create a multi-test solution file"
+            echo "  cf run <problem_index>                 Compile and run a solution"
             return 1
             ;;
     esac
