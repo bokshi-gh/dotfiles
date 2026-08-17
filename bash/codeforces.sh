@@ -10,6 +10,12 @@ cf_valid_contest_id() {
 }
 
 
+# Validate problem index
+cf_valid_problem_index() {
+    [[ "$1" =~ ^[A-Za-z]+$ ]]
+}
+
+
 # Check whether the current directory is a Codeforces contest directory
 cf_require_contest() {
     if [[ "$PWD" =~ ^"$CF_DIR"/([0-9]+)$ ]]; then
@@ -51,7 +57,8 @@ cf() {
         # Create a new problem
         new)
             if [[ -z "$2" ]]; then
-                echo "Usage: cf new <problem_index> [-t|--tests]"
+                echo "Usage: cf new <problem_index>"
+                echo "       cf new <problem_index> -t | --tests"
                 return 1
             fi
 
@@ -61,6 +68,11 @@ cf() {
             local file="${problem_index}.cpp"
             local tests=false
 
+            if ! cf_valid_problem_index "$problem_index"; then
+                echo "Error: Problem index must contain only letters."
+                return 1
+            fi
+
             case "$3" in
                 -t|--tests)
                     tests=true
@@ -68,7 +80,8 @@ cf() {
                 "")
                     ;;
                 *)
-                    echo "Usage: cf new <problem_index> [-t|--tests]"
+                    echo "Usage: cf new <problem_index>"
+                    echo "       cf new <problem_index> -t | --tests"
                     return 1
                     ;;
             esac
@@ -141,6 +154,11 @@ EOF
             local file="${problem_index}.cpp"
             local executable="$problem_index"
 
+            if ! cf_valid_problem_index "$problem_index"; then
+                echo "Error: Problem index must contain only letters."
+                return 1
+            fi
+
             if [[ ! -f "$file" ]]; then
                 echo "Problem not found: $file"
                 return 1
@@ -165,11 +183,10 @@ EOF
         # Show help
         *)
             echo "Usage:"
-            echo "  cf init <contest_id>             Initialize a contest"
-            echo "  cf new <problem_index>           Create a single-test problem"
-            echo "  cf new <problem_index> -t        Create a multi-test problem"
-            echo "  cf new <problem_index> --tests   Create a multi-test problem"
-            echo "  cf run <problem_index>           Compile and run a problem"
+            echo "  cf init <contest_id>                   Initialize a contest"
+            echo "  cf new <problem_index>                 Create a single-test problem"
+            echo "  cf new <problem_index> -t | --tests    Create a multi-test problem"
+            echo "  cf run <problem_index>                 Compile and run a problem"
             return 1
             ;;
     esac
