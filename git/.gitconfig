@@ -1,3 +1,15 @@
 [user]
 	name = Bokshi
 	email = devrajeshthapa@gmail.com
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nvim
+
+[pull]
+    rebase = false
+
+[push]
+    autoSetupRemote = true
