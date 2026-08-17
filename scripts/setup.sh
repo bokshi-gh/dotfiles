@@ -1,20 +1,18 @@
 #!/bin/bash
 
-# NOTE: After running setup.sh, manually run `source ~/.bashrc` so the updated shell configuration takes effect in the current session.
+readonly DOTFILES="$HOME/.dotfiles"
 
 GREEN='\033[1;32m'
 RED='\033[0;31m'
+YELLOW='\033[1;33m'
 NC='\033[0m'
 
-if [ -f "$HOME/.dotfiles/scripts/cleanup.sh" ]; then
-    bash "$HOME/.dotfiles/scripts/cleanup.sh"
-else
-    echo -e "${RED}Cleanup script not found${NC}"
+if [ ! -d "$DOTFILES" ]; then
+    echo -e "${RED}Dotfiles directory not found:${NC} $DOTFILES"
+    exit 1
 fi
 
-echo ""
-
-copy_file_or_dir() {
+link_file() {
     local src="$1"
     local dest="$2"
 
@@ -23,36 +21,36 @@ copy_file_or_dir() {
         return 1
     fi
 
-    if [ -d "$src" ]; then
-        cp -r "$src" "$dest"
-    else
-        cp "$src" "$dest"
+    if [ -L "$dest" ]; then
+        rm "$dest"
+    elif [ -e "$dest" ]; then
+        local backup="${dest}.backup"
+
+        if [ -e "$backup" ]; then
+            backup="${dest}.backup.$(date +%Y%m%d%H%M%S)"
+        fi
+
+        mv "$dest" "$backup"
+        echo -e "${YELLOW}Backed up:${NC} $dest → $backup"
     fi
 
-    echo -e "${GREEN}Copied:${NC} $src → $dest"
+    ln -s "$src" "$dest"
+    echo -e "${GREEN}Linked:${NC} $src → $dest"
 }
 
 mkdir -p "$HOME/.ssh"
 
-echo -e "${GREEN}[SETTING UP CONFIGURATION FILES AND FOLDERS]${NC}"
+echo -e "${GREEN}[Setting up dotfiles]${NC}"
+echo ""
 
-copy_file_or_dir "$HOME/.dotfiles/git/.gitconfig" "$HOME/.gitconfig"
-copy_file_or_dir "$HOME/.dotfiles/vim/.vimrc" "$HOME/.vimrc"
-copy_file_or_dir "$HOME/.dotfiles/ssh/config" "$HOME/.ssh/config"
-copy_file_or_dir "$HOME/.dotfiles/ssh/id_rsa_github" "$HOME/.ssh/id_rsa_github"
+link_file "$DOTFILES/bash/.bashrc" "$HOME/.bashrc"
+link_file "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+link_file "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
+link_file "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 
-chmod 600 "$HOME/.ssh/id_rsa_github"
+chmod 700 "$HOME/.ssh"
+chmod 600 "$HOME/.ssh/config"
 
-if [ -f "$HOME/.bashrc" ]; then
-    mv "$HOME/.bashrc" "$HOME/.previous-bashrc"
-    echo -e "${GREEN}Backed up:${NC} ~/.bashrc → ~/.previous-bashrc"
-fi
-
-cp "$HOME/.dotfiles/bash/.bashrc" "$HOME/.bashrc"
-
-if [ -f "$HOME/.previous-bashrc" ]; then
-    echo "" >> "$HOME/.bashrc"
-    cat "$HOME/.previous-bashrc" >> "$HOME/.bashrc"
-fi
-
-echo -e "${GREEN}Configured:${NC} ~/.bashrc"
+echo ""
+echo -e "${GREEN}Dotfiles setup complete.${NC}"
+echo "Run 'source ~/.bashrc' or open a new terminal to apply Bash changes."
