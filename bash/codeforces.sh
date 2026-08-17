@@ -3,6 +3,25 @@
 
 CF_DIR="$HOME/Codeforces"
 
+
+# Validate contest ID
+cf_valid_contest_id() {
+    [[ "$1" =~ ^[0-9]+$ ]]
+}
+
+
+# Check whether the current directory is a Codeforces contest directory
+cf_require_contest() {
+    if [[ "$PWD" =~ ^"$CF_DIR"/([0-9]+)$ ]]; then
+        return 0
+    fi
+
+    echo "Error: Not inside a Codeforces contest directory."
+    echo "Run: cf init <contest_id>"
+    return 1
+}
+
+
 cf() {
     case "$1" in
 
@@ -10,6 +29,11 @@ cf() {
         init)
             if [[ -z "$2" ]]; then
                 echo "Usage: cf init <contest_id>"
+                return 1
+            fi
+
+            if ! cf_valid_contest_id "$2"; then
+                echo "Error: Contest ID must be a number."
                 return 1
             fi
 
@@ -31,11 +55,7 @@ cf() {
                 return 1
             fi
 
-            if [[ ! -d "$CF_DIR" ]]; then
-                echo "Codeforces directory not found."
-                echo "Run: cf init <contest_id>"
-                return 1
-            fi
+            cf_require_contest || return 1
 
             local problem_index="$2"
             local file="${problem_index}.cpp"
@@ -114,6 +134,8 @@ EOF
                 echo "Usage: cf run <problem_index>"
                 return 1
             fi
+
+            cf_require_contest || return 1
 
             local problem_index="$2"
             local file="${problem_index}.cpp"
