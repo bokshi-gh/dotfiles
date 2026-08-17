@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly DOTFILES="$HOME/.dotfiles"
+readonly DOTFILES="$HOME/dotfiles"
 
 GREEN='\033[1;32m'
 RED='\033[0;31m'
