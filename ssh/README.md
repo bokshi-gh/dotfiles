@@ -1,4 +1,4 @@
-# SSH - Overview and Guide
+# SSH
 
 ## Generating an SSH Key Pair
 
