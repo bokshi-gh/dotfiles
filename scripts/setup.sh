@@ -7,49 +7,64 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-if [ ! -d "$DOTFILES" ]; then
+
+# Check dotfiles directory
+if [[ ! -d "$DOTFILES" ]]; then
     echo -e "${RED}Dotfiles directory not found:${NC} $DOTFILES"
     exit 1
 fi
 
-link_file() {
-    local src="$1"
-    local dest="$2"
 
-    if [ ! -e "$src" ]; then
-        echo -e "${RED}Source not found:${NC} $src"
-        return 1
-    fi
-
-    if [ -L "$dest" ]; then
-        rm "$dest"
-    elif [ -e "$dest" ]; then
-        local backup="${dest}.backup"
-
-        if [ -e "$backup" ]; then
-            backup="${dest}.backup.$(date +%Y%m%d%H%M%S)"
-        fi
-
-        mv "$dest" "$backup"
-        echo -e "${YELLOW}Backed up:${NC} $dest → $backup"
-    fi
-
-    ln -s "$src" "$dest"
-    echo -e "${GREEN}Linked:${NC} $src → $dest"
-}
-
+# Create required directories
 mkdir -p "$HOME/.ssh"
+
+
+# SETTING UP DOTFILES
+# ===================
 
 echo -e "${GREEN}[Setting up dotfiles]${NC}"
 echo ""
 
-link_file "$DOTFILES/bash/.bashrc" "$HOME/.bashrc"
-link_file "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
-link_file "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
-link_file "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 
+# Backup existing .bashrc
+if [[ -L "$HOME/.bashrc" ]]; then
+    echo -e "${GREEN}Already linked:${NC} ~/.bashrc"
+elif [[ -f "$HOME/.bashrc" ]]; then
+    rm -f "$HOME/.bashrc.backup"
+    mv "$HOME/.bashrc" "$HOME/.bashrc.backup"
+
+    echo -e "${YELLOW}Backed up:${NC} ~/.bashrc → ~/.bashrc.backup"
+fi
+
+
+# Link Bash configuration
+ln -sfn "$DOTFILES/bash/.bashrc" "$HOME/.bashrc"
+
+echo -e "${GREEN}Linked:${NC} $DOTFILES/bash/.bashrc → ~/.bashrc"
+
+
+# Link Git configuration
+ln -sfn "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+
+echo -e "${GREEN}Linked:${NC} $DOTFILES/git/.gitconfig → ~/.gitconfig"
+
+
+# Link Vim configuration
+ln -sfn "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
+
+echo -e "${GREEN}Linked:${NC} $DOTFILES/vim/.vimrc → ~/.vimrc"
+
+
+# Link SSH configuration
+ln -sfn "$DOTFILES/ssh/config" "$HOME/.ssh/config"
+
+echo -e "${GREEN}Linked:${NC} $DOTFILES/ssh/config → ~/.ssh/config"
+
+
+# SSH permissions
 chmod 700 "$HOME/.ssh"
 chmod 600 "$HOME/.ssh/config"
+
 
 echo ""
 echo -e "${GREEN}Dotfiles setup complete.${NC}"
