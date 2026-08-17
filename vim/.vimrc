@@ -4,5 +4,6 @@ set number
 " Enable syntax highlighting
 syntax on
 
-" Enable smart auto-indenting when starting a new line
-set smartindent
+" Enable modern language-aware auto-indenting
+filetype plugin indent on
+set autoindent
