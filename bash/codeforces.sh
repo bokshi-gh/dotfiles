@@ -6,20 +6,20 @@ CF_DIR="$HOME/Codeforces"
 cf() {
     case "$1" in
 
-        # Create a new contest directory
+        # Initialize a contest
         init)
             if [[ -z "$2" ]]; then
-                echo "Usage: cf init <contest>"
+                echo "Usage: cf init <contest_id>"
                 return 1
             fi
 
-            local contest="$2"
-            local contest_dir="$CF_DIR/$contest"
+            local contest_id="$2"
+            local contest_dir="$CF_DIR/$contest_id"
 
             mkdir -p -- "$contest_dir" || return 1
             cd -- "$contest_dir" || return 1
 
-            echo "Contest: $contest"
+            echo "Contest initialized: $contest_id"
             echo "Directory: $contest_dir"
             ;;
 
@@ -27,18 +27,31 @@ cf() {
         # Create a new problem
         new)
             if [[ -z "$2" ]]; then
-                echo "Usage: cf new <problem>"
+                echo "Usage: cf new <problem_index> [-t|--tests]"
                 return 1
             fi
 
             if [[ ! -d "$CF_DIR" ]]; then
                 echo "Codeforces directory not found."
-                echo "Run: cf init <contest>"
+                echo "Run: cf init <contest_id>"
                 return 1
             fi
 
-            local problem="$2"
-            local file="${problem}.cpp"
+            local problem_index="$2"
+            local file="${problem_index}.cpp"
+            local tests=false
+
+            case "$3" in
+                -t|--tests)
+                    tests=true
+                    ;;
+                "")
+                    ;;
+                *)
+                    echo "Usage: cf new <problem_index> [-t|--tests]"
+                    return 1
+                    ;;
+            esac
 
             if [[ -f "$file" ]]; then
                 echo "Problem already exists: $file"
@@ -46,17 +59,48 @@ cf() {
                 return
             fi
 
-            cat > "$file" <<'EOF'
+            if [[ "$tests" == true ]]; then
+                cat > "$file" <<'EOF'
 #include <bits/stdc++.h>
 using namespace std;
+
+void solve() {
+
+}
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    int t;
+    cin >> t;
+
+    while (t--) {
+        solve();
+    }
+
     return 0;
 }
 EOF
+            else
+                cat > "$file" <<'EOF'
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    solve();
+
+    return 0;
+}
+EOF
+            fi
 
             echo "Created: $(pwd)/$file"
 
@@ -66,19 +110,19 @@ EOF
 
         # Compile and run a problem
         run)
-            local file="${2:-main.cpp}"
+            if [[ -z "$2" ]]; then
+                echo "Usage: cf run <problem_index>"
+                return 1
+            fi
+
+            local problem_index="$2"
+            local file="${problem_index}.cpp"
+            local executable="$problem_index"
 
             if [[ ! -f "$file" ]]; then
-                echo "File not found: $file"
+                echo "Problem not found: $file"
                 return 1
             fi
-
-            if [[ "${file##*.}" != "cpp" ]]; then
-                echo "Not a C++ source file: $file"
-                return 1
-            fi
-
-            local executable="${file%.cpp}"
 
             g++ \
                 -std=c++20 \
@@ -99,9 +143,11 @@ EOF
         # Show help
         *)
             echo "Usage:"
-            echo "  cf init <contest>   Create a contest directory"
-            echo "  cf new <problem>    Create and open a problem"
-            echo "  cf run [file]       Compile and run a problem"
+            echo "  cf init <contest_id>             Initialize a contest"
+            echo "  cf new <problem_index>           Create a single-test problem"
+            echo "  cf new <problem_index> -t        Create a multi-test problem"
+            echo "  cf new <problem_index> --tests   Create a multi-test problem"
+            echo "  cf run <problem_index>           Compile and run a problem"
             return 1
             ;;
     esac
