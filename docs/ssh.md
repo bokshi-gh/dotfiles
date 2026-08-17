@@ -32,7 +32,7 @@ You can copy your public key to a remote server with:
 ssh-copy-id -i ~/.ssh/id_ed25519.pub username@remote_host
 ```
 
-You will normally enter the remote user's password once. After the key has been authorized, SSH can authenticate using the key instead of the account password.
+You will normally enter the remote user's password once. After the public key has been authorized, SSH can authenticate using the private key instead of the account password.
 
 You can also add the public key manually to:
 
