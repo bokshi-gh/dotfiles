@@ -1,18 +1,82 @@
-# BASH COMMAND ALIASES AND SHELL FUNCTION START
-alias clrdir='rm -rf ./* ./.??*'
-mdcd() {
-	mkdir "$*"
-	cd "$*"
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+
+# GENERAL CONFIGURATION
+# =====================
+
+# Prompt
+PS1='[\u@\h \W]\$ '
+
+# Editor
+export EDITOR='nvim'
+export VISUAL="$EDITOR"
+
+# PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Bash completion
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+    source /usr/share/bash-completion/bash_completion
+fi
+
+
+# BASH COMMAND ALIASES AND SHELL FUNCTIONS
+# =========================================
+
+# Aliases
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# Functions
+clrdir() {
+    echo "Current directory: $(pwd)"
+    echo "This will delete files and directories in the current directory."
+
+    read -r -p "Are you sure you want to continue? [y/N] " confirm
+
+    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+        echo "Cancelled."
+        return
+    fi
+
+    read -r -p "Include hidden files and directories? [y/N] " hidden
+
+    if [[ "$hidden" =~ ^[Yy]$ ]]; then
+        rm -rf -- ./* ./.??*
+        echo "All files and directories deleted, including hidden files."
+    else
+        rm -rf -- ./*
+        echo "Non-hidden files and directories deleted."
+    fi
 }
+
+mdcd() {
+    mkdir "$*" && cd "$*"
+}
+
 cdrd() {
     local dir
     dir="$(pwd)"
+
     cd .. || return 1
-    rm -rf "$dir"
+    rm -rf -- "$dir"
 }
+
 r() {
     "./$1" "${@:2}"
 }
+
 fp() {
     if [ $# -eq 0 ]; then
         echo "Usage: fp <port1> [port2] [port3] ..."
@@ -20,7 +84,8 @@ fp() {
     fi
 
     for port in "$@"; do
-        pid=$(lsof -t -i :"$port")
+        local pid
+        pid="$(lsof -t -i :"$port")"
 
         if [ -z "$pid" ]; then
             echo "Port $port is already free"
@@ -33,28 +98,29 @@ fp() {
         echo "Port $port freed"
     done
 }
-# BASH COMMAND ALIASES AND SHELL FUNCTION END
 
-# GIT COMMAND ALIASES AND SHELL FUNCTION START
+
+# GIT COMMAND ALIASES AND SHELL FUNCTIONS
+# ========================================
+
 gcl() {
-	git clone "$*"
+    git clone "$1"
 }
+
 gclcd() {
     if [ -z "$1" ]; then
         echo "Error: Please provide a repository URL."
         return 1
     fi
 
-    # Clone the repository
     git clone "$1" || return 1
 
-    # Extract the directory name from the URL
     local repo_dir
-    repo_dir=$(basename "$1" .git)
+    repo_dir="$(basename "$1" .git)"
 
-    # Change into the directory
     cd "$repo_dir" || return 1
 }
+
 grao() {
     if [ -z "$1" ]; then
         echo "Usage: grao <repository-url>"
@@ -63,25 +129,40 @@ grao() {
 
     git remote add origin "$1"
 }
+
 gs() {
-  git status
+    git status
 }
+
 ga() {
-	git add .
+    git add .
 }
+
 gac() {
+    if [ -z "$*" ]; then
+        echo "Usage: gac <commit-message>"
+        return 1
+    fi
+
     git add .
     git commit -m "$*"
 }
+
 gps() {
-	git push -u origin main
+    git push -u origin main
 }
+
 gpl() {
-	git pull origin main
+    git pull origin main
 }
+
 gacps() {
-	git add .
-	git commit -m "$*"
-	git push -u origin main
+    if [ -z "$*" ]; then
+        echo "Usage: gacps <commit-message>"
+        return 1
+    fi
+
+    git add .
+    git commit -m "$*"
+    git push -u origin main
 }
-# GIT COMMAND ALIASES AND SHELL FUNCTION END
