@@ -66,7 +66,12 @@ clrdir() {
 
 # Create a directory and enter it
 mdcd() {
-    mkdir -p -- "$*" && cd -- "$*"
+    if [[ -z "$1" ]]; then
+        echo "Usage: mdcd <directory>"
+        return 1
+    fi
+
+    mkdir -p -- "$1" && cd -- "$1"
 }
 
 # Remove the current directory and move to its parent
@@ -80,6 +85,11 @@ cdrd() {
 
 # Run an executable from the current directory
 r() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: r <executable> [arguments...]"
+        return 1
+    fi
+
     "./$1" "${@:2}"
 }
 
