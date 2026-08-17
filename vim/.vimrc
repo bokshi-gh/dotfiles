@@ -1,16 +1,14 @@
-" Core
-" ====
+" Syntax and Filetype
+" ===================
 
 syntax on
 filetype plugin indent on
-
-set autoindent
-set smartindent
 
 
 " Indentation
 " ===========
 
+set autoindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
