@@ -22,7 +22,7 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 - If `-f` is not specified, SSH uses the default files:
   - Private key: `~/.ssh/id_ed25519`
   - Public key: `~/.ssh/id_ed25519.pub`
-* The public key can be added to the remote server's `~/.ssh/authorized_keys`.
+- The public key can be added to the remote server's `~/.ssh/authorized_keys`.
 
 ### Copying the Public Key to a Server
 
@@ -55,7 +55,7 @@ Connect to a remote server:
 ssh username@remote_host
 ```
 
-SSH will use the configured identity files and authentication methods. If key authentication is unavailable, the server may prompt for the user's password.
+SSH will try the configured authentication methods. If public-key authentication is unavailable or fails, the server may allow password authentication.
 
 ## SSH with a Specific Key
 
@@ -229,15 +229,15 @@ ssh -i ~/.ssh/id_ed25519_example your_username@example.com
 
 ### Common SSH Config Options
 
-| Option           | Purpose                              |
-| ---------------- | ------------------------------------ |
-| `Host`           | Defines a host alias                 |
-| `HostName`       | Actual hostname or IP address        |
-| `User`           | Remote username                      |
-| `Port`           | SSH port                             |
-| `IdentityFile`   | Private key to use                   |
-| `AddKeysToAgent` | Adds keys to the SSH agent when used |
-| `RequestTTY`     | Controls terminal allocation         |
+| Option           | Purpose                                   |
+| ---------------- | ----------------------------------------- |
+| `Host`           | Defines which hosts the settings apply to |
+| `HostName`       | Actual hostname or IP address             |
+| `User`           | Remote username                           |
+| `Port`           | SSH port                                  |
+| `IdentityFile`   | Private key to use                        |
+| `AddKeysToAgent` | Adds keys to the SSH agent when used      |
+| `RequestTTY`     | Controls terminal allocation              |
 
 ## SSH File Overview
 
@@ -246,8 +246,7 @@ ssh -i ~/.ssh/id_ed25519_example your_username@example.com
 ├── config
 ├── id_ed25519
 ├── id_ed25519.pub
-├── known_hosts
-└── authorized_keys
+└── known_hosts
 ```
 
 `authorized_keys` normally exists on the **remote server**, while `known_hosts` normally exists on the **local machine**.
