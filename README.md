@@ -1,112 +1,135 @@
 # Dotfiles
 
-Personal Linux configuration, shell utilities, editor configuration, and setup scripts.
+Personal Linux configuration, development tools, and workflow scripts.
 
-## Structure
+## Repository Structure
 
 ```text
 .
-├── bash
+├── bash/
 │   ├── .bashrc
 │   ├── codeforces.sh
 │   └── git.sh
-├── docs
-│   ├── nvchad.md
-│   └── ssh.md
-├── git
+├── git/
 │   └── .gitconfig
-├── .gitignore
-├── nvchad
-│   ├── README.md
-│   └── scripts
-│       ├── cleanup.sh
-│       └── setup.sh
-├── README.md
-├── scripts
+├── vim/
+│   └── .vimrc
+├── ssh/
+│   └── config
+├── scripts/
 │   ├── cleanup-nvchad.sh
 │   ├── cleanup.sh
 │   ├── setup-fonts.sh
 │   ├── setup-nvchad.sh
 │   └── setup.sh
-├── ssh
-│   └── config
-└── vim
-    └── .vimrc
+├── docs/
+│   ├── nvchad.md
+│   └── ssh.md
+├── .gitignore
+└── README.md
 ```
 
-## Components
+## Directory Overview
 
-### Bash
+### `bash/`
 
-The `bash/` directory contains Bash configuration and shell utilities.
-
-* `.bashrc` — Main Bash configuration.
-* `codeforces.sh` — Codeforces competitive programming workflow.
-* `git.sh` — Git aliases and helper functions.
-
-### Git
-
-The `git/` directory contains the Git configuration:
+Contains the Bash configuration and shell utilities.
 
 ```text
-git/.gitconfig
+bash/
+├── .bashrc
+├── codeforces.sh
+└── git.sh
 ```
 
-It is linked to:
+* `.bashrc` — Main Bash configuration, environment variables, aliases, functions, and shell settings.
+* `codeforces.sh` — Codeforces workflow for creating, compiling, and running C++ solutions.
+* `git.sh` — Git aliases and helper functions.
+
+The `.bashrc` sources the additional Bash scripts so their commands are available in interactive shells.
+
+### `git/`
+
+Contains the Git configuration.
+
+```text
+git/
+└── .gitconfig
+```
+
+The configuration is linked to:
 
 ```text
 ~/.gitconfig
 ```
 
-### Vim
+### `vim/`
 
-The `vim/` directory contains the Vim configuration:
+Contains the Vim configuration.
 
 ```text
-vim/.vimrc
+vim/
+└── .vimrc
 ```
 
-It is linked to:
+The configuration is linked to:
 
 ```text
 ~/.vimrc
 ```
 
-### SSH
+### `ssh/`
 
-The `ssh/` directory contains the SSH client configuration:
+Contains the SSH client configuration.
 
 ```text
-ssh/config
+ssh/
+└── config
 ```
 
-It is linked to:
+The configuration is linked to:
 
 ```text
 ~/.ssh/config
 ```
 
-See [`docs/ssh.md`](docs/ssh.md) for more information.
+See [`docs/ssh.md`](docs/ssh.md) for additional information.
 
-### NvChad
+### `scripts/`
 
-The `nvchad/` directory contains the NvChad-specific setup and cleanup scripts.
+Contains scripts for setting up and cleaning up the environment.
 
-See [`nvchad/README.md`](nvchad/README.md) for the NvChad setup.
+```text
+scripts/
+├── cleanup-nvchad.sh
+├── cleanup.sh
+├── setup-fonts.sh
+├── setup-nvchad.sh
+└── setup.sh
+```
 
-Additional documentation is available in [`docs/nvchad.md`](docs/nvchad.md).
-
-### Scripts
-
-The `scripts/` directory contains general setup and cleanup scripts.
-
-| Script              | Description               |
+| Script              | Purpose                   |
 | ------------------- | ------------------------- |
 | `setup.sh`          | Set up the dotfiles       |
 | `cleanup.sh`        | Remove the dotfiles setup |
 | `setup-fonts.sh`    | Set up fonts              |
 | `setup-nvchad.sh`   | Set up NvChad             |
 | `cleanup-nvchad.sh` | Clean up NvChad           |
+
+### `docs/`
+
+Contains additional documentation.
+
+```text
+docs/
+├── nvchad.md
+└── ssh.md
+```
+
+* `nvchad.md` — NvChad setup and configuration notes.
+* `ssh.md` — SSH configuration notes.
+
+---
 
 ## Setup
 
@@ -117,7 +140,7 @@ git clone <repository-url> ~/dotfiles
 cd ~/dotfiles
 ```
 
-Run the setup script:
+Run the main setup script:
 
 ```bash
 ./scripts/setup.sh
@@ -129,31 +152,37 @@ After setup, reload Bash:
 source ~/.bashrc
 ```
 
-Alternatively, open a new terminal.
+Or open a new terminal.
 
-## Cleanup
+## Configuration Links
 
-To remove the dotfiles configuration:
-
-```bash
-./scripts/cleanup.sh
-```
-
-The cleanup script removes the configuration symlinks managed by this repository and restores the previous configuration when a backup is available.
-
-It does not remove personal projects or unrelated directories.
-
-For example, the Codeforces workspace:
+The setup script links the repository configurations to their standard locations:
 
 ```text
-~/Codeforces
+~/dotfiles/bash/.bashrc
+        ↓
+~/.bashrc
+
+~/dotfiles/git/.gitconfig
+        ↓
+~/.gitconfig
+
+~/dotfiles/vim/.vimrc
+        ↓
+~/.vimrc
+
+~/dotfiles/ssh/config
+        ↓
+~/.ssh/config
 ```
 
-is not managed or removed by the dotfiles cleanup.
+This keeps the configuration files inside the repository while applications continue using their normal configuration paths.
+
+---
 
 ## Codeforces Workflow
 
-The Bash configuration provides a small `cf` command for competitive programming.
+The Bash configuration provides a `cf` command for competitive programming.
 
 ```text
 Usage:
@@ -163,16 +192,51 @@ Usage:
   cf run <problem_index>                 Compile and run a solution
 ```
 
-Example:
+### Initialize a Contest
 
 ```bash
 cf init 2000
+```
+
+Creates and enters:
+
+```text
+~/Codeforces/2000/
+```
+
+### Create a Solution
+
+For a problem without multiple test cases:
+
+```bash
 cf new A
+```
+
+For a problem with multiple test cases:
+
+```bash
 cf new B -t
+```
+
+or:
+
+```bash
+cf new B --tests
+```
+
+The solution file is created and immediately opened in Neovim.
+
+### Run a Solution
+
+```bash
 cf run A
 ```
 
-This creates a workspace such as:
+The solution is compiled with `g++` using C++20, optimization, and warning flags, then executed.
+
+### Codeforces Directory
+
+Codeforces workspaces are kept outside this repository:
 
 ```text
 ~/Codeforces/
@@ -181,17 +245,33 @@ This creates a workspace such as:
     └── B.cpp
 ```
 
-`cf new` creates and opens the solution in Neovim.
+The dotfiles setup and cleanup scripts do not manage or remove `~/Codeforces`.
 
-`cf run` compiles the solution using `g++` with C++20 and optimization/warning flags, then runs it.
+---
+
+## Cleanup
+
+To remove the dotfiles setup:
+
+```bash
+./scripts/cleanup.sh
+```
+
+The cleanup script:
+
+* Removes configuration symlinks managed by this repository.
+* Restores previous configuration files from `.backup` files when available.
+* Does not remove unrelated files.
+* Does not remove personal projects or the Codeforces workspace.
+
+---
 
 ## Documentation
 
 Additional documentation:
 
-* [`docs/nvchad.md`](docs/nvchad.md) — NvChad notes and setup.
 * [`docs/ssh.md`](docs/ssh.md) — SSH configuration notes.
-* [`nvchad/README.md`](nvchad/README.md) — NvChad-specific setup.
+* [`docs/nvchad.md`](docs/nvchad.md) — NvChad setup and configuration notes.
 
 ## Notes
 
