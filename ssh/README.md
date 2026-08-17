@@ -1,89 +1,247 @@
 # SSH - Overview and Guide
 
-## **Generating SSH Key Pair**
+## Generating an SSH Key Pair
+
+Generate a new Ed25519 SSH key pair:
+
 ```sh
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-```
-- This command generates a new SSH key pair with the RSA algorithm (`-t rsa`) and a key length of 4096 bits (`-b 4096`).
-- The `-C` flag adds a label (usually your email) for identifying the key.
-- The key pair is usually placed inside the `~/.ssh/` directory.
-- If a custom name is not provided, the key pair files will be named `id_rsa` (private key) and `id_rsa.pub` (public key).
-- After generating key pair put the pubic key content to SSH server's authorized_keys file.
-- You can do this manually or using `ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote_host`.
-- It appends the key automatically to SSH server's `~/.ssh/authorized_keys`. You only need to enter your password once; afterward, passwordless login works.
-- If `-i` is not provided, the default public key used is `.ssh/id_rsa.pub`.
-- authorized_keys file looks like this:
-```
-ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArYHJ6jU+OnEwLOIhJz8LBX1nPRA6Oik9m4hklpqlyDAidFz9dKHtddMb4zrkDkSuTY4z6JfXbcT8bH6OXfGsA3GdAmwb9n8z44K5hQXsZy3qjdzssTY55M0PjYCTFSV+gjf96ZJvllqNN5gsseQZl0SZXqAPYkXggwRsqZgaLkgV2FNb1Kl6H8gPmI1ed3eRvoBXnyTXtXlbrX2Ez/8yyfBd1XpoRm5HzUBVw3A2zKqWYoFjWpxkMDCJbi/qvWwskA/2Ez3vhkmyw62gBhK8PlTZtZcW4rQ1lGfThgVfG1Oe9A29OSkjUEP3Wfr9XqI0XkZ3r5V6TmPzsh3hijXQPOEl1uFS0o8vvvWymnPQ4GGKhzI0wGtHw2pRtbd7e08+Hc3Qw== user@hostname
-ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtmUpX+Ymg7z5UE9y+Go6HRBYa3oFvhrpJ2geq5/JxN9lMKf5Ls17rwP1GV6hddjzZoHtYq44JvH1CGvZhUdmF61Rh3e0Em8J8yMLp/j2S7hfNm0AKn1unRFLVlfcuFggZn9mvoTpq7uAMi3VAHHf4plTmC4gHe95p7a34TmPG1ZmRtjmIMuFmu4sb0K5WVdT6ohCSM8nBbg1A== another_user@hostname
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-## **SSH with Remote Host (Password Authentication)**
+* `-t ed25519` specifies the Ed25519 key type.
+* `-C` adds a comment to the public key, usually an email address.
+* By default, the key pair is stored in `~/.ssh/`.
+* The default files are:
+
+  * Private key: `~/.ssh/id_ed25519`
+  * Public key: `~/.ssh/id_ed25519.pub`
+* The private key should **never be shared or committed to the dotfiles repository**.
+* The public key can be added to the remote server's `~/.ssh/authorized_keys`.
+
+### Copying the Public Key to a Server
+
+You can copy your public key to a remote server with:
+
+```sh
+ssh-copy-id -i ~/.ssh/id_ed25519.pub username@remote_host
+```
+
+You will normally enter the remote user's password once. After the key has been authorized, SSH can authenticate using the key instead of the account password.
+
+You can also add the public key manually to:
+
+```text
+~/.ssh/authorized_keys
+```
+
+Each authorized public key occupies its own line:
+
+```text
+ssh-ed25519 AAAA... user@hostname
+ssh-ed25519 BBBB... another_user@hostname
+```
+
+## SSH with Remote Host
+
+Connect to a remote server:
+
 ```sh
 ssh username@remote_host
 ```
-- This command connects to a remote server using the provided username and prompts you for a password (unless you’re using SSH keys for authentication).
 
-## **SSH with Key (No Password)**
+SSH will use the configured identity files and authentication methods. If key authentication is unavailable, the server may prompt for the user's password.
+
+## SSH with a Specific Key
+
+Specify a private key with `-i`:
+
 ```sh
-ssh -i /path/to/id_rsa/file username@remote_host
+ssh -i ~/.ssh/id_ed25519 username@remote_host
 ```
-- This allows SSH authentication using the private key (`-i` option), without entering a password, if your key is authorized on the remote server.
-- If `-i` is not provided, the default key used is `~/.ssh/id_rsa`.
 
-## **Copying Files with SCP (Secure Copy)**
-- Copy a file from remote server to local machine:
-  ```sh
-  scp username@remote_host:/path/to/remote/file /path/to/local/directory
-  ```
-- Copy a file from local machine to remote server:
-  ```sh
-  scp /path/to/local/file username@remote_host:/path/to/remote/directory
-  ```
+The `-i` option specifies the private identity file used for authentication.
 
-## **Execute Commands on a Remote Server**
+If `-i` is not specified, SSH searches its configured identity files and uses the applicable keys.
+
+## Copying Files with SCP
+
+### Remote → Local
+
+Copy a file from a remote server to your local machine:
+
+```sh
+scp username@remote_host:/path/to/remote/file /path/to/local/directory
+```
+
+### Local → Remote
+
+Copy a file from your local machine to a remote server:
+
+```sh
+scp /path/to/local/file username@remote_host:/path/to/remote/directory
+```
+
+## Execute Commands on a Remote Server
+
+Run a command directly on a remote server:
+
 ```sh
 ssh username@remote_host 'command'
 ```
-- This runs a command directly on the remote server without logging into an interactive session.
 
-## **Flags**
-- **`-T`**: Disables terminal allocation (useful when you don’t need a terminal, such as when executing commands non-interactively).
-  ```sh
-  ssh -T username@remote_host 'command'
-  ```
+For example:
 
-## **Adding to SSH Agent**
-- The SSH agent stores your keys and handles authentication for you, so you don’t need to re-enter the passphrase each time.
+```sh
+ssh username@remote_host 'uname -a'
+```
+
+This executes the command remotely without opening an interactive shell.
+
+### Disable Terminal Allocation
+
+Use `-T` when a terminal is not required:
+
+```sh
+ssh -T username@remote_host 'command'
+```
+
+## SSH Agent
+
+The SSH agent stores private keys in memory and performs authentication on behalf of SSH. This is useful when your private key has a passphrase because you don't need to enter the passphrase for every connection.
+
+Start the agent:
+
 ```sh
 eval "$(ssh-agent -s)"
-ssh-add /path/to/id_rsa
 ```
-- `eval "$(ssh-agent -s)"` starts the SSH agent in the background.
-- `ssh-add /path/to/id_rsa` adds your private key to the agent for authentication.
 
-## **`authorized_keys` File**
-- Located on the remote server in `~/.ssh/authorized_keys`, this file contains the public keys of users who are authorized to log in to the server without a password.
+Add a private key:
 
-## **`known_hosts` File**
-- Located on your local machine in `~/.ssh/known_hosts`, this file stores the fingerprints of remote hosts you’ve connected to. It’s used to verify the identity of the server during future connections.
+```sh
+ssh-add ~/.ssh/id_ed25519
+```
 
-## **SSH Config File**
-- Located on your local machine in `~/.ssh/config`.
-- Simplifies connecting to multiple hosts with specific configurations:
-  ```txt
-  Host *
-      AddKeysToAgent yes
-      UseKeychain yes
-      IdentityFile ~/.ssh/id_rsa
+List keys currently loaded into the agent:
 
-  Host example
-      HostName example.com
-      User your_username
-      Port 22
-      RequestTTY no
-      IdentityFile ~/.ssh/id_rsa_example
-  ```
-- The `Host *` section applies to all hosts, setting up common options.
-- Specific hosts can have unique settings, such as a different port or identity file.
-- Use `ssh example` to execute.
+```sh
+ssh-add -l
+```
+
+Remove all keys from the agent:
+
+```sh
+ssh-add -D
+```
+
+## `authorized_keys`
+
+The `authorized_keys` file is located on the remote server at:
+
+```text
+~/.ssh/authorized_keys
+```
+
+It contains the public keys that are allowed to authenticate as that user.
+
+Each public key should be on its own line.
+
+Typical permissions are:
+
+```sh
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
+
+## `known_hosts`
+
+The `known_hosts` file is located on the local machine at:
+
+```text
+~/.ssh/known_hosts
+```
+
+It stores information used by SSH to recognize servers you have previously connected to.
+
+When connecting to a server for the first time, SSH may display the server's host key fingerprint and ask you to confirm it.
+
+Do not blindly accept an unexpected host-key change.
+
+## SSH Config
+
+The SSH client configuration file is:
+
+```text
+~/.ssh/config
+```
+
+It allows you to define reusable settings for different hosts.
+
+Example:
+
+```sshconfig
+Host *
+    AddKeysToAgent yes
+
+Host example
+    HostName example.com
+    User your_username
+    Port 22
+    RequestTTY no
+    IdentityFile ~/.ssh/id_ed25519_example
+```
+
+### `Host *`
+
+```sshconfig
+Host *
+    AddKeysToAgent yes
+```
+
+The `Host *` section applies to all SSH connections.
+
+### Specific Host
+
+```sshconfig
+Host example
+    HostName example.com
+    User your_username
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519_example
+```
+
+Now you can connect using:
+
+```sh
+ssh example
+```
+
+instead of:
+
+```sh
+ssh -i ~/.ssh/id_ed25519_example your_username@example.com
+```
+
+### Common SSH Config Options
+
+| Option           | Purpose                              |
+| ---------------- | ------------------------------------ |
+| `Host`           | Defines a host alias                 |
+| `HostName`       | Actual hostname or IP address        |
+| `User`           | Remote username                      |
+| `Port`           | SSH port                             |
+| `IdentityFile`   | Private key to use                   |
+| `AddKeysToAgent` | Adds keys to the SSH agent when used |
+| `RequestTTY`     | Controls terminal allocation         |
+
+## SSH File Overview
+
+```text
+~/.ssh/
+├── config
+├── id_ed25519
+├── id_ed25519.pub
+├── known_hosts
+└── authorized_keys
+```
+
+`authorized_keys` normally exists on the **remote server**, while `known_hosts` normally exists on the **local machine**.
