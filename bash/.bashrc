@@ -1,7 +1,3 @@
-#
-# ~/.bashrc
-#
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -161,7 +157,6 @@ gacps() {
         echo "Usage: gacps <commit-message>"
         return 1
     fi
-
     git add .
     git commit -m "$*"
     git push -u origin main
