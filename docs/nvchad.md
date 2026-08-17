@@ -5,7 +5,7 @@
 * [**Docs**](https://nvchad.com/docs/quickstart/install)
 * [**Tutorial**](https://youtu.be/Mtgo-nP_r8Y?si=zVTb6dbvyACUSGIl)
 
-## Post [setup.sh](./scripts/setup.sh)
+## Post [setup-nvchad.sh](../scripts/setup-nvchad.sh)
 
 * Run `:MasonInstallAll` and `:TSInstallAll` after `lazy.nvim` finishes downloading plugins.
 
