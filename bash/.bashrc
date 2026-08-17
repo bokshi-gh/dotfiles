@@ -1,4 +1,8 @@
-# If not running interactively, don't do anything
+#
+# ~/.bashrc
+#
+
+# Exit if not running interactively
 [[ $- != *i* ]] && return
 
 
@@ -21,10 +25,9 @@ if [[ -f /usr/share/bash-completion/bash_completion ]]; then
 fi
 
 
-# BASH COMMAND ALIASES AND SHELL FUNCTIONS
-# =========================================
+# SHELL ALIASES
+# =============
 
-# Aliases
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias ll='ls -lah'
@@ -34,7 +37,11 @@ alias l='ls -CF'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-# Functions
+
+# SHELL FUNCTIONS
+# ===============
+
+# Clear the current directory
 clrdir() {
     echo "Current directory: $(pwd)"
     echo "This will delete files and directories in the current directory."
@@ -57,10 +64,12 @@ clrdir() {
     fi
 }
 
+# Create a directory and enter it
 mdcd() {
-    mkdir "$*" && cd "$*"
+    mkdir -p -- "$*" && cd -- "$*"
 }
 
+# Remove the current directory and move to its parent
 cdrd() {
     local dir
     dir="$(pwd)"
@@ -69,12 +78,14 @@ cdrd() {
     rm -rf -- "$dir"
 }
 
+# Run an executable from the current directory
 r() {
     "./$1" "${@:2}"
 }
 
+# Free one or more ports
 fp() {
-    if [ $# -eq 0 ]; then
+    if [[ $# -eq 0 ]]; then
         echo "Usage: fp <port1> [port2] [port3] ..."
         return 1
     fi
@@ -83,7 +94,7 @@ fp() {
         local pid
         pid="$(lsof -t -i :"$port")"
 
-        if [ -z "$pid" ]; then
+        if [[ -z "$pid" ]]; then
             echo "Port $port is already free"
             continue
         fi
@@ -96,68 +107,15 @@ fp() {
 }
 
 
-# GIT COMMAND ALIASES AND SHELL FUNCTIONS
-# ========================================
+# LOAD ADDITIONAL CONFIGURATION
+# =============================
 
-gcl() {
-    git clone "$1"
-}
+# Git
+if [[ -f "$HOME/.dotfiles/bash/git.sh" ]]; then
+    source "$HOME/.dotfiles/bash/git.sh"
+fi
 
-gclcd() {
-    if [ -z "$1" ]; then
-        echo "Error: Please provide a repository URL."
-        return 1
-    fi
-
-    git clone "$1" || return 1
-
-    local repo_dir
-    repo_dir="$(basename "$1" .git)"
-
-    cd "$repo_dir" || return 1
-}
-
-grao() {
-    if [ -z "$1" ]; then
-        echo "Usage: grao <repository-url>"
-        return 1
-    fi
-
-    git remote add origin "$1"
-}
-
-gs() {
-    git status
-}
-
-ga() {
-    git add .
-}
-
-gac() {
-    if [ -z "$*" ]; then
-        echo "Usage: gac <commit-message>"
-        return 1
-    fi
-
-    git add .
-    git commit -m "$*"
-}
-
-gps() {
-    git push -u origin main
-}
-
-gpl() {
-    git pull origin main
-}
-
-gacps() {
-    if [ -z "$*" ]; then
-        echo "Usage: gacps <commit-message>"
-        return 1
-    fi
-    git add .
-    git commit -m "$*"
-    git push -u origin main
-}
+# Codeforces
+if [[ -f "$HOME/.dotfiles/bash/codeforces.sh" ]]; then
+    source "$HOME/.dotfiles/bash/codeforces.sh"
+fi
