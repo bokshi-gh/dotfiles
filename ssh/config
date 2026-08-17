@@ -1,9 +1,13 @@
-# Git internally uses SSH to connect to github.com for operations like clone, pull, and push,
-# so it automatically invokes `ssh github.com` under the hood.
-# Therefore, the host alias in this config must be exactly github.com; otherwise, it won't be used.
+# Git uses SSH for operations such as clone, pull, and push.
+# For a remote like:
+#   git@github.com:user/repository.git
+# Git connects to github.com through SSH.
+# Therefore, this configuration uses `Host github.com`
+# to match the hostname used by the Git remote.
+
 Host github.com
     HostName github.com
     User git
     Port 22
     RequestTTY no
-    IdentityFile ~/.ssh/id_rsa_github
+    IdentityFile ~/.ssh/id_ed25519_github
