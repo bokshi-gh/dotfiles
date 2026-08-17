@@ -16,13 +16,12 @@ Generate a new Ed25519 SSH key pair:
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-* `-t ed25519` specifies the Ed25519 key type.
-* `-C` adds a comment to the public key, usually an email address.
-* By default, the key pair is stored in `~/.ssh/`.
-* The default files are:
-
-  * Private key: `~/.ssh/id_ed25519`
-  * Public key: `~/.ssh/id_ed25519.pub`
+- `-t ed25519` specifies the Ed25519 key type.
+- `-C` adds a comment to the public key, usually an email address.
+- `-f` specifies the file path and filename for the key pair.
+- If `-f` is not specified, SSH uses the default files:
+  - Private key: `~/.ssh/id_ed25519`
+  - Public key: `~/.ssh/id_ed25519.pub`
 * The public key can be added to the remote server's `~/.ssh/authorized_keys`.
 
 ### Copying the Public Key to a Server
