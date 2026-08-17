@@ -15,7 +15,6 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
   * Private key: `~/.ssh/id_ed25519`
   * Public key: `~/.ssh/id_ed25519.pub`
-* The private key should **never be shared or committed to the dotfiles repository**.
 * The public key can be added to the remote server's `~/.ssh/authorized_keys`.
 
 ### Copying the Public Key to a Server
