@@ -1,39 +1,52 @@
 #!/bin/bash
 
-# NOTE: After running clean.sh, manually run `source ~/.bashrc` so the updated shell configuration takes effect in the current session.
+readonly DOTFILES="$HOME/.dotfiles"
 
 GREEN='\033[1;32m'
-RED='\033[1;31m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${GREEN}[DELETING CONFIGURATION FILES AND FOLDERS]${NC}"
+if [ ! -d "$DOTFILES" ]; then
+    echo -e "${RED}Dotfiles directory not found:${NC} $DOTFILES"
+    exit 1
+fi
 
-delete_file_or_dir() {
-    local target="$1"
-    if [ -e "$target" ]; then
-        rm -rf "$target"
-        echo -e "${GREEN}Deleted:${NC} $target"
-    else
-        echo -e "${RED}Skipped:${NC} $target does not exist"
+cleanup_link() {
+    local src="$1"
+    local dest="$2"
+    local backup="${dest}.backup"
+
+    if [ -L "$dest" ]; then
+        local target
+        target=$(readlink "$dest")
+
+        if [ "$target" = "$src" ]; then
+            rm "$dest"
+            echo -e "${GREEN}Removed:${NC} $dest"
+        else
+            echo -e "${YELLOW}Skipped:${NC} $dest points to another location"
+            return
+        fi
+    elif [ -e "$dest" ]; then
+        echo -e "${YELLOW}Skipped:${NC} $dest is not a dotfiles symlink"
+        return
+    fi
+
+    if [ -e "$backup" ]; then
+        mv "$backup" "$dest"
+        echo -e "${GREEN}Restored:${NC} $backup → $dest"
     fi
 }
 
-targets=(
-    "$HOME/.gitconfig"
-    "$HOME/.vimrc"
-    "$HOME/.ssh/config"
-    "$HOME/.ssh/id_rsa_github"
-)
+echo -e "${GREEN}[Cleaning up dotfiles]${NC}"
+echo ""
 
-for t in "${targets[@]}"; do
-    delete_file_or_dir "$t"
-done
+cleanup_link "$DOTFILES/bash/.bashrc" "$HOME/.bashrc"
+cleanup_link "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+cleanup_link "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
+cleanup_link "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 
-if [ -f "$HOME/.previous-bashrc" ]; then
-    rm -f "$HOME/.bashrc"
-    mv "$HOME/.previous-bashrc" "$HOME/.bashrc"
-    echo -e "${GREEN}Restored:${NC} ~/.bashrc from ~/.previous-bashrc"
-else
-    echo -e "${RED}No backup found:${NC} ~/.previous-bashrc"
-fi
-
+echo ""
+echo -e "${GREEN}Dotfiles cleanup complete.${NC}"
+echo "Open a new terminal to apply the changes to your shell."
