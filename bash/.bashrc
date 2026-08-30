@@ -19,11 +19,6 @@ export VISUAL="$EDITOR"
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
 
-# Bash completion
-if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-    source /usr/share/bash-completion/bash_completion
-fi
-
 
 # SHELL ALIASES
 # =============
