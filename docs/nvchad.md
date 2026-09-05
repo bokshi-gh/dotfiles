@@ -2,9 +2,9 @@
 
 ## References
 
-- [**Docs**](https://nvchad.com/docs/quickstart/install)
-- [**Tutorial**](https://youtu.be/Mtgo-nP_r8Y?si=zVTb6dbvyACUSGIl)
-- [**Personal Notes**](https://docs.google.com/document/d/1kDZyftHyMHB2glnlvZcNsnUs0BWwBJKKWv6w2Yai8Ug/edit?tab=t.mmbzfjwnt4h1)
+- [**Official NvChad Documentation**](https://nvchad.com/docs/quickstart/install)
+- [**NvChad Tutorial — YouTube**](https://youtu.be/Mtgo-nP_r8Y?si=zVTb6dbvyACUSGIl)
+- [**My NvChad Notes — Google Docs**](https://docs.google.com/document/d/1kDZyftHyHMB2glnlvZcNsnUs0BWwBJKKWv6w2Yai8Ug/edit?tab=t.mmbzfjwnt4h1)
 
 ## Post [setup-nvchad.sh](../scripts/setup-nvchad.sh)
 
