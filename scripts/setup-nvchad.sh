@@ -43,6 +43,7 @@ sudo pacman -S --needed --noconfirm \
 
 # NvChad
 git clone https://github.com/NvChad/starter "$HOME/.config/nvim"
+rm -rf "$HOME/.config/nvim/.git"
 
 # LSP config
 mkdir -p "$HOME/.config/nvim/lua/plugins"
