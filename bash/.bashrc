@@ -125,8 +125,8 @@ if [[ -f "$HOME/dotfiles/bash/git.sh" ]]; then
 fi
 
 # Project
-if [[ -f "$HOME/dotfiles/bash/project.sh" ]]; then
-    source "$HOME/dotfiles/bash/project.sh"
+if [[ -f "$HOME/dotfiles/bash/cproj.sh" ]]; then
+    source "$HOME/dotfiles/bash/cproj.sh"
 fi
 
 # Codeforces
