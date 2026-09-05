@@ -68,10 +68,10 @@ chmod 600 "$HOME/.ssh/config"
 
 
 # Link cproj
-chmod +x "$DOTFILES/bin/cproj"
-ln -sfn "$DOTFILES/bin/cproj" "$HOME/.local/bin/cproj"
+chmod +x "$DOTFILES/bash/bin/cproj"
+ln -sfn "$DOTFILES/bash/bin/cproj" "$HOME/.local/bin/cproj"
 
-echo -e "${GREEN}Linked:${NC} $DOTFILES/bin/cproj → ~/.local/bin/cproj"
+echo -e "${GREEN}Linked:${NC} $DOTFILES/bash/bin/cproj → ~/.local/bin/cproj"
 
 
 echo ""
