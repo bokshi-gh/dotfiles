@@ -62,15 +62,16 @@ ln -sfn "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 echo -e "${GREEN}Linked:${NC} $DOTFILES/ssh/config → ~/.ssh/config"
 
 
-# Link cproj command
-ln -sfn "$DOTFILES/bin/cproj" "$HOME/.local/bin/cproj"
-
-echo -e "${GREEN}Linked:${NC} $DOTFILES/bin/cproj → ~/.local/bin/cproj"
-
-
 # SSH permissions
 chmod 700 "$HOME/.ssh"
 chmod 600 "$HOME/.ssh/config"
+
+
+# Link cproj
+chmod +x "$DOTFILES/bin/cproj"
+ln -sfn "$DOTFILES/bin/cproj" "$HOME/.local/bin/cproj"
+
+echo -e "${GREEN}Linked:${NC} $DOTFILES/bin/cproj → ~/.local/bin/cproj"
 
 
 echo ""
