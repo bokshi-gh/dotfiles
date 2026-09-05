@@ -42,7 +42,37 @@ sudo pacman -S --needed --noconfirm \
     python-pip
 
 # NvChad
-git clone https://github.com/NvChad/starter ~/.config/nvim
+git clone https://github.com/NvChad/starter "$HOME/.config/nvim"
+
+# LSP config
+mkdir -p "$HOME/.config/nvim/lua/plugins"
+
+cat > "$HOME/.config/nvim/lua/plugins/lsp.lua" <<'EOF'
+return {
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = {
+        "clangd",
+        "asm_lsp",
+        "rust_analyzer",
+        "jdtls",
+        "ts_ls",
+        "basedpyright",
+        "html",
+        "cssls",
+      },
+
+      automatic_enable = true,
+    },
+
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
+  },
+}
+EOF
 
 nvim
 
