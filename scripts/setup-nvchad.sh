@@ -7,7 +7,6 @@ sudo pacman -S --needed --noconfirm tree-sitter-cli
 sudo pacman -S --needed --noconfirm ripgrep
 sudo pacman -S --needed --noconfirm base-devel gcc make
 
-git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
-
-# After running this setup, check:
-# ../docs/nvchad.md
+git clone https://github.com/NvChad/starter ~/.config/nvim &&
+xdg-open "https://github.com/bokshi-gh/dotfiles/blob/main/docs/nvchad.md" &&
+nvim
