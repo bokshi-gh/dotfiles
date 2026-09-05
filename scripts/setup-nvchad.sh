@@ -8,7 +8,8 @@ sudo pacman -S --needed --noconfirm \
     neovim \
     tree-sitter-cli \
     ripgrep \
-    base-devel
+    base-devel \
+    unzip
 
 # C/C++
 sudo pacman -S --needed --noconfirm \
