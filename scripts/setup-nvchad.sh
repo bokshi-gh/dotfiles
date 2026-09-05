@@ -42,30 +42,39 @@ sudo pacman -S --needed --noconfirm \
     python \
     python-pip
 
+# Fresh Neovim config
+rm -rf \
+    "$HOME/.config/nvim" \
+    "$HOME/.local/share/nvim" \
+    "$HOME/.local/state/nvim" \
+    "$HOME/.cache/nvim"
+
 # NvChad
 git clone https://github.com/NvChad/starter "$HOME/.config/nvim"
 rm -rf "$HOME/.config/nvim/.git"
 
-# Custom plugins
+# Custom configuration
 mkdir -p "$HOME/.config/nvim/lua/plugins"
 
 cat > "$HOME/.config/nvim/lua/plugins/custom.lua" <<'EOF'
 return {
   {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = {
-        "clangd",
-        "asm_lsp",
-        "rust_analyzer",
-        "jdtls",
-        "ts_ls",
-        "basedpyright",
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      opts.ensure_installed = {
+        "c",
+        "cpp",
+        "asm",
+        "rust",
+        "java",
+        "javascript",
+        "typescript",
+        "tsx",
+        "python",
         "html",
-        "cssls",
-      },
-      automatic_enable = true,
-    },
+        "css",
+      }
+    end,
   },
 
   {
@@ -113,33 +122,80 @@ return {
       )
     end,
   },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "c",
-        "cpp",
-        "asm",
-        "rust",
-        "java",
-        "javascript",
-        "typescript",
-        "tsx",
-        "python",
-        "html",
-        "css",
-      },
-    },
-  },
 }
 EOF
 
-# Install plugins
-nvim --headless "+Lazy! sync" +qa
+# LSP configuration
+cat > "$HOME/.config/nvim/lua/configs/lspconfig.lua" <<'EOF'
+require("nvchad.configs.lspconfig").defaults()
 
-# Install LSPs, formatters, linters and parsers
-nvim --headless "+MasonInstallAll" "+TSInstallAll" +qa
+local servers = {
+  "clangd",
+  "asm_lsp",
+  "rust_analyzer",
+  "jdtls",
+  "ts_ls",
+  "basedpyright",
+  "html",
+  "cssls",
+}
+
+vim.lsp.enable(servers)
+EOF
+
+# Mason packages
+cat > "$HOME/.config/nvim/lua/chadrc.lua" <<'EOF'
+local M = {}
+
+M.base46 = {
+  theme = "chadcyan",
+}
+
+M.mason = {
+  pkgs = {
+    -- LSP
+    "clangd",
+    "asm-lsp",
+    "rust-analyzer",
+    "jdtls",
+    "typescript-language-server",
+    "basedpyright",
+    "html-lsp",
+    "css-lsp",
+
+    -- Formatters
+    "clang-format",
+    "rustfmt",
+    "google-java-format",
+    "prettier",
+    "black",
+
+    -- Linters
+    "clang-tidy",
+    "eslint_d",
+    "ruff",
+    "stylelint",
+  },
+}
+
+return M
+EOF
+
+# Install plugins
+echo "==> Syncing plugins..."
+nvim --headless -c "Lazy! sync" -c "qa"
+
+# Install Mason packages
+echo "==> Installing Mason packages..."
+nvim --headless \
+    +"lua require('nvchad.mason').install_all()" \
+    +"autocmd User MasonUpdateAllComplete qa"
+
+# Install Tree-sitter parsers
+echo "==> Installing Tree-sitter parsers..."
+nvim --headless -c "TSInstallAll" -c "qa"
+
+echo "==> NvChad setup complete!"
 
 nvim
 
