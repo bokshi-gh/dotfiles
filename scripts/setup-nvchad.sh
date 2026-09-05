@@ -9,7 +9,7 @@ sudo pacman -S --needed --noconfirm tree-sitter-cli
 sudo pacman -S --needed --noconfirm ripgrep
 sudo pacman -S --needed --noconfirm base-devel gcc make
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+"$SCRIPT_DIR/cleanup-nvchad.sh"
 git clone https://github.com/NvChad/starter ~/.config/nvim
 rm -rf "$HOME/.config/nvim/.git"
 nvim
