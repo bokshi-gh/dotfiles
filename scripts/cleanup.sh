@@ -83,6 +83,12 @@ remove_link \
     "$HOME/.ssh/config"
 
 
+# cproj
+remove_link \
+    "$DOTFILES/bin/cproj" \
+    "$HOME/.local/bin/cproj"
+
+
 echo ""
 echo -e "${GREEN}Dotfiles cleanup complete.${NC}"
 echo "Open a new terminal to apply the changes to your shell."
