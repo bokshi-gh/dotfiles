@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 sudo pacman -Syu --noconfirm
 
 # Basic tools
@@ -9,6 +11,7 @@ sudo pacman -S --needed --noconfirm \
     tree-sitter-cli \
     ripgrep \
     base-devel \
+    make \
     unzip
 
 # C/C++
@@ -41,6 +44,9 @@ sudo pacman -S --needed --noconfirm \
 sudo pacman -S --needed --noconfirm \
     python \
     python-pip
+
+# Clean existing NvChad
+"$SCRIPT_DIR/cleanup-nvchad.sh"
 
 # NvChad
 git clone https://github.com/NvChad/starter "$HOME/.config/nvim"
