@@ -1,5 +1,5 @@
-# Codeforces Workflow
-# ===================
+# Codeforces Toolkit
+# ==================
 
 CF_DIR="$HOME/Codeforces"
 
@@ -434,7 +434,7 @@ EOF
         # ─────────────────────────────────────
         help|"")
             echo
-            echo "Codeforces Workflow"
+            echo "Codeforces Toolkit"
             echo "==================="
             echo
             echo "Contest:"
