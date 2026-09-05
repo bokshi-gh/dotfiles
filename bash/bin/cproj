@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# cproj - Minimal C/C++ project generator
+# ccproj - Minimal C/C++ project generator
 
 if [[ $# -ne 2 ]]; then
-    echo "Usage: cproj <c|cpp> <project>"
+    echo "Usage: ccproj <c|cpp> <project>"
     exit 1
 fi
 
@@ -82,7 +82,11 @@ license="$REPLY"
 ask_yes_no "Initialize git? [Y/n]"
 git="$REPLY"
 
-mkdir -p "$project/src" "$project/include"
+mkdir -p "$project/src"
+
+if [[ "$type" == "2" ]]; then
+    mkdir -p "$project/include"
+fi
 
 if [[ "$lang" == "c" ]]; then
     ext="c"
@@ -97,9 +101,8 @@ if [[ "$type" == "1" ]]; then
         cat > "$project/src/main.c" <<'EOF'
 #include <stdio.h>
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    printf("Hello, world!\n");
     return 0;
 }
 EOF
@@ -107,9 +110,8 @@ EOF
         cat > "$project/src/main.cpp" <<'EOF'
 #include <iostream>
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::cout << "Hello, world!\n";
     return 0;
 }
 EOF
@@ -197,6 +199,8 @@ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 EOF
@@ -213,7 +217,9 @@ if [[ "$build" == "1" ]]; then
         flags="-Wall -Wextra -std=c++17"
     fi
 
-    cat > "$project/Makefile" <<EOF
+    if [[ "$type" == "1" ]]; then
+
+        cat > "$project/Makefile" <<EOF
 CC = $compiler
 CFLAGS = $flags
 
@@ -222,11 +228,37 @@ SRC = \$(wildcard src/*.$ext)
 
 all:
 	mkdir -p build
-	\$(CC) \$(CFLAGS) \$(SRC) -Iinclude -o build/\$(TARGET)
+	\$(CC) \$(CFLAGS) \$(SRC) -o build/\$(TARGET)
 
 clean:
 	rm -rf build
 EOF
+
+    else
+
+        cat > "$project/Makefile" <<EOF
+CC = $compiler
+CFLAGS = $flags
+AR = ar
+
+TARGET = lib$project.a
+SRC = \$(wildcard src/*.$ext)
+OBJ = \$(SRC:src/%.$ext=build/%.o)
+
+all:
+	mkdir -p build
+	\$(MAKE) \$(OBJ)
+	\$(AR) rcs build/\$(TARGET) \$(OBJ)
+
+build/%.o: src/%.$ext
+	mkdir -p build
+	\$(CC) \$(CFLAGS) -Iinclude -c \$< -o \$@
+
+clean:
+	rm -rf build
+EOF
+
+    fi
 
 fi
 
@@ -239,19 +271,39 @@ if [[ "$build" == "2" ]]; then
         standard="CXX"
     fi
 
-    cat > "$project/CMakeLists.txt" <<EOF
+    if [[ "$type" == "1" ]]; then
+
+        cat > "$project/CMakeLists.txt" <<EOF
 cmake_minimum_required(VERSION 3.10)
 
 project($project)
 
 set(CMAKE_${standard}_STANDARD 17)
+set(CMAKE_${standard}_STANDARD_REQUIRED ON)
 
 file(GLOB SOURCES "src/*.$ext")
 
 add_executable($project \${SOURCES})
-
-target_include_directories($project PRIVATE include)
 EOF
+
+    else
+
+        cat > "$project/CMakeLists.txt" <<EOF
+cmake_minimum_required(VERSION 3.10)
+
+project($project)
+
+set(CMAKE_${standard}_STANDARD 17)
+set(CMAKE_${standard}_STANDARD_REQUIRED ON)
+
+file(GLOB SOURCES "src/*.$ext")
+
+add_library($project STATIC \${SOURCES})
+
+target_include_directories($project PUBLIC include)
+EOF
+
+    fi
 
 fi
 
