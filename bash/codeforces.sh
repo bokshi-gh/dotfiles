@@ -91,7 +91,37 @@ cf() {
             cd -- "$contest_dir" || return 1
 
             echo "Contest initialized: $contest_id"
-            echo "  Directory: $contest_dir"
+            echo "Directory: $contest_dir"
+            ;;
+
+
+        # ─────────────────────────────────────
+        # Switch to an existing contest
+        # ─────────────────────────────────────
+        switch)
+            if [[ -z "$2" ]]; then
+                echo "Usage: cf switch <contest_id>"
+                return 1
+            fi
+
+            if ! cf_valid_contest_id "$2"; then
+                echo "Error: Contest ID must be a number."
+                return 1
+            fi
+
+            local contest_id="$2"
+            local contest_dir="$CF_DIR/$contest_id"
+
+            if [[ ! -d "$contest_dir" ]]; then
+                echo "Contest not found: $contest_id"
+                echo "Run: cf init $contest_id"
+                return 1
+            fi
+
+            cd -- "$contest_dir" || return 1
+
+            echo "Switched to contest: $contest_id"
+            echo "Directory: $contest_dir"
             ;;
 
 
@@ -281,7 +311,7 @@ EOF
 
             if cf_copy_to_clipboard "$file"; then
                 echo "Copied $file to clipboard."
-                echo "  Ready to paste into Codeforces."
+                echo "Ready to paste into Codeforces."
             else
                 return 1
             fi
@@ -439,6 +469,7 @@ EOF
             echo
             echo "Contest:"
             echo "  cf init <contest_id>                   Initialize a contest"
+            echo "  cf switch <contest_id>                 Switch to an existing contest"
             echo "  cf current                             Show current contest"
             echo "  cf list                                List solution files"
             echo
