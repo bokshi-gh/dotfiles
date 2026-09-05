@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 sudo pacman -Syu --noconfirm
 
 # Basic tools
@@ -50,7 +52,10 @@ rm -rf \
     "$HOME/.cache/nvim"
 
 # NvChad
-git clone https://github.com/NvChad/starter "$HOME/.config/nvim"
+git clone --depth 1 \
+    https://github.com/NvChad/starter \
+    "$HOME/.config/nvim"
+
 rm -rf "$HOME/.config/nvim/.git"
 
 # Custom configuration
@@ -148,7 +153,7 @@ cat > "$HOME/.config/nvim/lua/chadrc.lua" <<'EOF'
 local M = {}
 
 M.base46 = {
-  theme = "chadcyan",
+  theme = "onedark",
 }
 
 M.mason = {
@@ -183,17 +188,24 @@ EOF
 
 # Install plugins
 echo "==> Syncing plugins..."
-nvim --headless -c "Lazy! sync" -c "qa"
+
+nvim --headless \
+    -c "Lazy! sync" \
+    -c "qa"
 
 # Install Mason packages
 echo "==> Installing Mason packages..."
+
 nvim --headless \
     +"lua require('nvchad.mason').install_all()" \
     +"autocmd User MasonUpdateAllComplete qa"
 
 # Install Tree-sitter parsers
 echo "==> Installing Tree-sitter parsers..."
-nvim --headless -c "TSInstallAll" -c "qa"
+
+nvim --headless \
+    -c "TSInstallAll" \
+    -c "qa"
 
 echo "==> NvChad setup complete!"
 
