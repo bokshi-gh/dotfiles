@@ -49,7 +49,7 @@ gac() {
 }
 
 gps() {
-    git push -u origin main
+    git push origin main
 }
 
 gpl() {
@@ -64,5 +64,5 @@ gacps() {
 
     git add .
     git commit -m "$*"
-    git push -u origin main
+    git push origin main
 }
