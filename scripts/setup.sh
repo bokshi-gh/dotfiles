@@ -17,6 +17,7 @@ fi
 
 # Create required directories
 mkdir -p "$HOME/.ssh"
+mkdir -p "$HOME/.local/bin"
 
 
 # SETTING UP DOTFILES
@@ -59,6 +60,12 @@ echo -e "${GREEN}Linked:${NC} $DOTFILES/vim/.vimrc → ~/.vimrc"
 ln -sfn "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 
 echo -e "${GREEN}Linked:${NC} $DOTFILES/ssh/config → ~/.ssh/config"
+
+
+# Link cproj command
+ln -sfn "$DOTFILES/bin/cproj" "$HOME/.local/bin/cproj"
+
+echo -e "${GREEN}Linked:${NC} $DOTFILES/bin/cproj → ~/.local/bin/cproj"
 
 
 # SSH permissions
