@@ -7,14 +7,6 @@
 
 ## Post [setup-nvchad.sh](../scripts/setup-nvchad.sh)
 
-- Run `:MasonInstallAll` and `:TSInstallAll` after `lazy.nvim` finishes downloading plugins.
-
-- Delete the `.git` folder from the `nvim` folder:
-
-  ```bash
-  rm -rf ~/.config/nvim/.git
-  ```
-
 - Set a [**Nerd Font**](https://www.nerdfonts.com/) as your terminal font.
   - Recommended: **JetBrainsMono Nerd Font**
   - Install it using [`setup-fonts.sh`](../scripts/setup-fonts.sh).
