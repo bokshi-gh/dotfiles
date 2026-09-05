@@ -8,3 +8,6 @@ sudo pacman -S --needed --noconfirm ripgrep
 sudo pacman -S --needed --noconfirm base-devel gcc make
 
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+
+# After running this setup, check:
+# ../docs/nvchad.md
