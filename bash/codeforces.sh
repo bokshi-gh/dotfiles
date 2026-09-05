@@ -90,7 +90,7 @@ cf() {
             mkdir -p -- "$contest_dir" || return 1
             cd -- "$contest_dir" || return 1
 
-            echo "✓ Contest initialized: $contest_id"
+            echo "Contest initialized: $contest_id"
             echo "  Directory: $contest_dir"
             ;;
 
@@ -184,7 +184,7 @@ int main() {
 EOF
             fi
 
-            echo "✓ Created: $(pwd)/$file"
+            echo "Created: $(pwd)/$file"
 
             nvim "$file"
             ;;
@@ -227,7 +227,7 @@ EOF
                 "$file" \
                 -o "$executable" || {
                     echo
-                    echo "✗ Compilation failed."
+                    echo "Compilation failed."
                     return 1
                 }
 
@@ -246,9 +246,9 @@ EOF
             rm -f -- "$executable"
 
             if [[ $status -eq 0 ]]; then
-                echo "✓ Finished successfully."
+                echo "Finished successfully."
             else
-                echo "✗ Program exited with status: $status"
+                echo "Program exited with status: $status"
             fi
 
             return "$status"
@@ -280,7 +280,7 @@ EOF
             fi
 
             if cf_copy_to_clipboard "$file"; then
-                echo "✓ Copied $file to clipboard."
+                echo "Copied $file to clipboard."
                 echo "  Ready to paste into Codeforces."
             else
                 return 1
@@ -395,11 +395,11 @@ EOF
                 "$file" \
                 -o "$executable" || {
                     echo
-                    echo "✗ Compilation failed."
+                    echo "Compilation failed."
                     return 1
                 }
 
-            echo "✓ Build successful: $executable"
+            echo "Build successful: $executable"
             ;;
 
 
@@ -418,7 +418,7 @@ EOF
 
                 if [[ -f "$executable" && -x "$executable" ]]; then
                     rm -f -- "$executable"
-                    echo "✓ Removed: $executable"
+                    echo "Removed: $executable"
                     removed=true
                 fi
             done
