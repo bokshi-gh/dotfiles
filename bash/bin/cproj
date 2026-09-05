@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# ccproj - Minimal C/C++ project generator
+# cproj - Minimal C/C++ project generator
 
 if [[ $# -ne 2 ]]; then
     echo "Usage: ccproj <c|cpp> <project>"
