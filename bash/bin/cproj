@@ -3,7 +3,7 @@
 # cproj - Minimal C/C++ project generator
 
 if [[ $# -ne 2 ]]; then
-    echo "Usage: ccproj <c|cpp> <project>"
+    echo "Usage: cproj <c|cpp> <project>"
     exit 1
 fi
 
