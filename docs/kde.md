@@ -16,16 +16,13 @@
 - Theme: **Breeze**
   - Background : [sddm-login.png](../kde/wallpapers/sddm-login.png)
 
-## Panel
+## KDE Default Bottom Panel
 
-`Right-click Panel → Enter Edit Mode`
+`Right-click Panel → Show Panel Configuration`
 
-- Position: Bottom
+- Pager: Removed
 - Task Manager: Running applications only
-- Pinned applications: None
-- Virtual Desktop navigation: Removed
-- System Tray: Enabled
-- Digital Clock: Enabled
+  - Pinned applications: None
 
 ## Mouse
 
