@@ -48,7 +48,7 @@ sudo pacman -S \
 - Desktop Wallpaper: [plasma-desktop.png](../kde-plasma/backgrounds/plasma-desktop.png)\
   `System Settings → Appearance & Style → Wallpaper`
 - Lock Screen Wallpaper: [plasma-lockscreen.png](../kde-plasma/backgrounds/plasma-lockscreen.png)\
-  `System Settings → Security & Privacy → Screen Locking`
+  `System Settings → Security & Privacy → Screen Locking → Configure Appearance`
 
 ## KDE Default Bottom Panel
 
