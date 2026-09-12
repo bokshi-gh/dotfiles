@@ -36,16 +36,16 @@ sudo pacman -S \
 
 ## KDE User
 
-- Avatar: avatar.png\
+- Avatar: [avatar.png](../kde-plasma/backgrounds/avatar.png)\
   `System Settings → System → Users → Your Account`
 
 ## KDE Theme & Wallpaper
 
 - Global Theme: **Breeze Dark**\
   `System Settings → Appearance & Style → Global Theme`
-- Desktop Wallpaper: plasma-desktop.png\
+- Desktop Wallpaper: [plasma-desktop.png](../kde-plasma/backgrounds/plasma-desktop.png)\
   `System Settings → Appearance & Style → Wallpaper`
-- Lock Screen Wallpaper: plasma-lockscreen.png\
+- Lock Screen Wallpaper: [plasma-lockscreen.png](../kde-plasma/backgrounds/plasma-lockscreen.png)\
   `System Settings → Security & Privacy → Screen Locking`
 
 ## KDE Default Bottom Panel
@@ -61,7 +61,7 @@ sudo pacman -S \
 `System Settings → Colors & Themes → Login Screen (SDDM)`
 
 - Theme: **Breeze**
-  - Background: sddm-login.png
+  - Background: [sddm-login.png](../kde-plasma/backrgounds/sddm-login.png)
 
 ## Mouse
 
@@ -69,5 +69,3 @@ sudo pacman -S \
 
 - Pointer speed: `0.20`
 - Invert scroll direction (Natural scrolling): Enabled
-
-```
