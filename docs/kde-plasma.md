@@ -36,7 +36,7 @@ sudo pacman -S \
 
 ## KDE User
 
-- Avatar: [avatar.png](../kde-plasma/backgrounds/avatar.png)\
+- Avatar: [avatar.png](../kde-plasma/user/avatar.png)\
   `System Settings → System → Users → Your Account`
 
 ## KDE Theme & Wallpaper
