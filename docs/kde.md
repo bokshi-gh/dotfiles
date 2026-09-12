@@ -9,7 +9,7 @@
 - Lock Screen Wallpaper: [plasma-lockscreen.png](../kde/wallpapers/plasma-lockscreen.png)\
    `System Settings → Security & Privacy → Screen Locking`
 
- ## SDDM
+ ## SDDM Theme
 
  `System Settings → Colors & Themes → Login Screen (SDDM)`
 
