@@ -6,7 +6,7 @@
    `System Settings → Appearance & Style → Global Theme`
 - Desktop Wallpaper: [plasma-desktop.png](../kde/wallpapers/plasma-desktop.png)\
    `System Settings → Appearance & Style → Wallpaper`
-- Lock Screen Wallpaper: plasma-lockscreen.jpg\
+- Lock Screen Wallpaper: [plasma-lockscreen.png](../kde/wallpapers/plasma-lockscreen.png)\
    `System Settings → Security & Privacy → Screen Locking`
 
  ## SDDM
@@ -14,7 +14,7 @@
  `System Settings → Colors & Themes → Login Screen (SDDM)`
 
 - Theme: **Breeze**
-  - Background : sddm-login.jpg
+  - Background : [sddm-login.png](./kde/wallpapers/sddm-login.png)
 
 ## Panel
 
