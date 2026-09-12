@@ -4,9 +4,9 @@
 
 - Global Theme: **Breeze Dark**\
   `System Settings → Appearance & Style → Global Theme`
-- Desktop Wallpaper: plasma-desktop.png\
+- Desktop Wallpaper: [plasma-desktop.png](../kde/backgrounds/plasma-desktop.png)\
   `System Settings → Appearance & Style → Wallpaper`
-- Lock Screen Wallpaper: plasma-lockscreen.png\
+- Lock Screen Wallpaper: [plasma-lockscreen.png](../kde/backgrounds/plasma-lockscreen.png)\
   `System Settings → Security & Privacy → Screen Locking`
 
 ## KDE User
@@ -20,14 +20,14 @@
 
 - Pager: Not present
 - Task Manager: Running applications only
-   - Pinned applications: None
+  - Pinned applications: None
 
 ## SDDM Theme
 
 `System Settings → Colors & Themes → Login Screen (SDDM)`
 
 - Theme: **Breeze**
-   - Background: sddm-login.png
+  - Background: [sddm-login.png](../kde/backgrounds/sddm-login.png)
 
 ## Mouse
 
