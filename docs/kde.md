@@ -1,5 +1,10 @@
 # KDE Setup
 
+## KDE User
+
+- Avatar: [avatar.png](../kde/user/avatar.png)\
+  `System Settings → System → Users → Your Account`
+
 ## KDE Theme & Wallpaper
 
 - Global Theme: **Breeze Dark**\
@@ -8,11 +13,6 @@
   `System Settings → Appearance & Style → Wallpaper`
 - Lock Screen Wallpaper: [plasma-lockscreen.png](../kde/backgrounds/plasma-lockscreen.png)\
   `System Settings → Security & Privacy → Screen Locking`
-
-## KDE User
-
-- Avatar: [avatar.png](../kde/user/avatar.png)\
-  `System Settings → System → Users → Your Account`
 
 ## KDE Default Bottom Panel
 
