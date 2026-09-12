@@ -57,6 +57,7 @@ sudo pacman -S \
 - Pager: Not present
 - Task Manager: Running applications only
   - Pinned applications: None
+- Peek at Desktop: Not present
 
  ## SDDM Theme
 
