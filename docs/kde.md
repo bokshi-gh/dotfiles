@@ -31,5 +31,5 @@
 
 `System Settings → Input & Output → Mouse & Touchpad`
 
-- Natural scrolling: Enabled
-- Pointer acceleration: `0.200`
+- Pointer speed: `0.20`
+- Invert scroll direction (Natural scrolling): Enabled
