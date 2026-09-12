@@ -14,7 +14,7 @@
  `System Settings → Colors & Themes → Login Screen (SDDM)`
 
 - Theme: **Breeze**
-  - Background : [sddm-login.png](./kde/wallpapers/sddm-login.png)
+  - Background : [sddm-login.png](../kde/wallpapers/sddm-login.png)
 
 ## Panel
 
