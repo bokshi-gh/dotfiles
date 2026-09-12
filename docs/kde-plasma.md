@@ -61,7 +61,7 @@ sudo pacman -S \
 `System Settings → Colors & Themes → Login Screen (SDDM)`
 
 - Theme: **Breeze**
-  - Background: [sddm-login.png](../kde-plasma/backrgounds/sddm-login.png)
+  - Background: [sddm-login.png](../kde-plasma/backgrounds/sddm-login.png)
 
 ## Mouse
 
