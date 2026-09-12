@@ -9,11 +9,12 @@ sudo pacman -S \
   plasma-desktop \
   sddm sddm-kcm \
   plasma-nm plasma-pa \
-  kscreen powerdevil \
+  powerdevil \
   breeze breeze-gtk bluedevil \
-  xdg-desktop-portal-kde \
-  dolphin konsole spectacle ark gwenview
-````
+  dolphin konsole spectacle ark gwenview \
+  ffmpegthumbs \
+  okular
+```
 
 ### Audio
 
@@ -25,13 +26,11 @@ sudo pacman -S \
   wireplumber
 ```
 
-### Other Applications
+### Applications
 
 ```
 sudo pacman -S \
-  ffmpegthumbs \
   mpv \
-  okular \
   libreoffice-fresh
 ```
 
@@ -70,6 +69,5 @@ sudo pacman -S \
 
 - Pointer speed: `0.20`
 - Invert scroll direction (Natural scrolling): Enabled
-```
 
 ```
