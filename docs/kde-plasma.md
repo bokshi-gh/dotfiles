@@ -38,7 +38,7 @@ sudo pacman -S \
 
 `System Settings → System → Users → Your Account`
 
-- Name: BOKSHI
+- Name: Bokshi
 - Avatar: [avatar.png](../kde-plasma/user/avatar.png)
 
 ## KDE Theme & Wallpaper
