@@ -54,6 +54,7 @@ sudo pacman -S \
 
 `Right-click Panel → Show Panel Configuration`
 
+- Panel Height: `20`
 - Pager: Not present
 - Task Manager: Running applications only
   - Pinned applications: None
