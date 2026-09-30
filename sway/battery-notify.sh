@@ -43,5 +43,5 @@ while true; do
 
     last_level=$battery
 
-    sleep 30
+    sleep 5
 done
