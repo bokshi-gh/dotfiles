@@ -15,5 +15,5 @@ while true; do
     fi
 
     last="$current"
-    sleep 2
+    sleep 3
 done
