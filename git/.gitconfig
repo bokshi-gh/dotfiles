@@ -1,0 +1,12 @@
+[user]
+	name = Bokshi
+	email = 169505071+bokshi-gh@users.noreply.github.com
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nvim
+
+[push]
+    autoSetupRemote = true
