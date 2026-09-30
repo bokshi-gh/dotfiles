@@ -20,18 +20,21 @@ while true; do
             notify-send -u critical -t 5000 \
                 "Low Battery" \
                 "Battery is at ${battery}%"
+            paplay /usr/share/sounds/freedesktop/stereo/dialog-warning.oga
         fi
 
         if (( battery <= 10 && last_level > 10 )); then
             notify-send -u critical -t 5000 \
                 "Very Low Battery" \
                 "Battery is at ${battery}%"
+            paplay /usr/share/sounds/freedesktop/stereo/dialog-warning.oga
         fi
 
         if (( battery <= 5 && last_level > 5 )); then
             notify-send -u critical -t 5000 \
                 "Critical Battery" \
                 "Battery is at ${battery}%. System may shut down soon."
+            paplay /usr/share/sounds/freedesktop/stereo/dialog-error.oga
         fi
     fi
 
@@ -39,6 +42,7 @@ while true; do
         notify-send -t 5000 \
             "Battery Full" \
             "Battery is fully charged"
+        paplay /usr/share/sounds/freedesktop/stereo/complete.oga
     fi
 
     last_level=$battery
