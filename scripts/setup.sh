@@ -133,6 +133,14 @@ link_file \
     "$DOTFILES/sway/status.sh" \
     "$HOME/.config/sway/status.sh"
 
+link_file \
+    "$DOTFILES/sway/wifi-notify.sh" \
+    "$HOME/.config/sway/wifi-notify.sh"
+
+link_file \
+    "$DOTFILES/sway/battery-notify.sh" \
+    "$HOME/.config/sway/battery-notify.sh"
+
 chmod +x "$DOTFILES/sway/status.sh"
 
 

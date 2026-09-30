@@ -111,6 +111,14 @@ remove_link \
     "$DOTFILES/sway/status.sh" \
     "$HOME/.config/sway/status.sh"
 
+remove_link \
+    "$DOTFILES/sway/wifi-notify.sh" \
+    "$HOME/.config/sway/wifi-notify.sh"
+
+remove_link \
+    "$DOTFILES/sway/battery-notify.sh" \
+    "$HOME/.config/sway/battery-notify.sh"
+
 
 # Wallpaper
 if [[ -f "$HOME/Pictures/wallpapers/wallpaper.png" ]] &&

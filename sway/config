@@ -1,4 +1,3 @@
-```ini
 # Variables
 
 set $mod Mod4
@@ -187,4 +186,3 @@ bar {
 # Additional configuration
 
 include /etc/sway/config.d/*
-```
