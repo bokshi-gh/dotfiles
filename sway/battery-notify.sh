@@ -17,26 +17,26 @@ while true; do
     if [[ "$status" == "Discharging" ]]; then
 
         if (( battery <= 20 && last_level > 20 )); then
-            notify-send -u critical \
+            notify-send -u critical -t 5000 \
                 "Low Battery" \
                 "Battery is at ${battery}%"
         fi
 
         if (( battery <= 10 && last_level > 10 )); then
-            notify-send -u critical \
+            notify-send -u critical -t 5000 \
                 "Very Low Battery" \
                 "Battery is at ${battery}%"
         fi
 
         if (( battery <= 5 && last_level > 5 )); then
-            notify-send -u critical \
+            notify-send -u critical -t 5000 \
                 "Critical Battery" \
                 "Battery is at ${battery}%. System may shut down soon."
         fi
     fi
 
     if [[ "$status" == "Charging" && "$last_level" -lt 100 && "$battery" -eq 100 ]]; then
-        notify-send \
+        notify-send -t 5000 \
             "Battery Full" \
             "Battery is fully charged"
     fi
