@@ -35,7 +35,7 @@ while true; do
         fi
     fi
 
-    if [[ "$status" == "Charging" && "$last_level" -lt 100 && "$battery" -eq 100 ]]; then
+    if (( battery == 100 && last_level < 100 )); then
         notify-send -t 5000 \
             "Battery Full" \
             "Battery is fully charged"
