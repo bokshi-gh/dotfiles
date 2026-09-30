@@ -8,10 +8,10 @@ while true; do
 
     if [[ -n "$current" && "$current" != "$last" ]]; then
         notify-send -t 3000 "Wi-Fi Connected" "$current"
-        paplay /usr/share/sounds/freedesktop/stereo/message.oga
+        paplay /usr/share/sounds/freedesktop/stereo/network-connectivity-established.oga
     elif [[ -z "$current" && -n "$last" ]]; then
         notify-send -t 3000 "Wi-Fi Disconnected"
-        paplay /usr/share/sounds/freedesktop/stereo/message.oga
+        paplay /usr/share/sounds/freedesktop/stereo/network-connectivity-lost.oga
     fi
 
     last="$current"
