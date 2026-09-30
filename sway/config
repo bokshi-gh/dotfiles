@@ -1,3 +1,4 @@
+```ini
 # Variables
 
 set $mod Mod4
@@ -162,6 +163,13 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym Print exec grim
 
 
+# Notifications
+
+exec mako
+exec ~/.config/sway/wifi-notify.sh
+exec ~/.config/sway/battery-notify.sh
+
+
 # Status Bar
 
 bar {
@@ -179,3 +187,4 @@ bar {
 # Additional configuration
 
 include /etc/sway/config.d/*
+```
