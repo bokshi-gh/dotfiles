@@ -140,10 +140,14 @@ link_file \
 link_file \
     "$DOTFILES/sway/battery-notify.sh" \
     "$HOME/.config/sway/battery-notify.sh"
+link_file \
+    "$DOTFILES/sway/ac-notify.sh" \
+    "$HOME/.config/sway/ac-notify.sh"
 
 chmod +x "$DOTFILES/sway/status.sh"
 chmod +x "$DOTFILES/sway/wifi-notify.sh"
 chmod +x "$DOTFILES/sway/battery-notify.sh"
+chmod +x "$DOTFILES/sway/ac-notify.sh"
 
 
 # Wallpaper
