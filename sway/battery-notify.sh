@@ -9,10 +9,26 @@ else
 fi
 
 last_level=$(cat "$battery_path/capacity")
+last_ac=$(cat /sys/class/power_supply/ACAD/online)
 
 while true; do
     battery=$(cat "$battery_path/capacity")
     status=$(cat "$battery_path/status")
+    ac=$(cat /sys/class/power_supply/ACAD/online)
+
+    if [[ "$ac" != "$last_ac" ]]; then
+        if [[ "$ac" == "1" ]]; then
+            notify-send -t 3000 \
+                "Charger Connected" \
+                "Power adapter plugged in"
+            paplay /usr/share/sounds/freedesktop/stereo/power-plug.oga
+        else
+            notify-send -t 3000 \
+                "Charger Disconnected" \
+                "Power adapter unplugged"
+            paplay /usr/share/sounds/freedesktop/stereo/power-unplug.oga
+        fi
+    fi
 
     if [[ "$status" == "Discharging" ]]; then
 
@@ -46,6 +62,7 @@ while true; do
     fi
 
     last_level=$battery
+    last_ac=$ac
 
     sleep 5
 done
