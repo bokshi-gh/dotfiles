@@ -160,7 +160,8 @@ bindsym --locked XF86AudioStop exec playerctl stop
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
-bindsym Print exec grim
+bindsym Print exec grim ~/Pictures/Screenshots/"$(date +'%Y-%m-%d_%H-%M-%S').png"
+bindsym $mod+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/"$(date +'%Y-%m-%d_%H-%M-%S').png"
 
 
 # Notifications
